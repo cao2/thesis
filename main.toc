@@ -1,0 +1,35 @@
+\contentsline {chapter}{\numberline {\uppercase {\vspace {-.1in}LIST OF TABLES}}}{iii}
+\contentsline {chapter}{\numberline {\uppercase {\vspace {-.1in}LIST OF FIGURES}}}{iv}
+\contentsline {chapter}{ABSTRACT}{vii}
+\select@language {english}
+\contentsline {chapter}{\numberline {\uppercase {CHAPTER 1}}\uppercase {Introduction}}{1}
+\contentsline {section}{\numberline {1.1}Silicon Validation}{1}
+\contentsline {section}{\numberline {1.2}Pre- and Post-silicon Validation}{1}
+\contentsline {section}{\numberline {1.3}Related Work}{2}
+\contentsline {section}{\numberline {1.4}Motivation}{4}
+\contentsline {chapter}{\numberline {\uppercase {CHAPTER 2}}\uppercase {Background}}{6}
+\contentsline {section}{\numberline {2.1}SoC Protocols and Post-silicon Trace Analysis}{6}
+\contentsline {section}{\numberline {2.2}Labeled Petri-Nets}{8}
+\contentsline {chapter}{\numberline {\uppercase {CHAPTER 3}}\uppercase {Flow Guided Trace Interpretation}}{9}
+\contentsline {section}{\numberline {3.1}Notations and formalization}{9}
+\contentsline {section}{\numberline {3.2}Flow Guided Trace Interpretation}{9}
+\contentsline {section}{\numberline {3.3}Trace Signal selection}{10}
+\contentsline {section}{\numberline {3.4}General Impact of partial observability}{10}
+\contentsline {chapter}{\numberline {\uppercase {CHAPTER 4}}\uppercase {Trace Analysis Under Partial Observability}}{12}
+\contentsline {section}{\numberline {4.1}Single signal event}{12}
+\contentsline {section}{\numberline {4.2}Sequence of signal events}{13}
+\contentsline {section}{\numberline {4.3}Difficulties and solutions}{13}
+\contentsline {section}{\numberline {4.4}Interactive Trace Interpretation}{14}
+\contentsline {chapter}{\numberline {\uppercase {CHAPTER 5}}\uppercase {Implementations and Results}}{16}
+\contentsline {section}{\numberline {5.1}Simulation simple TLM SoC with GEM5}{16}
+\contentsline {section}{\numberline {5.2}Simulation simple RTL SoC with VHDL}{21}
+\contentsline {chapter}{\numberline {\uppercase {CHAPTER 6}}\uppercase {Conclusion and Future Works}}{23}
+\contentsline {chapter}{\numberline {\uppercase {APPENDICES}}}{24}
+\contentsline {chapter}{\numberline {\uppercase {APPENDICES}}}{25}
+\contentsline {appendix}{\numberline {Appendix A}\ignorespaces {Flow specifications and protocols provided by GEM5}}{26}
+\contentsline {section}{\numberline {A.1}Flow Specifications}{26}
+\contentsline {section}{\numberline {A.2}Protocols}{27}
+\contentsline {appendix}{\numberline {Appendix B}\ignorespaces {RTL model in VHDL}}{31}
+\contentsline {section}{\numberline {B.1}Flow Specification}{31}
+\contentsline {section}{\numberline {B.2}Protocol}{32}
+\contentsline {chapter}{\numberline {\uppercase {\vspace {-.12in}LIST OF REFERENCES }}}{36}

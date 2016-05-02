@@ -1,0 +1,910 @@
+\documentclass[12pt,frontmatter,copyright,thesis]{usfmanus}
+\usepackage[bottom=1in, left=1in, right=1in, top=1in]{geometry}
+
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amssymb,alltt,url,verbatim}
+\usepackage{float}
+%\usepackage{caption}
+\usepackage{graphics}
+\usepackage{graphicx,leftidx}
+\usepackage{epsfig}
+\usepackage{fixltx2e}
+\usepackage[english]{babel}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage[]{algorithm2e}
+\usepackage{scrextend}
+\usepackage{pifont}
+%\usepackage{mybeamer}
+\setenumerate[0]{leftmargin=0.5in}
+
+%\usepackage{tikz}
+%\usepackage{color}
+
+
+
+
+\newcommand{\eg}{\mbox{{\em e.g.}}}
+\newcommand{\ie}{\mbox{{\em i.e.}}}
+\newcommand{\viz}{\mbox{{\em viz.}}}
+
+\title{Protocol Guided Analysis of Post silicon Traces Under Limited Observability}
+\author{Yuting Cao}
+\degree{Master of Science in Computer Science} 
+\department{Computer Science and Engineering} 
+\college{Engineering} 
+\majorprofessor{Hao Zheng, Ph.D.} 
+\majorproftitle{Associate  Professor, Department of Computer Science and Engineering} 
+\members{Dmitry Goldgof, Ph.D. \and Yao Liu, Ph.D.} 
+\presentdate{To be determine}
+
+\keywords{silicon, validation, trace, analysis, observability, signal selection}
+
+\graddate{August, 2016} \copyrightyear{2015}
+
+%\dedication{}
+
+\acknowledgments{ 
+I am grateful to Cagri Cetin, Dr. Jay Ligatti, and Dr. Dmitry Goldgof for their precious and constant help on this project.
+I would like to thank Glenn Whichard, William Munnerlyn, Sarah Murphy, and Nair Gayatry, for their help through the patent application process.
+I also would like to thank Ian Markwood and Benjamin Dunn for their help with proofreading and revisions.
+}
+
+\abstract{
+
+We consider the problem of reconstructing system- level behavior of an SoC design from a partially observed signal trace. Solving this problem is a critical activity in post- silicon validation, and currently depends primarily on human creativity and insights. In this paper, we provide an algorithm to automatically infer system-level transactions from incomplete, ambiguous, and noisy trace data. We demonstrate the approach on a multicore virtual platform developed within the GEM5 environment.
+
+}
+
+\begin{document}
+
+\chapter{Introduction}
+Post-silicon validation makes use of pre-production silicon
+integrated circuit (IC) to ensure that the fabricated system
+works as desired under actual operating conditions with real
+software.  Since the silicon executes at target clock speed,
+post-silicon executions are billions of times faster than
+RTL simulations, and even provide speed-up of several orders
+of magnitude over other pre-silicon platforms (\eg, FPGA,
+system-level emulation, etc.).  This makes it possible to
+explore deep design states which cannot be exercised in
+pre-silicon, and identify errors missed during pre-silicon
+validation and debug.  Post-silicon validation is a critical
+component of the design validation life-cycle for modern
+microprocessors and SoC designs.  Unfortunately, it is also
+a highly complex component, performed under aggressive
+schedules and accounting for more than $50\%$ of the overall
+design validation cost~\cite{Patra2007}.  Consequently, it
+is crucial to develop techniques for streamlining and
+automating post-silicon validation activities.
+
+A key component of post-silicon validation of SoC designs is
+to correlate traces from silicon execution with the intended
+system-level transactions.  An SoC design is typically
+composed of a large number of pre-designed hardware or
+software blocks (often referred to as ``intellectual
+properties'' or ``IPs'') that coordinate through complex
+protocols to implement the system-level behavior.  Any
+execution trace of the system involves a large number of
+interleaved instances of these protocols.  For example,
+consider a smartphone executing a usage scenario where the
+end-user browses the Web while listening to music and
+sending and receiving occasional text messages.  Typical
+post-silicon validation use-cases involve exercising such
+scenarios.  An execution trace would involve activities from
+the CPU, audio controller, display controller, wireless
+radio antenna, etc., reflecting the interleaved execution of
+several communication protocols.  On the other hand, due to
+observability limitations, only a small number of
+participating signals can be actually traced during silicon
+execution.  Furthermore, due to electrical perturbations,
+silicon data can be noisy, lossy, and ambiguous.
+Consequently, it is non-trivial to identify all
+participating protocols and pinpoint the interleaving that
+results in an observed trace.
+
+In this paper, we consider the problem of reconstructing
+protocol-level behavior from silicon traces in SoC designs.
+Given a collection of system-level communication protocols
+and a trace of (partially observed) hardware signals, our
+approach infers, with a certain measure of confidence, the
+protocol instances (and their interleavings) being exercised
+by the trace.  The approach is based on a formalization of
+system-level transactions via labeled Petri-Nets, which are
+capable of describing sequencing, concurrency, and choices
+over system events.  We develop algorithms to infer
+system-level transactions from traces with missing, noisy,
+and ambiguous signal values.  We demonstrate our approach on
+a multicore virtual platform constructed within the GEM5
+environment~\cite{Binkert2011}.
+
+
+
+
+
+
+\chapter{Background}
+\section{SoC Protocols and Post-silicon Trace Analysis}
+An SoC design involves integration of a number of IPs that
+communicate through complex protocols.  Such system-level
+protocols are typically specified in architecture documents
+as message flow diagrams.  For this paper, we use the words
+``protocol'' and ``flow'' interchangeably.
+Fig~\ref{flow-spec-ex}(a) shows one diagram for a protocol
+to authenticate and load a firmware during system boot for
+firmware upgrade.  During validation, the system under debug
+(SUD) exercises some complex system-level use-case which
+involves interleaved execution of possibly a large number of
+such flows.  A trace of a small number of hardware signals
+is then shipped off-chip analysis.  The off-chip analysis
+includes two broad phases: (1)~trace abstraction, and
+(2)~trace interpretation.  Trace abstraction maps the
+hardware trace into higher-level architectural constructs,
+\eg, messages, operations, etc.: a message such as {\tt
+  Authorization request} may be implemented in hardware
+through a Boolean or temporal combination of specific
+hardware signals in the NoC fabric between {\tt Device} and
+{\tt CE}, \eg, as a sequence containing a header, a specific
+value of a sequence of data words, etc.  We will refer to
+such architectural constructs as {\em protocol events} or
+{\em flow events}.  Note that due to limited observability,
+it may not be possible to map a given set of (observed)
+hardware signals uniquely to a flow event.  Finally, the
+trace may be a result from several instances of the same
+protocol executing concurrently, \eg, a firmware
+authentication protocol may be invoked when another instance
+of the protocol has not completed.
+
+
+
+\begin{figure}
+
+\label{flow-spec-ex}
+\centering
+    \includegraphics[width=0.6\textwidth]{try}
+    \caption{(a) A graphical representation of a SoC firmware
+  load protocol~\cite{Krstic14HOST}.  (b) LPN formalization.
+  Each event has a form of $\langle {\tt src, dest, cmd}
+  \rangle$ where ${\tt cmd}$ is a command sent from a source
+  component ${\tt src}$ to a destination component ${\tt
+    dest}$. The solid black places without outgoing edges
+  are {\em terminals}, which indicate termination of
+  protocols represented by the LPNs.}
+\end{figure}
+
+Trace interpretation entails mapping flow events created
+during trace abstraction to system-level protocols in order
+to identify the set of protocol instances (and
+interleavings) responsible for creating the observed
+behavior.  The trace may identify a problem in the protocols
+themselves, \eg~an interleaving of some protocol executions
+may lead to an unexpected message being sent or cause the
+system to crash.  More commonly, one finds a bug in the {\em
+  implementation} of the protocol, \ie, a trace inconsistent
+with any possible interleaving of the protocol executions.
+Identifying these problems involves significant human
+expertise, and can often take days to weeks of effort.
+
+\section{Labeled Petri-Nets}
+Labeled Petri-nets (LPN) is a formalization of state transition systems that is capable of describing sequencing, concurrency, and choices.  Fig.~\ref{flow-spec-ex}(b) illustrates how to use LPN to formalize protocols. Formally, an LPN is a tuple $(P, T, s_0, E, L)$ where $P$ is a finite set of {\em places}, $T$ is a finite set of {\em  transitions}, $\mathit{init}$ is the set of initially marked places, also referred to as the {\em initial  marking}, $E$ is a finite set of {\em events}, and $L: T \rightarrow E$ is a labeling function that maps each transition $t \in T$ to an event $e \in E$.  For each transition $t \in T$, its preset, denoted as $\bullet{t} \subseteq P$, is the set of places connected to $t$, and its postset, denoted as $t\bullet \subseteq P$, is the set of places that $t$ is connected to.  A marking $s \subseteq P$ of a LPN is a subset of places marked with tokens, and it is also referred to as a state of a LPN.  The initial marking $\mathit{init}$ is also the initial state of the LPN.
+
+
+
+
+\chapter{Related Work}
+Our work is closely related to communication-centric and
+transaction based debug.  An early pioneering work is
+described in~\cite{Goossens2007NOCS}, which advocates the
+focus on observing activities on the interconnect network
+among IP blocks, and mapping these activities to
+transactions for better correlation between computations and
+communications.  Therefore, the communication transactions,
+as a result of software execution, provide an interface
+between computation and communication, and facilitate
+system-level debug.  This work is extended
+in~\cite{Vermeulen2009VLSI-DAT,Goossens2009DATE}.  However,
+this line of work is focused on the network-on-chip (NoC)
+architecture for interconnect using the run/stop debug
+control method.
+
+A similar transaction-based debug approach is presented
+in~\cite{Gharehbaghi2012ISQED}.  Furthermore, it proposes an
+automated extraction of state machines at transaction level
+from high level design models.  From an observed failure
+trace, it performs backtracking on this transaction level
+state machine to derive a set of transaction traces that
+lead to the observed failure state.  In the subsequent step,
+bounded model checking with the constraints on the internal
+variables is used to refine the set of transaction traces to
+remove the infeasible traces.  This approach requires user
+inputs to identify impossible transaction sequences, and may
+not find the states causing the failure if the transaction
+traces leading to the observed failure state is long.
+Backtracking from the observed failure state requires
+pre-image computation, which can be computationally
+expensive.  A transaction-based online debug approach is
+proposed in~\cite{Dehbash2014} to address these issues.
+This approach utilizes a transaction debug pattern
+specification language~\cite{Gharehbaghi2009ICCD} to define
+properties that transactions should meet.  These transaction
+properties are checked at runtime by programming debug units
+in the on-chip debug infrastructure, and the system can be
+stopped shortly after a violation is detected for any one of
+those properties.  In this sense, it can be viewed as the
+hardware assertion approaches in~\cite{Boule2007ISQED}
+elevated to the transaction level.
+
+In~\cite{Singerman2011DAC}, a coherent workflow is described
+where the result from the pre-silicon validation stage can
+be carried over to the post-silicon stage to improve
+efficiency and productivity of post-silicon debug.  This
+workflow is centered on a repository of system events and
+simple transactions defined by architects and IP designers.
+It spans across a wide spectrum of the post-silicon
+validation including DFx instrumentation, test generation,
+coverage, and debug.  The DFx instruments are automatically
+inserted into the design RTL code driven by the defined
+transactions.  This instrumentation is optimized for making
+a large set of events and transactions observable.  Test
+generation is also optimized to generate only the necessary
+but sufficient tests to allow all defined transactions to be
+exercised.  Moreover, coverage for post-silicon validation
+is now defined at the abstract level of events and
+transactions rather than the raw signals, and thus can be
+evaluated more efficiently.  In~\cite{Abarbanel2014DAC}, a
+model at an even higher-level of abstraction, {\em flows},
+is proposed.  Flows are used to specify more sophisticated
+cross-IP transactions such as power management, security,
+etc, and to facilitate reuse of the efforts of the
+architectural analysis to check HW/SW implementations.
+
+
+
+
+
+
+
+
+
+
+
+\chapter{Flow-directed Trace Interpretation}
+In this section we formalize the trace interpretation problem in terms of labeled Petri-nets, and discuss our algorithms to address the problem. For pedagogical reasons, here we assume full observability of all hardware signals involved in the flow events. In the next section we will extend the approach to partial observability.
+
+\medskip
+
+\noindent 
+{\bf Notations and formalization.}  The set
+of system flows is a collection ${\vec{F}}$ of
+LPNs.  A {\em flow execution scenario} is defined as a
+set $\{(F_{i,j}, s_{i,j})\}$ where $F_{i,j}$ is the
+$j$th instance of flow $F_i \in {\vec{F}}$, and $s_{i,j}$ is
+a state of $F_{i,j}$.  A flow execution scenario indicates
+the set of protocols and the number of instances of a
+particular protocol are activated and their corresponding
+current states.  Since we assume full observability, we view
+an {\em observed trace} $\rho = e_1e_2\ldots e_n$ as a
+sequence of events.  Given an observed trace $\rho$, the
+goal of trace interpretation is to construct a set of
+candidate flow execution scenarios whose execution can
+create the sequence of events in $\rho$.  We call such
+execution scenarios {\em compliant} with $\rho$.  Let
+$\mathit{accept(F_{i,j}, s_{i,j}, e)}$ be a function that
+determines if event $e$ can be emitted by $F_{i,j}$ in state
+$s_{i,j}$.  Formally, $\mathit{accept(F_{i,j}, s_{i,j}, e)}$
+returns $(F_{i,j}, s'_{i,j})$ where $s'_{i,j} = (s_{i,j} - \bullet t)
+\cup t\bullet$ if there exists a transition
+$t$ in $F_i$ such that $L(t) = e$ and $\bullet t \subseteq
+s_{i,j}$.  It returns $\emptyset$ otherwise.
+
+Given an observed trace $\rho$ and the set $\vec{F}$ of LPNs,
+Algorithm~\ref{algo:compliance} provides a basic procedure for
+computing a set of compliant flow execution scenarios. 
+The algorithm operates by keeping track (in variable
+$\mathit{Scen}$) of a set of candidate flow execution scenarios
+compliant with each prefix of $\rho$.  At each iteration,
+for each event $e_h$ in the observed trace, we
+update $Scen$ by either extending a member of
+$\mathit{scen}$ or initiating a new protocol instance for 
+each $scen \in Scen$ with respect to $e_h$ in every possible way.
+If $e_h$ cannot be emitted by any existing or new flow instances, 
+then we report that the trace is {\tt  inconsistent}, \ie, 
+there is no possible interleaving of
+the protocol instances from $\vec{F}$ that is compliant with
+$\rho$.
+
+\begin{algorithm}[ht]
+\DontPrintSemicolon
+Create an empty scenario $scen$\;
+$\mathit{Scen} = \{scen\}$\;
+\ForEach {$h, \; 1 \leq h \leq n $} {
+	$\mathit{found} \gets {\tt true}$ \;
+	$Scen' = \emptyset$\;
+	\ForEach {$scen \in Scen$} {
+  		\ForEach {$(F_{i,j}, s_{i,j}) \in \mathit{scen_1}$} {
+    		\If {$\mathit{accept}(F_{i,j}, s_{i,j}, e_h) = (F_{i,j}, s'_{i,j})$} {
+				Let $scen'$ be a copy of $scen$\;
+      		$\mathit{scen'} \gets (\mathit{scen'} - (F_{i,j}, s_{i,j})) \cup (F_{i,j}, s'_{i,j})$\;
+      		$\mathit{Scen'} \gets \mathit{scen'} \cup \mathit{Scen'}$\;
+      		$\mathit{found} \gets {\tt false}$ \;
+    		}
+  		}
+  		\ForEach {$F_i \in \vec{F}$} {
+      	create a new instance $F_{i, j+1}$ \;
+      	\If {$\mathit{accept}(F_{i,j+1},\mathit{init}_{i,j+1}, e_h) = (F_{i,j+1}, s'_{i,j+1})$} {
+    			Let $scen'$ be a copy of $scen$\;
+				$\mathit{scen'} \gets \mathit{scen'} \cup (F_{i,j+1}, s'_{i,j+1})$ \;
+				$\mathit{Scen'} \gets \mathit{scen'} \cup \mathit{Scen'}$\;
+        		$\mathit{found} \gets {\tt false}$ \;
+      	}
+    	}
+	}
+  \If {$\mathit{found} == {\tt true}$} {
+    \Return ${\tt Inconsistent}$\;
+  }
+  $Scen = Scen'$\;
+}
+\Return $\mathit{Scen}$ \;
+\caption{$\textsc{Check-Compliance}(\vec{F}, \, \rho)$}
+\label{algo:compliance}
+\end{algorithm}
+
+To illustrate the basic idea, consider the system flow in
+Fig.~\ref{flow-spec-ex}(b), which we will call $F_1$.
+Suppose that the following flow trace is abstracted from an
+observed signal trace.
+\[
+	t_1\;t_2\;t_1\;t_2\;t_3\;t_3\;t_4\;t_5\;t_5\;t_4\ldots
+\]  
+Here transition names in the LPN are used to represent the 
+flow events in the trace.  The first four events results in
+the following flow execution scenario
+\[
+	\{(F_{1,1}, \{p_3\}),~(F_{1,2}, \{p_3\})\}.
+\]
+For the first event $t_3$, it results in two execution scenarios 
+below depending on which flow instance emits $t_3$.
+\[
+\begin{array}{l}
+	\{(F_{1,1}, \{p_4\}),~(F_{1,2}, \{p_3\})\} \\
+	\{(F_{1,1}, \{p_3\}),~(F_{1,2}, \{p_4\})\}.
+\end{array}
+\]
+After handing the next event $t_3$, the above two execution scenarios
+are reduced to the one as shown below.
+\[
+	\{(F_{1,1}, \{p_4\}),~(F_{1,2}, \{p_4\})\}.
+\]
+Using Algorithm~\ref{algo:compliance} to handle the
+remaining four events, the following execution scenario is
+derived.
+\[
+	\{(F_{1,1}, \{p_5, p_6\}),~(F_{1,2}, \{p_5, p_6\})\}
+\]
+\chapter{Trace Analysis With Partial Observability}
+In general, a signal trace of partial observability
+corresponds a set of traces of flow events due to the
+ambiguous interpretation of signal events.  In the
+following, we discuss two cases for trace abstraction on
+partial observability: mapping a single signal event to a
+flow event or mapping a sequence of signal events to a flow
+event.  A signal event is defined as a state on or an
+assignment to a set of signals.
+
+Hereafter, the term {\em flow traces} is used to refer to
+traces of flow events.  Consider the following example for
+the first case.  Suppose that there are three flow events:
+$e_1$, $e_2$, and $e_3$, which are implemented in hardware
+by the signal events shown in the list below.  We use
+Boolean expressions to represent signal events for the
+discussion.
+\[
+\begin{array}{cl}
+e_1: & abc\\
+e_2: & \bar{a}bc\\
+e_3: & a\bar{b}c
+\end{array}
+\] 
+Suppose that only signals $b$ and $c$ are observable, and we
+obtain the following trace:
+\[
+bc\ bc \ \bar{b}c
+\]
+During trace abstraction, the first two signal events $bc$
+can be mapped to $\{e_1, e_2\}$ since $a$ is not observable,
+and the last one $b'c$ is mapped to $\{e_3\}$.  Therefore,
+this signal trace is abstracted to four flow traces, $\{e_1,
+e_2\} \times \{e_1, e_2\} \times \{e_3\}$.
+
+Next, we consider the case where a flow event is mapped from
+a sequence of signal events.  Now suppose that two other
+flow events are implemented by sequences of signal events as
+defined in the list below.
+\[
+\begin{array}{cl}
+e_4: & abc\ \bar{a}bc\\
+e_5: & abc\ abc\ abc\ \bar{a}bc\\
+\end{array}
+\] 
+Given an observed trace of the same observability shown below
+\[
+bc\ bc\ bc \ bc,
+\]
+it is abstracted to the following flow traces.
+\[
+e_4e_4,\; \textvisiblespace e_4 \textvisiblespace,\;  e_4 \textvisiblespace \textvisiblespace,\;  \textvisiblespace \textvisiblespace e_4, \; e_5
+\] 
+
+where $\textvisiblespace$ denotes signal events that are not
+mapped to any flow events.  Note that the above abstraction
+leads to three distinct flow traces as the middle three
+correspond to the same flow trace.
+
+It is clear from above that a partial trace is viewed as a
+set of flow traces, and Algorithm~\ref{algo:compliance} can
+be suitably extended to work with flow traces to obtain the
+set of candidate flows.  However, applicability of the
+algorithm in practice can be gated because the number of
+potential flow execution scenarios generated under partial
+observability may be enormous.  Note that this is not a
+limitation of the algorithm; if the observability of
+critical events is poor there simply {\em are} too many flow
+execution scenarios compliant with the observed trace.
+Nevertheless, we need to address the issue to make trace
+interpretation (whether automatic or not) practicable.
+There are two potential approaches: (1)~better selection of
+post-silicon trace observability, and (2)~use of system
+insights during validation.  Trace signal selection itself
+is an important and orthogonal topic~\cite{nicolici,basu},
+and a detailed discussion of it is out of scope of this
+paper.  However, we briefly describe how the debuggers'
+insights of a system's architecture can help to address the
+complexity issue in the trace interpretation.
+\section{Interactive Trace Interpretation}
+
+Post-silicon validation is performed by debuggers with deep
+knowledge about the system's architecture and
+micro-architecture, and the test environment.  Two key
+insights are (1) the maximal number of instances of a flow
+activated in the test environment, and (2)~the mutual
+relationship between two flows.  For example, the test
+environment may not permit multiple instances of firmware
+authentication to operate concurrently, or a flow involving
+audio and Web browsing to initiate until the flows
+participating in boot are completed.  Our framework permits
+incorporating such insights as constraints in trace
+analysis; flow execution scenarios that violate these
+constraints are ignored.  These insights can lead to two
+advantages.  First, they help to reduce the potentially
+large number of partial scenarios generated during the trace
+interpretation step, thus making the analysis more
+efficient.  Second, they permit the debugger to quickly
+filter out uninteresting combinations of flows and focus on
+interesting interleavings.
+
+This approach can be flexible in that it allows a debugger
+to analyze the observed traces in a trial-and-error manner
+if the precise knowledge of the system (micro-)architecture
+is hard to come by.  For instance, the debugger might
+initially make a very restricted assumption on how the SUD
+executes a flow specification, and these assumptions can
+potentially lead to an empty set of flow execution
+scenarios.  Depending on which of these assumptions
+triggered during the trace interpretation step, the debugger
+can study these assumptions more carefully, and relax some
+or all of them for the next run of analysis.  This iteration
+can be repeated as many times as necessary until some
+results deemed meaningful are produced.
+
+\chapter{Implementations and Results}
+
+\section{Simulation simple TLM SoC with GEM5}
+\begin{figure} 
+\centerline{
+\includegraphics[width=3in]{figures/Fig4.png}}
+\caption{SoC platform structure.}
+\label{SoC}
+\end{figure}
+
+To determine the efficiency of the trace analysis method for
+a realistic example, a transaction level model of a SoC is
+constructed within the GEM5 environment~\cite{Binkert2011}.
+This SoC model, as shown in Fig.~\ref{SoC}, consists of two
+ARM Cortex-A9 cores, each of which contains two separate
+16KB data and instruction caches.  The caches are connected
+to a 1GB memory through a memory bus model.  Components
+communicate with each other by sending and receiving various
+request and response messages.  In order to observe and
+trace communications occurring inside this model during
+execution, monitors are attached to links connecting the
+components.  These monitors record the messages flowing
+through the links they are attached to, and store them into
+output trace files.
+
+For this model, we consider the flow specifications
+describing the cache coherence protocols supported in
+GEM5 that is used to build the model in Fig~\ref{SoC}.
+The GEM5 cache coherence protocols can be found at~\cite{gem5}.
+These flow specifications describe data/instruction read
+operations and data write operations initiated from CPUs.
+Three such flows describe the cache coherent protocols for
+each CPU.  Since there are two CPUs, there are six flows in
+the model.
+
+We wrote two simple concurrent programs, one for each CPU,
+ to exercise the flows.  They read numbers from a file,
+perform some operations on these numbers, and store the
+results back to the file.  How GEM5 supports shared memory
+multi-threaded program execution is unclear.  Therefore,
+no data are shared in both caches in this test.
+Furthermore, GEM5 does not support true concurrency.  When
+there are two programs running on the CPUs, GEM5 alternates
+the executions between the two CPUs.  To simulate
+asynchronous concurrency with the interleaving semantics,
+those two simple programs are instrumented with
+pseudo-blocking commands, one placed before each statement.
+A pseudo blocking command includes a random number generator
+that returns either $0$ or $1$ and a loop that only exits
+when the returned random number is $0$.
+
+
+\begin{table}[tb]
+\caption{Runtime Results of Trace analysis. Time is in seconds and memory usage is in MB.}
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+	&	F-Obs. & \begin{tabular}{c}P-Obs. \\ No Amb.\end{tabular} & \begin{tabular}{c}P-Obs. \\ Amb.~1\end{tabular} & \begin{tabular}{c}P-Obs. \\ Amb.~2\end{tabular} \\
+\hline
+\hline
+Time & $3$ & $2.78$ & $896$ & $<1$\\
+\hline
+Mem & $12$ & $10$ & $420$ & $9$\\
+\hline
+	
+\end{tabular}
+\end{center}
+\label{table-results}
+\end{table}%
+
+After this model is executed with the simple concurrent programs, 
+the trace analysis is applied to traces with different observabilities
+collected from this model.  The runtime results are shown in Table~\ref{table-results}.
+The first column shows the results from analyzing the trace with the full
+observability, while the next three show the result from 
+analyzing traces with different partial observability assumptions.
+
+In the first experiment, full observability is assumed.
+After the SoC model finishes executing the program, there
+are totally $343581$ messages collected in the trace file.
+Not all of the messages are relevant to the flow
+specification as many are used by GEM5 to initialize its
+simulation environment.  After removing those irrelevant
+messages, the number of messages in the trace file is to
+reduced to $121138$.
+
+The time taken to remove the irrelevant messages from the
+trace is negligible.  The total runtime and the peak memory
+taken by the trace analysis algorithm on the reduced
+trace are 3 seconds and 12MB, respectively.  Only one flow execution
+scenario is extracted, and 
+Table~\ref{table-case-2} shows the number of flow instances contained in that
+scenario for the six 
+flows describing cache coherent operations initiated from both CPUs.
+\begin{table}[tb]
+\caption{The number of flow instances derived by the trace analysis with the full observability.}
+\begin{center}
+\begin{tabular}{|l|c|}
+\hline
+Flows & $\#$Instances \\
+\hline
+\hline
+CPU1 Data Read			&  $17582$\\
+CPU1 Instruction Read		&  $4002$\\
+CPU1 Write				&  $3370$\\
+\hline
+CPU2 Data Read			&  $17386$\\
+CPU2 Instruction Read		&  $3955$\\
+CPU2 Write				&  $3308$\\
+\hline
+\end{tabular}
+\end{center}
+\label{table-case-2}
+\end{table}%
+
+In the second experiment, partial observability is taken into account
+with the four monitors attached to the links between two CPUs and their
+caches are disabled. Then, the trace is generated by the
+remaining five monitors from the SoC model executing the
+same program.  The new trace contains 15089 messages.  
+Similarly, only one flow execution
+scenario is extracted, and the numbers of the
+flow instances contained in that execution scenario are
+shown in Table~\ref{table-par-obs}.  From these results, the
+numbers of the flow instances are dropped significantly
+compared to the results extracted from the trace with the
+full observability as shown in
+Table~\ref{table-case-2}. This difference is due to that
+some communications occurred in the system when executing
+the program involve the CPUs and their corresponding caches
+only, and the traffic on the links between the CPUs and
+their corresponding caches is not observable. Therefore, the
+instances of the flow specifications characterizing these
+communications do not exist in the trace. In other words,
+all extracted flow instances in Table~\ref{table-par-obs}
+characterize the communications that pass through the memory
+bus in the system model.  The runtime and memory usage as shown in
+the third column in Table~\ref{table-results} are
+similar to those for analyzing the trace of the full
+observability.
+
+\begin{table}[tb]
+\caption{The number of flow instances derived by the trace analysis with certain monitors disabled.}
+\begin{center}
+\begin{tabular}{|l|c|}
+\hline
+Flows & $\#$Instances \\
+\hline
+\hline
+CPU1 Data Read			&  $829$\\
+CPU1 Instruction Read		&  $169$\\
+CPU1 Write				&  $82$\\
+\hline
+CPU2 Data Read			&  $803$\\
+CPU2 Instruction Read		&  $190$\\
+CPU2 Write				&  $83$\\
+\hline
+\end{tabular}
+\end{center}
+\label{table-par-obs}
+\end{table}%
+
+In the third experiment, further partial observability is taken into consideration.  In this experiment, only the five links involving the memory bus are still considered.  However, an assumption is made that all events passing the same link are not distinguishable due to the limited observability.  The monitors are modified such that whenever an event is captured on one of the links, it dumps a set of events passing through the same link into the trace file.  Therefore, each line of the trace file corresponds to a set of events.  After applying the trace analysis to this trace,  a total of 13944 flow execution scenarios are extracted.    This large number, compared to the results from the first two experiments, is due to the ambiguous interpretation of the events with limited observability.  
+
+The whole experiment takes about $15$ minutes and $420$~MB to finish as shown in column~4
+in Table~\ref{table-results}, significantly higher than the numbers for analyzing traces where there is no ambiguity in the observed events.  This is due to the fact that a trace of ambiguous events is in fact a set of traces of original events, which lead to large numbers of execution scenarios either during or at the end of the analysis.  In this experiment, the peak number of execution scenarios during the analysis process is $70384$, many of which are invalid and removed eventually.  However, controlling the number of intermediate execution scenarios during the trace analysis is critical in order for the analysis to be tractable.  Here, insights from validators could help, but are not used in this experiment.   
+
+As shown above, the ambiguous interpretation of events can lead to large numbers of intermediate and final execution scenarios, which not only make the trace analysis more time consuming but also make it difficult to gain insightful understanding from the derived execution scenarios.  Careful selection of what to observe may have big impact on results from the trace analysis.  In this last experiment, we relax the assumption made in the previous experiment such that the events passing each link are partitioned into two groups, one for read operations and one for write operations.  Similar to the assumption made in the previous experiment, events in the same group are assumed to be non-distinguishable.  The monitors are modified accordingly such that they output all events in the same group into the trace file if an event from that group is captured.  After the trace analysis on this new partially observed trace is finished, only one execution scenario is derived where the distribution of the numbers of flow instances is the same as those shown in Table~\ref{table-par-obs}.  The peak number of execution scenarios encountered during the trace analysis is $4$.  The total runtime and memory usage are negligible as shown in the last column in Table~\ref{table-results}.  Compared to the results from the previous experiment, the precision and the performance of the trace analysis are improved dramatically as a result of careful selection of observable events. 
+
+
+\begin{figure} 
+\centerline{
+\includegraphics[width=7in]{struc.pdf}}
+\caption{SoC platform structure.}
+\label{rtlstruc}
+\end{figure}
+
+
+\section{Simulation simple RTL SoC with VHDL}
+Another register transaction level SoC model is constructed using VHDL language. As showed in Fig.~\ref{rtlstruc}, this model consists of two CPU model with instruct set hard coded in, each with its own 1KB cache. The caches are connected to a 4MG memory through a memory bus model. At each rising clock cycle, our model will record selected signal value into a vcd(value change dump) format file.
+
+This model has 6 protocols implemented. It's based on the protocols provided by GEM5 with some modification. 3 types of protocols: read, write and write back is implemented for both CPU. Different from GEM5, the cache miss and cache hit scenarios for both read(/write) are combined into a single protocol of read(/write). Write back protocol is new and will be invoked when Cache need to flush back dirty datas.
+
+We wrote a random test generator inside each CPU. For every clock cycle, each CPU will randomly generate a read or write operation to a random generated address. In order to better active and cache coherent protocol, only first 3 bits of the 16 bits request address are random generated, while the rest of the bits are predefined.
+
+\chapter{Conclusion and Future Works}
+This thesis presents a method for post-silicon validation by
+interpreting observed raw signal traces at the level of
+system flow specifications.  The derived flow execution
+scenarios provide more structured information on system
+operations, which is more understandable to system
+validators.  This information can help to locate design
+defects more easily, and also provides a measurement of
+validation coverage.
+
+Due to partial observability, this approach may derive a
+large number of different flow execution scenarios for a
+given signal trace.  Insights from system validators can
+help to eliminate some false scenarios due to the partial
+observability.  An interesting future direction is
+formalization of the validators' insights using temporal
+logic on flows so that the validators can express their
+intents more precisely and concisely.
+
+The trace analysis approach presented in this paper needs to
+be iterated with different observations selected in
+different iterations in order to eliminate the false
+scenarios and to root cause system failures as quickly as
+possible.  The observation selection and stitching signal
+traces of different observations together for the above goal
+will also be pursued in the future.
+
+\chapter{Flow Specifications and Protocols}
+\section{GEM5}
+
+\subsection{write flow specification}
+
+In this section, we will take CPU1 as an example to explain how write flow specification works in our SoC system.
+ 
+Coherence protocol for write operation can be triggered by CPU1 initiating a memory write request to its data cache. Next, depends on whether the required data is included in cache1, and the status of requested data,  cache1 can generate three possible responses. 
+
+First, the cache1 will send read exclusive request message msg2 to interconnect if data is not present in cache, as shown in Fig.~\ref{write3}.
+
+ \begin{figure} 
+ \centerline{
+ \includegraphics[width=4In]{figures/write3.png}}
+ \caption{Flow sequence chart of write operation when requested data is not included in Dcache. ReadExRes can also be sent from Memory if Dcache2 doesn't have requested data. This sequence chart is symmetric for CPU2. }
+ \label{write3}
+ \end{figure}
+ 
+ \begin{figure} 
+ \centerline{
+ \includegraphics[width=4In]{figures/write2.png}}
+ \caption{Flow sequence chart of write operation when requested data is shared by another component. UpgradeRes can also be sent from Memory if Dcache2 doesn't have requested data. This sequence chart is symmetric for CPU2. }
+ \label{write2}
+ \end{figure}
+
+ \begin{figure} 
+ \includegraphics[width=1.9In]{figures/write1.png}
+ \caption{Flow sequence chart of write operation when XCache has the exclusive right of requested data. XCache can be instruction cache or data cache. This sequence chart is symmetric for CPU2. }
+ \label{write1}
+ \end{figure}
+ 
+Second, if the data is shared by CPU2, it will send upgrade request message msg16 to interconnect request disabling  CPU2's ownership of the data, as shown in Fig.~\ref{write2}. 
+
+Last, if CPU1 has exclusive right of required data, ICache1 will perform the write operation and sent an response message msg15 to CPU1, as shown in Fig.~\ref{write1}.
+
+
+\begin{figure} 
+
+\begin{minipage}{.5\textwidth}
+ \includegraphics[width=3.0In]{figures/Fig5.png}
+ {\tiny
+ \[
+ \begin{array}{llll}
+ msg_0: (&\mbox{ CPU1},&\mbox{writeReq},&\mbox{icache1   })\\       
+ msg_1: (&\mbox{ dcache1},&\mbox{ readExreq },&\mbox{Bus     })\\        
+ msg_2: (&\mbox{ Bus},&\mbox{ readExreq},&\mbox{ dcahce2 })\\  
+ msg_3: (&\mbox{ dcache2},&\mbox{readExreq},&\mbox{cpu2         })\\   
+ msg_4: (&\mbox{ Bus},&\mbox{ readExreq},&\mbox{ icahce2           })\\  
+ msg_5: (&\mbox{ icache2},&\mbox{readExreq},&\mbox{cpu2 })\\  
+ msg_6: (&\mbox{ Bus},&\mbox{ readExreq},&\mbox{ icahce1       })\\     
+ msg_7: (&\mbox{ dcache1},&\mbox{readExreq},&\mbox{cpu1           })\\  
+ msg_8: (&\mbox{ Bus},&\mbox{ readExreq},&\mbox{ Memory })\\  
+ msg_9: (&\mbox{ true                                          })\\  
+ msg_{10}: (&\mbox{ Memory},&\mbox{ readExres},&\mbox{ Bus})\\  
+ msg_{11}: (&\mbox{ icache2},&\mbox{ readExres},&\mbox{ Bus })\\  
+ msg_{12}: (&\mbox{ Bus},&\mbox{ readExres},&\mbox{ dcache1})\\  
+ msg_{13}: (&\mbox{ icache1},&\mbox{ writeRes},&\mbox{ CPU1         })\\  
+ msg_{14}: (&\mbox{ icache1},&\mbox{ writeRes},&\mbox{ CPU1 })\\  
+ msg_{15}: (&\mbox{ dcache1},&\mbox{UpgradeReq},&\mbox{Bus})\\  
+ msg_{16}: (&\mbox{ Bus},&\mbox{ UpgradeReq},&\mbox{ icahce2      })\\   
+ msg_{17}: (&\mbox{ Bus},&\mbox{ UpgradeReq},&\mbox{ Memory })\\  
+ msg_{18}: (&\mbox{ icache2},&\mbox{UpgradeRes},&\mbox{ Bus     })\\  
+ msg_{19}: (&\mbox{ Bus},&\mbox{ UpgradeRes},&\mbox{ dcache1      })\\  
+ msg_{20}: (&\mbox{ icache1},&\mbox{ writeRes},&\mbox{ CPU1 })
+ \end{array}
+ \]}
+ \caption{\footnotesize Flow specification of a cache coherent write operation initiated from CPU1. This flow is symmetric for CPU2. }
+ \label{write-flow}
+ \end{minipage}%
+ \begin{minipage}{.1\textwidth}
+ .
+ \end{minipage}%
+ \begin{minipage}{.4\textwidth}
+ \centering
+  \includegraphics[width=2in]{figures/Fih6.png}
+  \centering
+ {\tiny
+ \[
+ \begin{array}{llll}
+ msg0: (&\mbox{ CPU1},&\mbox{ReadReq},&\mbox{icache1  })\\                   
+ msg1: (&\mbox{ dcache1},&\mbox{ StoreCondreq },&\mbox{Bus })\\           
+ msg2: (&\mbox{ Bus},&\mbox{ StoreCondreq},&\mbox{ icahce2 })\\
+ msg3: (&\mbox{ icache2},&\mbox{StoreCondreq},&\mbox{cpu2       })\\      
+ msg4: (&\mbox{ Bus},&\mbox{ StoreCondreq},&\mbox{ dcahce2           })\\ 
+ msg5: (&\mbox{ dcache2},&\mbox{StoreCondreq},&\mbox{cpu2 })\\
+ msg6: (&\mbox{ Bus},&\mbox{ StoreCondreq},&\mbox{ dcahce1     })\\       
+ msg7: (&\mbox{ icache1},&\mbox{StoreCondreq},&\mbox{cpu1           })\\ 
+ msg8: (&\mbox{ Bus},&\mbox{ StoreCondreq},&\mbox{ Memory })\\
+ msg9: (&\mbox{ true                                        })\\
+ msg10: (&\mbox{ Memory},&\mbox{ ReadRes},&\mbox{ Bus            })\\    
+ msg11: (&\mbox{ icache2},&\mbox{ ReadRes},&\mbox{ Bus })\\
+ msg12: (&\mbox{ Bus},&\mbox{ ReadRes},&\mbox{ dcache1      })\\            
+ msg13: (&\mbox{ icache1},&\mbox{ ReadRes},&\mbox{ CPU1          })\\  
+ msg14: (&\mbox{ icache1},&\mbox{ ReadRes},&\mbox{ CPU1 })\\
+ \end{array}
+ \]}
+ \caption{\footnotesize Flow specification of a cache coherent read operation initiated from CPU1 to instruction cache.This flow is symmetric for CPU2. }
+ \label{read-flow}
+\end{minipage}
+ 
+ \end{figure}
+
+
+ Afterwards, interconnect will sent received request to all connected component (data cache and instruction cache of each CPU and memory). Once the interconnect obtains the response from either CPU2 or memory, it will generate a response message to cache1, cache1 will generate a write response message msg14 (or msg 21 ) to CPU1. These three flow sequence charts are implemented together in one flow specification in GEM5, as specified in Fig.~\ref{write-flow}.
+ 
+ 
+ \subsection{read flow specification}
+ In this section, we will also take CPU1 as an example to explain how read flow specification works in our SoC system.
+
+
+ 
+ \begin{figure} 
+ \begin{minipage}{.3\textwidth}
+ \centerline{
+ \includegraphics[width=3.9In]{figures/read3.png}}
+ \caption{Flow sequence chart of read operation when requested data is shared by another component. LoadLockedRes can also be sent from Memory if Dcache2 doesn't have requested data. This sequence chart is symmetric for CPU2. }
+ \label{read3}
+ \end{minipage}%
+ \begin{minipage}{.3\textwidth} 
+ \centerline{
+ \includegraphics[width=3.9In]{figures/read2.png}}
+ \caption{Flow sequence chart of read operation when requested data is not present. StoreCondRes can also be sent from Memory if Dcache2 doesn't have requested data. This sequence chart is symmetric for CPU2. }
+ \label{read2}
+  \end{minipage}%
+  \begin{minipage}{.3\textwidth} 
+\ \includegraphics[width=2In]{figures/read1.png}
+ \caption{Flow sequence chart of read operation when XCache has the exclusive right of requested data. XCache can be instruction cache or data cache. This sequence chart is symmetric for CPU2. }
+ \label{read1}
+  \end{minipage}
+ \end{figure}
+
+ 
+Read coherence protocol can be triggered by CPU1 initiating a memory read request to its cache. Depending on whether the required data is included in its cache, the status of requested data,  and which cache the request is sent to, cache can generate three possible responses. 
+
+First, for both instruction cache and data cache, if they have the exclusive right of requested data, they can generate a read response carrying the data back to CPU. Detailed flow sequence chart is displayed in Fig.~\ref{read1}.
+
+Second, when ICache1 decide that the requested data is not present, it will issue an StoreCondReq to memory bus asking for data. 
+
+Finally, if DCache1 has the data, but it's shared, it will issue an LoadLockedReq to memory bus requesting exclusive right of the data. Flow sequence charts for these two possibility are shown in Fig.\~ref{read1} and Fig.\~ref{read}.
+ 
+Since instruction cache and data cache have different coherence protocol, there are two flow specifications for read operation generated by CPU1. The LPN specification as shown in Fig.~\ref{read-flow} captures the system flow where CPU1 initiate a memory read to instruction cache. And Fig.~\ref{read-dcache} specifies read operation to data cache from CPU1.
+
+ 
+
+ \begin{figure} 
+ \centerline{
+ \includegraphics[width=2.4in]{figures/readDcache.png}}
+
+ {\tiny
+ \[
+ \begin{array}{llll}
+ msg0: (&\mbox{ CPU1},&\mbox{ReadReq},&\mbox{dcache1  })\\                   
+ msg1: (&\mbox{ dcache1},&\mbox{ ReadRes},&\mbox{ CPU1 })\\
+ msg2: (&\mbox{ icache1},&\mbox{ LoadLockedreq },&\mbox{Bus })\\     
+ msg3: (&\mbox{ Bus},&\mbox{ LoadLockedreq},&\mbox{ dcahce2     })\\
+ msg4: (&\mbox{ dcache2},&\mbox{LoadLockedreq},&\mbox{cpu2 })\\
+ msg5: (&\mbox{ Bus},&\mbox{ LoadLockedreq},&\mbox{ icahce2     })\\ 
+ msg6: (&\mbox{ icache2},&\mbox{LoadLockedreq},&\mbox{cpu2     })\\
+ msg7: (&\mbox{ Bus},&\mbox{ LoadLockedreq},&\mbox{ dcahce1 })\\
+ msg8: (&\mbox{ icache1},&\mbox{LoadLockedreq},&\mbox{cpu1       })\\
+ msg9: (&\mbox{ Bus},&\mbox{ LoadLockedreq},&\mbox{ Memory     })\\
+ msg10: (&\mbox{ true })\\
+ msg11: (&\mbox{ Memory},&\mbox{ ReadRes},&\mbox{ Bus       })\\     
+ msg12: (&\mbox{ icache2},&\mbox{ ReadRes},&\mbox{ Bus    })\\
+ msg13: (&\mbox{ Bus},&\mbox{ ReadRes},&\mbox{ icache1 })\\
+ msg14: (&\mbox{ dcache1},&\mbox{ ReadRes},&\mbox{ CPU1 })\\
+ \end{array}
+ \]}
+ \caption{\footnotesize Flow specification of a cache coherent read operation initiated from CPU1 to  data cache. This flow is symmetric for CPU2. }
+ \label{read-dcache}
+ 
+ \end{figure}
+
+\section{failed read specification}
+
+\begin{figure} 
+\centering
+ \includegraphics[width=1.5in]{figures/storeFail.png}
+ 
+ {\tiny
+ \[
+ \begin{array}{llll}
+ msg0: (&\mbox{ CPU1},&\mbox{StoreCondFailedReq},&\mbox{ICache1})\\                   
+ msg1: (&\mbox{ ICache1},&\mbox{ StoreCondFailedRes},&\mbox{ CPU1 })\\
+ \end{array}
+ \]}
+ \caption{\footnotesize Flow specification of failed read. This flow is symmetric for CPU2. }
+ \label{storefail}
+ 
+ \end{figure}
+Another flow implemented in GEM5 is when CPU initiate a store failed request to instruction cache, with a simple store failed response from instruction cache. Detailed flow specification is specified in Fig.~\ref{storefail}
+
+This three specifications are also symmetric for CPU2.
+\begin{spacing}{1}
+\bibliographystyle{unsrt}
+\bibliography{SoC}
+\end{spacing}
+
+\end{document}

@@ -1,0 +1,55 @@
+% <<<   Packages   >>>
+
+%\usepackage{beamerthemesplit}
+\usepackage{verbatim}
+\usepackage{hyperref}
+\usepackage{fancybox}
+\usepackage{multirow} %used for crazy tables
+\usepackage{stmaryrd} %used for /shortrightarrow
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{cancel}
+\usepackage{setspace}
+\usepackage{bm}
+\usepackage{enumerate}
+\usepackage[]{algorithm2e}
+\usepackage[]{algorithm2e}
+\usepackage{pifont}
+
+\usepackage{tikz}
+\usetikzlibrary{arrows,shapes,calc,automata,positioning,shadows}
+
+
+%  <<<   New commands and environments   >>>
+
+\newcommand\vtextvisiblespace[1][.3em]{%
+  \mbox{\kern.06em\vrule height.3ex}%
+  \vbox{\hrule width#1}%
+  \hbox{\vrule height.3ex}}
+
+\newenvironment{tikzpic}{%
+	\begin{center}
+	\begin{tikzpicture}[node distance=3cm, auto,>=latex', thick]}
+	{\end{tikzpicture}\end{center}}
+	
+	
+% Use tikz to create a command that wrap a circle aorund a text.
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+    \node[shape=rounded rectangle,%drop shadow={opacity=.5,shadow xshift=0pt},
+			 draw,inner sep=2pt] (char) {#1};}}
+    
+\newenvironment{myblock}[2]
+  {\begin{columns}[c]
+	\column{#1}
+	\begin{block}{#2}}
+	{\end{block}
+	\end{columns}
+	\vspace{0.1in}
+	}
+
+
+% <<< Symbols from package 'pifont'
+\newcommand{\cmark}{\ding{52}}%
+\newcommand{\xmark}{\ding{56}}%
+
