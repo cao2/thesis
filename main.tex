@@ -170,13 +170,6 @@ etc, and to facilitate reuse of the efforts of the
 architectural analysis to check HW/SW implementations.
 
 
-In case of signal selection, our thesis did signal selection mainly manually
-and didn't use any of the signal selection algorithm. We still collected some
-paper for future reference when number of signal become too big. ~\cite{forestMa} proposed that 
-the signal selection standard SSR(State Restoration Ratio) is not suitable
-for evaluating trace signal quality. The paper presents its own algorithm with 
-a better performance.
-
 
 
 \section{Motivation}
@@ -364,8 +357,8 @@ then we report that the trace is {\tt  inconsistent}, \ie,
 there is no possible interleaving of
 the protocol instances from $\vec{F}$ that is compliant with
 $\rho$.
-\footnotesize{
-\begin{algorithm}[ht]
+
+\begin{algorithm}[h]
 \setstretch{1.35}
 \DontPrintSemicolon
 Create an empty scenario $scen$\;
@@ -400,7 +393,7 @@ $\mathit{Scen} = \{scen\}$\;
 \Return $\mathit{Scen}$ \;
 \caption{$\textsc{Check-Compliance}(\vec{F}, \, \rho)$}
 \label{algo:compliance}
-\end{algorithm}}
+\end{algorithm}
 
 To illustrate the basic idea, consider the system flow in
 Fig.~\ref{flow-spec-ex}(b), which we will call $F_1$.
@@ -434,10 +427,8 @@ derived.
 \[
 	\{(F_{1,1}, \{p_5, p_6\}),~(F_{1,2}, \{p_5, p_6\})\}
 \]
+ 
 
-
-\section{Trace Signal selection}
-\section{General Impact of partial observability}
 
 
 
@@ -517,12 +508,37 @@ Nevertheless, we need to address the issue to make trace
 interpretation (whether automatic or not) practicable.
 There are two potential approaches: (1)~better selection of
 post-silicon trace observability, and (2)~use of system
-insights during validation.  Trace signal selection itself
+insights during validation. 
+Trace signal selection itself
 is an important and orthogonal topic~\cite{nicolici,basu},
-and a detailed discussion of it is out of scope of this
-thesis.  However, we briefly describe how the debuggers'
+and finding an automated way of signal selection algorithm can be one 
+of our future research direction. We will briefly describe impact of signal selection
+and how the debuggers'
 insights of a system's architecture can help to address the
-complexity issue in the trace interpretation in next section.
+complexity issue in the trace interpretation in next two sections.
+
+\section{Trace Signal Selection}
+Examples in previous section showed that limited observability will increase number of scenarios during
+the trace interpretation process. The difference can be magnitude of 2 or even more number of scenarios 
+compared to with full observability. 
+For real time simulation, where there are millions of trace messages, this could lead to 
+ thousands of scenarios or even worse. Therefore choosing the right set of signals that
+ can represent the most numbers of flow messages is very important.
+
+The increased scenario number will not just add up the analysis time, but also makes the debugging process
+harder. With more final scenarios and we can't tell which one is the real final state, we need to analyze all 
+those scenarios to find possible root cause of errors. Therefore, choose the signals that can lead to fewest
+ number of scenario is our final goal.
+ 
+Our thesis did signal selection mainly manually,
+we tried different sets of signals to observe and chose those sets that leads to fewest
+numbers of final scenario. Finding a method to automate signal selection process is 
+one of our future research direction. A lot of research is done in the area and most of them
+use SSR(State Restoration Ratio) as their metic. However, as 
+ ~\cite{forestMa} proposed that 
+the signal selection standard SSR is not suitable
+for evaluating trace signal quality. We believe a better signal selection algorithm can
+be built with suitable metric other than SSR.
 
 \section{Interactive Trace Interpretation}
 
@@ -745,7 +761,7 @@ As shown above, the ambiguous interpretation of events can lead to large numbers
 
 
 \section{Simulation simple RTL SoC with VHDL}
-Another register transaction level SoC model is constructed. This model is more specific compared to the last model as the register value will be updated every cycle, thus will be much slower than the model on GEM5. Because the lack of similar research, I couldn't find any existing model, so this model is built from scratch just by me. The desired protocols are implemented inside all the components. Because this is a simplified model, the CPU can't run software programs. A test generator is implemented inside CPU to allow simple functions.
+Another register transaction level SoC model is constructed. This model is more specific compared to the last model as the register value will be updated every cycle, thus will be much slower than the model on GEM5. Because the lack of similar research, we couldn't find any existing model, so this model is built from scratch just by me. The desired protocols are implemented inside all the components. Because this is a simplified model, the CPU can't run software programs. A test generator is implemented inside CPU to allow simple functions.
 
  As showed in Fig.~\ref{rtlstruc}, this model consists of two CPU models, each with its own 1KB cache. The caches are connected to a 4MG memory through a memory bus model. At each rising clock cycle, our model will record selected signal value into a vcd(value change dump) format file.
 
@@ -783,9 +799,23 @@ CPU2 Write Back				&  $1211$\\
 \label{table-case-3}
 \end{table}%
 
+During the building of the system, we used our analysis algorithm
+as a debugging method to find the problems. Following types of errors
+are detected by the algorithm and fixed.
+\begin{itemize}
+\item 
+Error one: interconnect bus sending same request to Memory more than one time. 
+During the trace analysis, our algorithm shows that the trace will always stop when interconnect send
+ request to Memory and the message cannot be mapped to any existing scenarios. The error message
+ looks exactly the same as the previous message. We traced the bug to interconnect and find out the request
+ wasn't reset correctly.
+ \item
+Error two: command changed after interconnect bus receive snoop request from Cache. 
+Our trace analysis algorithm find message from cache to memory can't map to any existing scenarios in 
+multiple runs, and all the stacked messages are snoop response. By debugging the cache component,
+we discovered the wrong implemented cache coherent protocol and fixed the error.
 
-
-
+\end{itemize}
 \chapter{Conclusion and Future Works}
 This thesis presents a method for post-silicon validation by
 interpreting observed raw signal traces at the level of
