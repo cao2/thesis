@@ -1,51 +1,15 @@
 \begin{thebibliography}{10}
 
-\bibitem{forestMa}
-Sai Ma, Debjit Pal, Rui Jiang, Sandip Ray, and Shobha Vasudevan.
-\newblock Can't see the forest for the trees: State restoration's limitations
-  in post-silicon trace signal selection.
-\newblock In {\em Proceedings of the IEEE/ACM International Conference on
-  Computer-Aided Design}, ICCAD '15, pages 1--8, Piscataway, NJ, USA, 2015.
-  IEEE Press.
-
-\bibitem{validationWall}
-P.~Patra.
-\newblock On the cusp of a validation wall.
-\newblock {\em IEEE Design Test of Computers}, 24(2):193--196, March 2007.
-
-\bibitem{fw}
-Yael Abarbanel, Eli Singerman, and Moshe~Y. Vardi.
-\newblock Validation of soc firmware-hardware flows: Challenges and solution
-  directions.
-\newblock In {\em Proceedings of the 51st Annual Design Automation Conference},
-  DAC '14, pages 2:1--2:4, New York, NY, USA, 2014. ACM.
-
-\bibitem{qed}
-Dongyang Lin, Tianqi Hong, Yanjing Li, S~Eswaran, Sudhakar Kumar, Farzan
-  Fallah, Nagib Hakim, Donald~S Gardner, and Subhasish Mitra.
-\newblock Effective post-silicon validation of system-on-chips using quick
-  error detection.
-\newblock {\em Computer-Aided Design of Integrated Circuits and Systems, IEEE
-  Transactions on}, 33(10):1573--1590, 2014.
-
 \bibitem{Krstic14HOST}
 S.~Krstic, Jin Yang, D.W. Palmer, R.B. Osborne, and E.~Talmor.
 \newblock Security of soc firmware load protocols.
 \newblock In {\em Hardware-Oriented Security and Trust (HOST), 2014 IEEE
   International Symposium on}, pages 70--75, May 2014.
 
-\bibitem{Patra2007}
-Priyadarsan Patra.
+\bibitem{validationWall}
+P.~Patra.
 \newblock On the cusp of a validation wall.
-\newblock {\em IEEE Des. Test}, 24(2):193--196, March 2007.
-
-\bibitem{Binkert2011}
-Nathan Binkert, Bradford Beckmann, Gabriel Black, Steven~K. Reinhardt, Ali
-  Saidi, Arkaprava Basu, Joel Hestness, Derek~R. Hower, Tushar Krishna, Somayeh
-  Sardashti, Rathijit Sen, Korey Sewell, Muhammad Shoaib, Nilay Vaish, Mark~D.
-  Hill, and David~A. Wood.
-\newblock The gem5 simulator.
-\newblock {\em SIGARCH Comput. Archit. News}, 39(2):1--7, August 2011.
+\newblock {\em IEEE Design Test of Computers}, 24(2):193--196, March 2007.
 
 \bibitem{Goossens2007NOCS}
 Kees Goossens, Bart Vermeulen, Remco~van Steeden, and Martijn Bennebroek.
@@ -109,6 +73,32 @@ Yael Abarbanel, Eli Singerman, and Moshe~Y. Vardi.
   Conference on Design Automation Conference}, DAC '14, pages 2:1--2:4, New
   York, NY, USA, 2014. ACM.
 
+\bibitem{Patra2007}
+Priyadarsan Patra.
+\newblock On the cusp of a validation wall.
+\newblock {\em IEEE Des. Test}, 24(2):193--196, March 2007.
+
+\bibitem{Binkert2011}
+Nathan Binkert, Bradford Beckmann, Gabriel Black, Steven~K. Reinhardt, Ali
+  Saidi, Arkaprava Basu, Joel Hestness, Derek~R. Hower, Tushar Krishna, Somayeh
+  Sardashti, Rathijit Sen, Korey Sewell, Muhammad Shoaib, Nilay Vaish, Mark~D.
+  Hill, and David~A. Wood.
+\newblock The gem5 simulator.
+\newblock {\em SIGARCH Comput. Archit. News}, 39(2):1--7, August 2011.
+
+\bibitem{LSCTOCPN}
+Binsan Khadka.
+\newblock Transformation of live sequence charts to colored petri nets
+  (lsctocpn).
+\newblock Master's thesis, University of Massachusetts Dartmouth, January 2007.
+
+\bibitem{Bunker2005}
+Annette Bunker, Ganesh Gopalakrishnan, and Konrad Slind.
+\newblock Live sequence charts applied to hardware requirements specification
+  and verification.
+\newblock {\em International Journal on Software Tools for Technology
+  Transfer}, 7(4):341--350, 2005.
+
 \bibitem{nicolici}
 Ho~Fai Ko and N.~Nicolici.
 \newblock Algorithms for state restoration and trace-signal selection for data
@@ -122,6 +112,20 @@ K.~Basu and P.~Mishra.
   debug.
 \newblock In {\em VLSI Design (VLSI Design), 2011 24th International Conference
   on}, pages 352 --357, jan. 2011.
+
+\bibitem{forestMa}
+Sai Ma, Debjit Pal, Rui Jiang, Sandip Ray, and Shobha Vasudevan.
+\newblock Can't see the forest for the trees: State restoration's limitations
+  in post-silicon trace signal selection.
+\newblock In {\em Proceedings of the IEEE/ACM International Conference on
+  Computer-Aided Design}, ICCAD '15, pages 1--8, Piscataway, NJ, USA, 2015.
+  IEEE Press.
+
+\bibitem{signalselect}
+Matthew Amrein.
+\newblock System-level trace signal selection for post-silicon debug using
+  linear programming.
+\newblock Master's thesis, University of Illinois, May 2015.
 
 \bibitem{gem5}
 The gem5 simulator: A modular platform for computer-system architecture

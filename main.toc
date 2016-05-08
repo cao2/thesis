@@ -8,27 +8,29 @@
 \contentsline {section}{\numberline {1.3}Related Work}{2}
 \contentsline {section}{\numberline {1.4}Motivation}{4}
 \contentsline {chapter}{\numberline {\uppercase {CHAPTER 2}}\uppercase {Background}}{6}
-\contentsline {section}{\numberline {2.1}SoC Protocols and Post-silicon Trace Analysis}{6}
-\contentsline {section}{\numberline {2.2}Labeled Petri-Nets}{8}
-\contentsline {chapter}{\numberline {\uppercase {CHAPTER 3}}\uppercase {Flow Guided Trace Interpretation}}{9}
-\contentsline {section}{\numberline {3.1}Notations and formalization}{9}
-\contentsline {section}{\numberline {3.2}Flow Guided Trace Interpretation}{10}
-\contentsline {chapter}{\numberline {\uppercase {CHAPTER 4}}\uppercase {Trace Analysis Under Partial Observability}}{13}
-\contentsline {section}{\numberline {4.1}Single signal event}{13}
-\contentsline {section}{\numberline {4.2}Sequence of signal events}{14}
-\contentsline {section}{\numberline {4.3}Difficulties and solutions}{14}
-\contentsline {section}{\numberline {4.4}Trace Signal Selection}{15}
-\contentsline {section}{\numberline {4.5}Interactive Trace Interpretation}{16}
-\contentsline {chapter}{\numberline {\uppercase {CHAPTER 5}}\uppercase {Implementations and Results}}{17}
-\contentsline {section}{\numberline {5.1}Simulation simple TLM SoC with GEM5}{17}
-\contentsline {section}{\numberline {5.2}Simulation simple RTL SoC with VHDL}{22}
-\contentsline {chapter}{\numberline {\uppercase {CHAPTER 6}}\uppercase {Conclusion and Future Works}}{25}
-\contentsline {chapter}{\numberline {\uppercase {APPENDICES}}}{26}
-\contentsline {chapter}{\numberline {\uppercase {APPENDICES}}}{27}
-\contentsline {appendix}{\numberline {Appendix A}\ignorespaces {Flow specifications and protocols provided by GEM5}}{28}
-\contentsline {section}{\numberline {A.1}Flow Specifications}{28}
-\contentsline {section}{\numberline {A.2}Protocols}{29}
-\contentsline {appendix}{\numberline {Appendix B}\ignorespaces {RTL model in VHDL}}{33}
-\contentsline {section}{\numberline {B.1}Flow Specification}{33}
-\contentsline {section}{\numberline {B.2}Protocol}{34}
-\contentsline {chapter}{\numberline {\uppercase {\vspace {-.12in}LIST OF REFERENCES }}}{38}
+\contentsline {section}{\numberline {2.1}SoC Protocols and Representation of Protocols}{6}
+\contentsline {section}{\numberline {2.2}Sequence Diagram}{7}
+\contentsline {section}{\numberline {2.3}Labeled Petri-Nets}{9}
+\contentsline {section}{\numberline {2.4}SoC Protocols and Post-silicon Trace Analysis}{12}
+\contentsline {chapter}{\numberline {\uppercase {CHAPTER 3}}\uppercase {Flow Guided Trace Interpretation}}{15}
+\contentsline {section}{\numberline {3.1}Notations and formalization}{15}
+\contentsline {section}{\numberline {3.2}Flow Guided Trace Interpretation}{16}
+\contentsline {chapter}{\numberline {\uppercase {CHAPTER 4}}\uppercase {Trace Analysis Under Partial Observability}}{22}
+\contentsline {section}{\numberline {4.1}Single signal event}{22}
+\contentsline {section}{\numberline {4.2}Sequence of signal events}{23}
+\contentsline {section}{\numberline {4.3}Difficulties and solutions}{24}
+\contentsline {section}{\numberline {4.4}Trace Signal Selection}{24}
+\contentsline {section}{\numberline {4.5}Interactive Trace Interpretation}{25}
+\contentsline {chapter}{\numberline {\uppercase {CHAPTER 5}}\uppercase {Implementations and Results}}{27}
+\contentsline {section}{\numberline {5.1}Simulation simple TLM SoC with GEM5}{27}
+\contentsline {section}{\numberline {5.2}Simulation simple RTL SoC with VHDL}{32}
+\contentsline {chapter}{\numberline {\uppercase {CHAPTER 6}}\uppercase {Conclusion and Future Works}}{36}
+\contentsline {chapter}{\numberline {\uppercase {APPENDICES}}}{37}
+\contentsline {chapter}{\numberline {\uppercase {APPENDICES}}}{38}
+\contentsline {appendix}{\numberline {Appendix A}\ignorespaces {Flow specifications and protocols provided by GEM5}}{39}
+\contentsline {section}{\numberline {A.1}Flow Specifications}{39}
+\contentsline {section}{\numberline {A.2}Protocols}{40}
+\contentsline {appendix}{\numberline {Appendix B}\ignorespaces {RTL model in VHDL}}{44}
+\contentsline {section}{\numberline {B.1}Flow Specification}{44}
+\contentsline {section}{\numberline {B.2}Protocol}{45}
+\contentsline {chapter}{\numberline {\uppercase {\vspace {-.12in}LIST OF REFERENCES }}}{49}
