@@ -36,7 +36,7 @@
 \college{Engineering} 
 \majorprofessor{Hao Zheng, Ph.D.} 
 \majorproftitle{Associate  Professor, Department of Computer Science and Engineering} 
-\members{Dmitry Goldgof, Ph.D. \and Yao Liu, Ph.D.} 
+\members{MIMI, Ph.D. \and BIBI Ph.D.} 
 \presentdate{To be determine}
 
 \keywords{silicon, validation, trace, analysis, observability, signal selection}
@@ -46,7 +46,12 @@
 %\dedication{}
 
 \acknowledgments{ 
-I am grateful to Dr. Hao Zheng for his precious and constant help on this project.
+I would like to thank my advisor Dr. Hao Zheng for his continuous support
+and valuable suggestions for this research work. His insights on the topic was very 
+valuable to me, especially his guidance and feedback has driven me in the proper direction 
+of the research.
+
+I would also like to thank my friend and family for supporting my academic career. 
 }
 
 \abstract{
@@ -245,12 +250,27 @@ environment~\cite{Binkert2011} and another RTL model written in VHDL.
 
 
 \chapter{Background}
- \section{SoC Protocols and Representation of Protocols}
- 
+ \section{Representations of SoC Protocols }
+  
+ In software engineering field, there are two approaches for representing the system protocols: informal
+ and formal representation.
+  Informal representation usually use common 
+  graphical notation for representation for better understandability and easier communication with the client. 
+The formal representation is usually built on strong mathematical notations and proofs for
+more automated verification purpose.
+
+System development usually need to create protocol in both formal and informal formats. 
+Informal format is mostly used for communications and formal format for verification purpose. 
+Usually it requires manual translation of an informal description to a formal description, which 
+requires massive amount of time and effort when system growing larger and more complicate. 
+ ~\cite{lsctocpn} introduced a tool translating informal formal Live Sequence Chart
+ into formal format of Colored Petri-net, which can be great help for future research.
+
+
  An SoC design involves integration of a number of IPs that
 communicate through complex protocols.  Such system-level
 protocols are typically specified in architecture documents
-as message flow diagrams.  For this paper, we use the words
+as message flow diagrams.  For this thesis, we use the words
 ``protocol'' and ``flow'' interchangeably.
 
 \begin{figure}[h]
@@ -262,120 +282,93 @@ as message flow diagrams.  For this paper, we use the words
 
 Fig~\ref{flowa} shows one diagram for a protocol
 to authenticate and load a firmware during system boot for
-firmware upgrade.  
+firmware upgrade.  To start this protocol, the Driver will reset Device and copy the needed
+firmware to a place in System Memory (SM) and notice the Device to load it. With the location of firmware
+provided from Driver, Device can retrieve firmware to Isolated Memory (IM) and sends the message $Auth\_req $
+to Crypto-engine (CE), providing the location of the copied firmware, and asking for authentication. After verifying 
+signature of firmware in IM, CE will reply with 
+PASS/FAIL status ($sts$). 
+Upon receiving the PASS $sts$, Device sends report message to Driver and acknowledge message
+to CE and then jump to the firmware from Local Memory (LM)
+
+Currently our research is only for verification purpose and our system is too simple
+to need two formats of specification, so we only use the formal format of Labeled Petri-net, which is introduced 
+in section \ref{petri}. Section \ref{diagram} will give a brief explanation of sequence diagram as an 
+example of informal representation.
 
 
- 
- In software engineering field, there are two approaches for representing the system protocols: informal
- and formal representation.
-  Informal representation usually use common 
-  graphical notation for representation for better understandability and easier communication with the client. 
-The formal representation is usually built on strong mathematical notations and proofs for
-more automated verification purpose.
-
-System development usually need to create protocol in both formal and informal formats. 
-Informal format for communications and formal format for verification purpose. 
-Usually it requires manually translation of informal to formal format, which 
-requires massive time and effort when system become large and complex. 
- ~\cite{LCSTOCPN} introduced a tool translating informal formal Live Sequence Chart
- into formal format of Colored Petri-net, which can be great help for future research.
- 
- Currently our research is only for verification purpose and our system is too simple
- to have two format of specification, we only use the formal format of Labeled Petri-net,
-  which will be introduced in Section 3.
-  For the future research, when we need to use large existing system, we will 
-  research more about tools that can translate graphical specification to formal specification.
-
-Next two section will talk about sequence diagram as informal representation and Petri-Net as formal representation.
-
-
-\section{Sequence Diagram}
-Sequence Diagram is one of the most used language to provide 
-graphical notation of system's behavior.
-It represents the
+\section{Sequence Diagram} \label{diagram}
+Sequence Diagram represents the
  life cycle of an processor and the interactions between them.
- Life cycle of an object is represented by a vertical line
-  and the interaction between objects is represented by 
-  a horizontal line with an arrow pointing towards the receiver object.
+%% Life cycle of an object is represented by a vertical line
+ %% and the interaction between objects is represented by 
+ %% a horizontal line with an arrow pointing towards the receiver object.
 Common used sequence diagram include UML sequence diagram, message sequence 
-diagram and live sequence diagram.~\cite{LSCTOCPN}
+diagram and live sequence diagram.~\cite{lsctocpn}
  
 \begin{figure} [h]
 \centerline{
-\includegraphics[width=5in]{handshake.png}}
-\caption{Handshake protocol in the graphical LSC representaion}
-\label{handshake}
+\includegraphics[width=5in]{livesc.png}}
+\caption{Protocol in Fig.~\ref{flowa} represented in graphical LSC }
+\label{livesequence}
 \end{figure}
- Fig.~\ref{handshake} shows an simple exam of Live Sequence Chart (LSC) specification of a handshake protocol between
- the two processes $initiator$ and $target$. 
- A precondition bar requires that the interface be in a state in which $valid$ and $ack$ be deasserted 
- before any actions of the protocol begin. 
- Once $valid$ and $ack$ both deassert,
-  however, the interface may begin a new transaction by waiting zero or more clock edges as noted by the hot, starred, clock tick.
+ Fig.~\ref{livesequence} shows the live sequence chart representation of protocol from Fig.~\ref{flowa}.
+ In this graph we can clearly see the sequence of the communication between each IP.
 
-At this time, the initiator sets the $data$ line and then asserts 
-the $valid$ signal. Once the target samples the $valid$ signal asserted, 
-it is free to sample the value on the $data$ line. After zero or more clock ticks, the target then asserts $ack$ to acknowledge 
-receipt of the data value. At this point, a single clock tick must occur before
- the $initiator$ can deassert $valid$ and the $target$ can deassert $ack$ since the 
- data transfer officially occurs on the clock edge on which both $valid$ and $ack$ 
- are asserted. 
- Again, zero or more clock ticks may occur before the transaction
-  exits by leaving the interface in a state in which $valid$ and $ack$ are both 
-  deasserted. ~\cite{Bunker2005}
+%%At this time, the initiator sets the $data$ line and then asserts 
+%%the $valid$ signal. Once the target samples the $valid$ signal asserted, 
+%it is free to sample the value on the $data$ line. 
+%After zero or more clock ticks, the target then asserts $ack$ to acknowledge 
+%receipt of the data value. At this point, a single clock tick must occur before
+ %the $initiator$ can deassert $valid$ and the $target$ can deassert $ack$ since the 
+ %data transfer officially occurs on the clock edge on which both $valid$ and $ack$ 
+ %are asserted. 
+% Again, zero or more clock ticks may occur before the transaction
+  %exits by leaving the interface in a state in which $valid$ and $ack$ are both 
+  %deasserted. ~\cite{Bunker2005}
   
   
-\section{Labeled Petri-Nets}
+  
+\section{Labeled Petri-Nets} \label{petri}
 Labeled Petri-nets (LPN) is a formalization of state transition 
 systems that is capable of describing sequencing, concurrency, and choices.  
 Compared with informal representation, it can be verified using mathematical techniques
 and tools.
  %--- LPN definition with levels
  
- Specifically, a labeled Petri-net (LPN) is a tuple $(P, T, M_0, V, E, L)$ where
+ Formally, an LPN is a tuple $(P, T, s_0, E, L)$  where
  \begin{itemize}
  \item $P$ is a finite set of places,
  \item $T$ is a finite set of transitions,
- \item $M_0$ is the set of initially marked places, also referred to as the initial marking.
- \item $V$ is a finite set of auxiliary variables of integer type,
+ \item $s_0$ is the set of initially marked places, also referred to as the initial marking.
  \item $E$ is a finite set of events,
- \item $L$ is a labeling function that maps each transition $t \in T$ to a triple $(g, e, A)$ where
- 	\begin{itemize}
- 	\item $g$ is a predicate over $V$,
- 	\item $e \in E$ is an event,
- 	\item $A$ is a set of assignments to some variables in $V$.  
- 	\end{itemize}
+ \item $L$ is a labeling function that maps each transition $t \in T$ to an event $e \in E$. 
  \end{itemize}
  
- For each transition $t \in T$, its preset, denoted as $\bullet{t} \subseteq P$, is the set of places connected to $t$, and its postset, denoted as $t\bullet \subseteq P$, is the set of places that $t$ is connected to.  A marking of a LPN is a set of places marked with tokens, and a state of a LPN is $(M, \alpha)$ where $M$ is a marking and $\alpha$ is an assignment to all auxiliary variables in $V$.  
- 
- The operational semantics of a LPN is defined by transition executions.  A transition can be executed after it is {\em enabled}.  A transition $t = (g, e, A)$ is enabled in a state $(M, \alpha)$ if every place in its preset is included in the marking, i.e. $\bullet{t} \subseteq M$, and the values of the auxiliary variables make the predicate $g$ be true, i.e. $\alpha \models g$.  Execution of $t$ results in a new state $(M', \alpha')$ such that 
- \[
- M' = (M - \bullet{t}) \cup t\bullet,
- \]
- and $\alpha'$ is a new assignment where the values of the auxiliary variables are updated with respect to the assignments $A$.  Furthermore, when $t$ is executed, the event $e$ is emitted.  
+ For each transition $t \in T$, its preset, denoted as $\bullet{t} \subseteq P$, is the set of places connected to $t$, and its postset, denoted as $t\bullet \subseteq P$, is the set of places that $t$ is connected to.  A marking of a LPN is a set of places marked with tokens, and it is alsoreferred to as a state of a LPN. The initia marking $init$ is 
+ also the initial state of the LPN.
 
-
- Formally, an LPN is a tuple $(P, T, s_0, E, L)$ where $P$ is
- a finite set of {\em places}, $T$ is a finite set of {\em
-   transitions}, $\mathit{init}$ is the set of initially
- marked places, also referred to as the {\em initial
-   marking}, $E$ is a finite set of {\em events}, and $L: T
- \rightarrow E$ is a labeling function that maps each
- transition $t \in T$ to an event $e \in E$.  For each
- transition $t \in T$, its preset, denoted as $\bullet{t}
- \subseteq P$, is the set of places connected to $t$, and its
- postset, denoted as $t\bullet \subseteq P$, is the set of
- places that $t$ is connected to.  A marking $s \subseteq P$
- of a LPN is a subset of places marked with tokens, and it is
- also referred to as a state of a LPN.  The initial marking
- $\mathit{init}$ is also the initial state of the LPN.
-
- The operational semantics of a LPN is defined by transition executions.  A transition can be executed after it is {\em enabled}.  A transition $t \in T$ is enabled in a state $s$ if every place in its preset is included in the marking, i.e. $\bullet{t} \subseteq s$.  Execution of $t$ results in a new state $s'$ such that 
+ The operational semantics of a LPN is defined by transition executions.  
+ A transition can be executed after it is {\em enabled}.  
+ A transition $t \in T$ is enabled in a state $s$ if every place in its preset is included in the marking, i.e. $\bullet{t} \subseteq s$.  Execution of $t$ results in a new state $s'$ such that 
  \[
  s' = (s - \bullet{t}) \cup t\bullet,
  \]
  and the emission of event $e$ labeled for $t$. 
+
+\begin{figure}
+\label{changedb}
+\centering
+    \includegraphics[width=0.7\textwidth]{try}
+  \caption{LPN formalization.
+  Each event has a form of $\langle {\tt src, dest, cmd}
+  \rangle$ where ${\tt cmd}$ is a command sent from a source
+  component ${\tt src}$ to a destination component ${\tt
+    dest}$. The solid black places without outgoing edges
+  are {\em terminals}, which indicate termination of
+  protocols represented by the LPNs.}
+\end{figure}
+
 
  The communication protocol in the BMPN shown
  in~Fig.~\ref{flowa} is represented by the LPN
@@ -386,36 +379,42 @@ and tools.
  event.  Each event has a form of $\langle {\tt src, dest,
    cmd} \rangle$ where ${\tt cmd}$ is a command sent from a
  source component ${\tt src}$ to a destination component
- ${\tt dest}$. The solid black places without outgoing edges
+ ${\tt dest}$. 
+ (Another form of event used in our RTL model implementation
+ is $\langle {\tt src, dest, cmd, addr} \rangle$ where $addr$ is an unique id for
+ each flow instance, this can be used to make flow interpretation easier.)
+  The solid black places without outgoing edges
  are {\em terminals}, which indicate termination of protocols
  represented by the LPNs.  The initial marking is
- $\mathit{init} = \{p_1\}$.  In this LPN model, only the
+ $\mathit{s_0} = \{p_1\}$.  In this LPN model, only the
  communication portion of the BPMN specification is
  represented while the computation portion is ignored.
- Another example is presented in Fig.~\ref{fig-flow-ex-1}.
-
-
- \begin{figure}
-\centering
-\includegraphics[height=1.6in]{figures/flow-ex-1}
- \caption{An example of a LPN represented system flow}
- \label{fig-flow-ex-1}
-\end{figure}
-
- \begin{figure}[h]
- \begin{center}
- \includegraphics[height=1.6in]{figures/flow-ex-2}
- \caption{Another example of a LPN representing the system flow in Fig.~\ref{fig-flow-ex-1} with a fixed number of message exchanges.}
- \label{fig-flow-ex-2}
- \end{center}
- \end{figure}
 
 
   %%@COMMENT This example is for LPNs with guards.
- The above protocol specification can be made more precise by describing how component~2 would respond without using non-determinism.  For example, the system architect may wish to specify that component~2  responds with $\mathit{msg_2}$ to every sequence of two $\mathit{msg_1}$ for five such sequences in a row.  On the sixth such sequence, component~2 responds with $\mathit{msg_3}$.  The LPN modeling such protocol is shown in Figure~\ref{fig-flow-ex-2}.  An alternative without using auxiliary variables in the transition predicates is by unrolling the loops for the specified number of times; however this would result in a larger and more complex LPN.  
+ %The above protocol specification can be made more precise by describing how component~2 would respond without using non-determinism.  For example, the system architect may wish to specify that component~2  responds with $\mathit{msg_2}$ to every sequence of two $\mathit{msg_1}$ for five such sequences in a row.  On the sixth such sequence, component~2 responds with $\mathit{msg_3}$.  The LPN modeling such protocol is shown in Figure~\ref{fig-flow-ex-2}.  An alternative without using auxiliary variables in the transition predicates is by unrolling the loops for the specified number of times; however this would result in a larger and more complex LPN.  
 
 
  
+
+\chapter{Flow Guided Trace Interpretation}
+
+ In this chapter,
+ we describe a trace analysis method where the observed
+ signal traces are interpreted at the level of system
+ flows. In general, the trace analysis can offer
+ debuggers a structured view of communications among the
+ IP blocks during the SUD execution by deriving the types
+ and numbers of system flows activated during SUD
+ executions from the observed signal traces.
+
+We formalize the trace interpretation problem in terms of labeled Petri-nets,
+ and discuss algorithms to address the problem.
+  For pedagogical reasons, here we assume full
+   observability of all hardware signals involved in the flow events. 
+  In the next chapter we will extend the approach
+   to consider partial observability.
+
 \section{Post-silicon Trace Analysis}
  In a typical validation setting, the system under debug
  (SUD) is executed in a test environment until it is
@@ -424,10 +423,14 @@ and tools.
  small number of observable signals is streamed off the
  chip for debugging.  
 The off-chip analysis
-includes two broad phases: (1)~trace abstraction, and
-(2)~trace interpretation.  Trace abstraction maps the
+includes two broad phases:
+\begin{itemize} 
+\item trace abstraction that translate signal traces into flow traces
+\item trace interpretation that translate flow traces into flow execution scenarios
+\end{itemize}
+Trace abstraction maps the
 hardware trace into higher-level architectural constructs,
-\eg, messages, operations, etc.: a message such as {\tt
+\eg, messages, operations, etc. A message such as {\tt
   Authorization request} may be implemented in hardware
 through a Boolean or temporal combination of specific
 hardware signals in the NoC fabric between {\tt Device} and
@@ -443,31 +446,16 @@ authentication protocol may be invoked when another instance
 of the protocol has not completed.
 
 
-\begin{figure}
-\label{changedb}
-\centering
-    \includegraphics[width=0.7\textwidth]{try}
-  \caption{LPN formalization.
-  Each event has a form of $\langle {\tt src, dest, cmd}
-  \rangle$ where ${\tt cmd}$ is a command sent from a source
-  component ${\tt src}$ to a destination component ${\tt
-    dest}$. The solid black places without outgoing edges
-  are {\em terminals}, which indicate termination of
-  protocols represented by the LPNs.}
-\end{figure}
 
-Trace interpretation entails mapping flow events created
+Trace interpretation entails mapping a sequence of flow events created
 during trace abstraction to system-level protocols in order
 to identify the set of protocol instances (and
 interleavings) responsible for creating the observed
 behavior. The trace interpretation takes a finite trace of flow events
  resulting from the trace abstraction and a set of system
  flows in LPNs $\vec{F}$, and generates a set of possible
- system flow execution scenarios.  A \emph{flow execution
-   scenario} is defined as $\{(F_{i,j}, s_{i,j})\}$ where in
- each element $(F_{i,j}, s_{i,j})$, $F_{i,j}$ is the $j$th
- activated instance of flow $F_i \in \vec{F}$, and $s_{i,j}$
- is a state of $F_{i,j}$.  A flow execution scenario
+ system flow execution scenarios, which is defined in next section.
+   A flow execution scenario
  indicates that at a certain point of SUD execution, what
  types of flows and the number of instances of a particular
  flow are activated and their corresponding current states.
@@ -483,29 +471,8 @@ expertise, and can often take days to weeks of effort.
 
 
 
-
-
-
-\chapter{Flow Guided Trace Interpretation}
-
- In this chapter,
- we describe a trace analysis method where the observed
- signal traces are interpreted at the level of system
- flows. In general, the trace analysis can offer
- debuggers a structured view of communications among the
- IP blocks during the SUD execution by deriving the types
- and numbers of system flows activated during SUD
- executions from the observed signal traces.
-
-We formalize the trace interpretation problem in terms of labeled Petri-nets,
- and discuss our algorithms to address the problem.
-  For pedagogical reasons, here we assume full observability of all hardware signals involved in the flow events. 
-  In the next chapter we will extend the approach to partial observability.
-
-
-
- 
-\section{Notations and formalization}  The set
+\section{Flow Execution Scenarios}
+ The set
 of system flows is a collection ${\vec{F}}$ of
 LPNs.  A {\em flow execution scenario} is defined as a
 set $\{(F_{i,j}, s_{i,j})\}$ where $F_{i,j}$ is the
@@ -515,21 +482,28 @@ the set of protocols and the number of instances of a
 particular protocol are activated and their corresponding
 current states.  Since we assume full observability, we view
 an {\em observed trace} $\rho = e_1e_2\ldots e_n$ as a
-sequence of events.  Given an observed trace $\rho$, the
-goal of trace interpretation is to construct a set of
-candidate flow execution scenarios whose execution can
-create the sequence of events in $\rho$.  We call such
-execution scenarios {\em compliant} with $\rho$.  Let
+sequence of flow events.  
+ Let
 $\mathit{accept(F_{i,j}, s_{i,j}, e)}$ be a function that
 determines if event $e$ can be emitted by $F_{i,j}$ in state
 $s_{i,j}$.  Formally, $\mathit{accept(F_{i,j}, s_{i,j}, e)}$
 returns $(F_{i,j}, s'_{i,j})$ where $s'_{i,j} = (s_{i,j} - \bullet t)
 \cup t\bullet$ if there exists a transition
 $t$ in $F_i$ such that $L(t) = e$ and $\bullet t \subseteq
-s_{i,j}$.  It returns $\emptyset$ otherwise.
+s_{i,j}$.  It returns $(F_{i,j}, \emptyset)$ otherwise.
 
-\section{Flow Guided Trace Interpretation}
-Given an observed trace $\rho$ and the set $\vec{F}$ of LPNs,
+Given an observed trace $\rho$, the
+goal of trace interpretation is to construct a set of
+candidate flow execution scenarios whose execution can
+create the sequence of events in $\rho$.  
+Such that $\rho$ is the result of executing 
+the flow instances in those execution scenarios by following 
+the corresponding LPN operational semantics. We call such execution scenarios $compliant$ 
+with $\rho$.
+
+
+\section{Flow Guided Trace Interpretation Algorithm}
+Given an observed flow trace $\rho$ and the set $\vec{F}$ of flows,
 Algorithm~\ref{algo:compliance} provides a basic procedure for
 computing a set of compliant flow execution scenarios. 
 The algorithm operates by keeping track (in variable
@@ -537,12 +511,11 @@ $\mathit{Scen}$) of a set of candidate flow execution scenarios
 compliant with each prefix of $\rho$.  At each iteration,
 for each event $e_h$ in the observed trace, we
 update $Scen$ by either extending a member of
-$\mathit{scen}$ or initiating a new protocol instance for 
+$\mathit{scen}$ or initiating a new flow instance for 
 each $scen \in Scen$ with respect to $e_h$ in every possible way.
-If $e_h$ cannot be emitted by any existing or new flow instances, 
-then we report that the trace is {\tt  inconsistent}, \ie, 
-there is no possible interleaving of
-the protocol instances from $\vec{F}$ that is compliant with
+If $e_h$ cannot be accepted by any existing or new flow instances, 
+then we report that the trace is {\tt  inconsistent} with $\mathit{Scen}$, \ie, 
+the execution scenario $\mathit{Scen}$ is not compliant with
 $\rho$.
 
 \begin{algorithm}[h]
@@ -554,17 +527,17 @@ $\mathit{Scen} = \{scen\}$\;
 	$\mathit{found} \gets {\tt true}$ \;
 	$Scen' = \emptyset$\;
 	\ForEach {$scen \in Scen$} {
-  		\ForEach {$(F_{i,j}, s_{i,j}) \in \mathit{scen_1}$} {
-    		\If {$\mathit{accept}(F_{i,j}, s_{i,j}, e_h) = (F_{i,j}, s'_{i,j})$} {
+  		\ForEach {$(F_{i,j}, s_{i,j}) \in \mathit{scen}$} {
+    		\If {$((F_{i,j}, s'_{i,j}) \gets (\mathit{accept}(F_{i,j}, s_{i,j}, e_h) )) \cap (s'_{i,j}\neq \emptyset )$} {
 				Let $scen'$ be a copy of $scen$\;
-      		$\mathit{scen'} \gets (\mathit{scen'} - (F_{i,j}, s_{i,j})) \cup (F_{i,j}, s'_{i,j})$\;
+      		$\mathit{scen'} \gets \mathit{scen'} - (F_{i,j}, s_{i,j})) \cup (F_{i,j}, s'_{i,j}$\;
       		$\mathit{Scen'} \gets \mathit{scen'} \cup \mathit{Scen'}$\;
       		$\mathit{found} \gets {\tt false}$ \;
     		}
   		}
   		\ForEach {$F_i \in \vec{F}$} {
       	create a new instance $F_{i, j+1}$ \;
-      	\If {$\mathit{accept}(F_{i,j+1},\mathit{init}_{i,j+1}, e_h) = (F_{i,j+1}, s'_{i,j+1})$} {
+      	\If {$((F_{i,j+1}, s'_{i,j+1})\gets\mathit{accept}(F_{i,j+1},\mathit{init}_{i,j+1}, e_h)) \cap(s'_{i,j+1}\neq \emptyset ) $} {
     			Let $scen'$ be a copy of $scen$\;
 				$\mathit{scen'} \gets \mathit{scen'} \cup (F_{i,j+1}, s'_{i,j+1})$ \;
 				$\mathit{Scen'} \gets \mathit{scen'} \cup \mathit{Scen'}$\;
@@ -604,14 +577,13 @@ $\mathit{Scen} = \{scen\}$\;
    (F_{i,j+1}, s'_{i,j+1})$, which is added into
    $\mathit{Scen}'$.
  \end{description}
-
- After $e_h$ is processed, $Scen = Scen'$, and the above two
+After $e_h$ is processed, $Scen = Scen'$, and the above two
  steps repeat for the next event $e_{h+1}$.
 
  If every events in $\rho$ is successfully mapped to some
  flow instance, this algorithm returns a set of flow
- execution scenarios such that every flow instance is in its
- terminal state.  On the other hand, inconsistent events can
+ execution scenarios such that every flow execution scenario on is compliant to $\rho$.
+   On the other hand, inconsistent events can
  also be encountered.  An event $e$ is \emph{inconsistent} if
  for each flow execution scenario $\mathit{scen} \in
  \mathit{Scen}$, the following two conditions hold.
@@ -629,13 +601,12 @@ $\mathit{Scen} = \{scen\}$\;
  events indicates possible causes of system failures.
 
  Based on the above discussion, the trace interpretation
- algorithm returns two pieces of information: 1) a set $G$ of
- flow execution scenarios where every flow instance in every
- scenario is in its terminal state, 2) a set $B$ of pairs,
- each of which includes a set of flow execution scenarios and
- an inconsistent event.  The set $B$ provides valuable
+ algorithm generates two pieces of information: 1) a set $G$ of
+ flow execution scenarios each of which is compliant with the observed trace, 2) a pair $B$,
+ which includes a flow execution scenario and
+ an corresponding inconsistent event.  The pair $B$ provide valuable
  information for debuggers to root cause system failures.
- One of these two sets can be empty.  With the full
+ The algorithm returns either G or B.  With the full
  observability, the set $G$ includes a single flow execution
  scenario derived for a trace.  In reality, it is always the
  case that the SUD is only partially observable.  Therefore,
@@ -643,67 +614,34 @@ $\mathit{Scen} = \{scen\}$\;
  set of flow execution scenarios is typically derived for a
  given trace as the result of the trace analysis.
 
-
- %\ref{\bf The following illustration may not be needed (from here to the end of this subsection) if seciton IV is kept.  Or we keep the illustration below but remove section IV which uses 3 pages.}
-
- To illustrate the basic idea of the trace analysis method, consider the system flow shown in Figure~\ref{fig-flow-ex-1}.  Let $F_1$ denote such flow.  Suppose that a hardware system implements flow $F_1$, and the following trace of flow events is abstracted from an observed signal trace as a result of executing such system.     
- \[
- \mathit{msg}_1\;\mathit{msg}_1\;\mathit{msg}_1\;\mathit{msg}_2\;\mathit{msg}_3\;\ldots
- \]  
- This trace is interpreted from the first event to the last in order to derive all possible flow execution scenarios.  At the beginning, the first event $\mathit{msg}_1$ is processed.  According to the flow specification $F_1$, we know that one instance of such flow $F_1$, $F_{1,1}$,  is activated by the SUD as $\mathit{accept}(F_{1,1}, init_1, \mathit{msg}_1) = (F_{1,1}, \{p_2\})$ where $\mathit{init} = \{p_1\}$ is the initial state of $F_1$.  As the result, the flow execution scenario after interpreting the first event $\mathit{msg_1}$ is $\{(F_{1,1}, \{p_2\})\}$.  
-
- Next, the second $\mathit{msg}_1$ is interpreted on both scenarios   This event could be the result of two possible cases.  In the first case, this event is the result of the continuing execution of $F_{1,1}$ as $\mathit{accept}(F_{1,1}, \{p_2\}, \mathit{msg}_1) = (F_{1,1}, \{p_3\})$.  In the second case, the system may activate another instance of $F_1$, $F_{1,2}$ such that the second event $\mathit{msg_1}$ is a result of executing this new instance.  Therefore, the interpretation of the first two events $\mathit{msg}_1$ leads to two flow execution scenarios as shown below.
- \[
- \label{tr-analy-s1}\tag{1}
- \begin{array}{cl}
- 1. & \{(F_{1,1}, \{p_3\})\},\\
- 2. & \{(F_{1,1}, \{p_2\}), (F_{1,2}, \{p_2\})\} 
- \end{array}
- \]
-
- Now, consider the third $\mathit{msg}_1$ for each of the two scenario derived in~(\ref{tr-analy-s1}).    For the execution scenario~1, $F_{1,1}$ is not able to accept $\mathit{msg}_1$ as it is in state $\{p_3\}$.  On the other hand, this event could be the result of activation of a new flow instance.  Therefore, this execution scenario can be revised accordingly as 
- \[
- \label{tr-analy-s2}\tag{2}
- \{(F_{1,1}, \{p_3\}),(F_{1,2},\{p_2\})\}.
- \]   
- For the execution scenario~2, event $\mathit{msg}_1$ could be the result of continuing execution of $F_{1,1}$ or $F_{1,2}$, or it could be a result of activation of a new flow instance.  Therefore,  three new execution scenarios can be derived as shown below for this event.
- \[
- \label{tr-analy-s3}\tag{3}
- \begin{array}{l}
- \{(F_{1,1}, \{p_3\}), (F_{1,2}, \{p_2\})\},\\
- \{(F_{1,1}, \{p_2\}), (F_{1,2}, \{p_3\})\}, \\
- \{(F_{1,1}, \{p_2\}), (F_{1,2}, \{p_2\}), (F_{1,3}, \{p_2\})\}
- \end{array}
- \]
- Since the flow execution scenario in~(\ref{tr-analy-s2}) already exists in~(\ref{tr-analy-s3}), the three flow execution scenarios shown in~(\ref{tr-analy-s3}) is the result from the interpretation of the first three events $\mathit{msg}_1$.
-
- The next flow event in the trace $\mathit{msg_2}$ is analyzed for the flow execution scenarios as shown in~(\ref{tr-analy-s3}).   For the first scenario $\{(F_{1,1}, \{p_3\}), (F_{1,2}, \{p_2\})\}$, event $\mathit{msg_2}$ can only be the result from executing $F_{1,1}$ as $\mathit{accept}(F_{1,1}, \{p_3\}, \mathit{msg_2}) = (F_{1,1}, \{p_1\})$.   Based on the same reasoning, this event can only be the result from executing $F_{1,2}$ in the second scenario, and it moves $F_{1,2}$ to a new state $\{p_3\}$ too.  The interesting case is the third scenario where none of the flow instances can allow $\mathit{msg_2}$ to happen.  This is due to the fact that the flow must be in $\{p_3\}$ for $\mathit{msg_2}$ to happen.  This indicates the third system execution scenario is impossible for the prefix of the flow event trace upto $\mathit{msg_2}$, therefore this scenario is ignored from further analysis.  After analyzing event $\mathit{msg_2}$, the updated system execution scenarios are shown below.
- \[
- \begin{array}{l}
- \{(F_{1,1}, \{p_1\}), (F_{1,2}, \{p_2\})\},\ \{(F_{1,1}, \{p2\}), (F_{1,2}, \{p_1\})\}.
- \end{array}
- \]
-
- The last flow event in the trace is $\mathit{msg}_3$.  Considering the above two possible system executions, neither can allow this event to be produced as none of the flow instances in both system executions is in state $\{p_3\}$.  What this means is that the system does {\em not} implement the flow specification correctly as it produces something not allowed by the specification.  By examining the system executions right before the ``buggy'' event, debuggers may gain more information on when and where the problem might be.  The trace interpretation algorithm adds these two scenarios along with the fifth event $\mathit{msg_3}$ into $B$, and returns it for debuggers to analyze.
-
-
-
-Next, we will use another example to illustrate when all flow events are successful mapped and reach the correct final state.
-We consider the system flow in
-Fig.~\ref{changedb} which we will call $F_1$.
+\section{Illustration}
+To illustrate the basic idea of the trace analysis method, consider the system flow shown in 
+Fig.~\ref{changedb}. Let $F_1$ denote such flow.
 Suppose that the following flow trace is abstracted from an
 observed signal trace.
 \[
 	t_1\;t_2\;t_1\;t_2\;t_3\;t_3\;t_4\;t_5\;t_5\;t_4\ldots
 \]  
+This trace is interpreted from the first event to the last in order to derive all possible flow execution
+ scenarios.
 Here transition names in the LPN are used to represent the 
-flow events in the trace.  The first four events results in
+flow events in the trace.  
+At the begininng, the first event $t_1$ is process. 
+According to the flow specification $F_1$, 
+we know that one instance of such flow $F_1$, $F_{1,1}$, is activated by the SUD 
+as $\mathit{accept}(F_{1,1}, init_1, t_1) = (F_{1,1}, \{p_2\})$ where $\mathit{init} = \{p_1\}$ is the initial state of $F_1$.  As the result, the flow execution scenario after interpreting the first event $\mathit{msg_1}$ is $\{(F_{1,1}, \{p_2\})\}$.  
+
+Next, the second $t_1$ is interpreted. This event is the continuing execution of 
+$F_{1,1}$ as $\mathit{accept}(F_{1,1}, {p_2}, t_2) = (F_{1,1}, \{p_3\})$.
+Next event $t_1$ will activate another instance of flow $F_1$, $F_{1,2}$. And event $t_2$
+ after that is the continuing event of $F_{1,2}$, resulting in
 the following flow execution scenario
 \[
 	\{(F_{1,1}, \{p_3\}),~(F_{1,2}, \{p_3\})\}.
 \]
-For the first event $t_3$, it results in two execution scenarios 
-below depending on which flow instance emits $t_3$.
+For the fifth event $t_3$, it can be the result of continuing execution of $F_{1,1}$ 
+or $F_{1,2}$. Therefore,
+two execution scenarios can be derived as showed below.
 \[
 \begin{array}{l}
 	\{(F_{1,1}, \{p_4\}),~(F_{1,2}, \{p_3\})\} \\
@@ -723,28 +661,51 @@ derived.
 \]
 
 
+
+
 \chapter{Trace Analysis Under Partial Observability}
 
 In hardware that implements a given system flow
- specification, a flow event is defined as an event or a
- sequence of events on a set of signals.  Due to the limited
- number of pins on the boundary of chips available for
- observation, only a small fraction of system signals can be
- observed during debug.  In this section, we discuss how the
- trace analysis method presented above can be adapted to deal
- with signal traces of partial observability.
+ specification, a flow event is assumed to be implemented as an event or a
+ sequence of events on a set of signals.  
+ However, in post-silicon verification, it is impossible to have full observability of all 
+ signals. There are two reasons that result in such limitation:
+ \begin{itemize}
+ \item Limitation of the interface: there are limited number of pins on the boundary of chip available for observation.
+ \item Speed frequency difference: the big speed frequency gap between chip and interface may lead to data lost. 
+ \end{itemize}
+  In this chapter, we discuss how the
+ trace analysis method presented in the previous chapter can be adapted to deal
+ with signal traces of partial observability. A signal event is defined as a state on or an
+assignment to a set of signals.
+Hereafter, the term {\em flow traces} is used to refer to
+traces of flow events. 
  
-In general, a signal trace of partial observability
-corresponds a set of traces of flow events due to the small number of
- observable signal or ambiguous interpretation of signal events. 
+In general, a signal trace of partial observability is a set of signal events
+with some signal value unknown. In this case, we will consider all possibilities for that signal value, 
+each corresponding to a fully observable signal trace. Thus we can say that one partial observable signal
+ trace can be mapped to a set of fully observable signal traces.
+We take the following signal trace with signal $c$'s value missing as an example.
+\[
+\begin{array}{cl}
+ ab\textvisiblespace\\
+\end{array}
+\] 
+There are two possible values for signal $c$: $c$ or $\bar{c}$. To consider
+both of the possibilities, we will have two fully observable signal traces: 
+\[
+\begin{array}{cl}
+ abc\\
+ ab\bar{c}\\
+\end{array}
+\] 
+
 In the following, we discuss two cases for trace abstraction on
 partial observability: mapping a single signal event to a
 flow event or mapping a sequence of signal events to a flow
-event.  A signal event is defined as a state on or an
-assignment to a set of signals.
-Hereafter, the term {\em flow traces} is used to refer to
-traces of flow events.  
-\section{Single signal event}
+event.   
+
+\section{Mapping Individual Signal Event to Flow Event}
 Consider the following example for
 the first case.  Suppose that there are three flow events:
 $e_1$, $e_2$, and $e_3$, which are implemented in hardware
@@ -763,12 +724,35 @@ obtain the following trace:
 \[
 bc\ bc \ \bar{b}c
 \]
-During trace abstraction, the first two signal events $bc$
-can be mapped to $\{e_1, e_2\}$ since $a$ is not observable,
-and the last one $b'c$ is mapped to $\{e_3\}$.  Therefore,
+With all possibilities of signal $a$ considered, we will have the following 
+fully observable signal traces:
+obtain the following trace:
+\[
+\begin{array}{cl}
+trace_1: & abc\ abc \ a\bar{b}c\\
+trace_2: & abc\ abc \ \bar{a}\bar{b}c\\
+trace_3: & abc\ \bar{a}bc \ a\bar{b}c\\
+trace_4: & abc\ \bar{a}bc \ \bar{a}\bar{b}c\\
+trace_5: & \bar{a}bc\ abc \ a\bar{b}c\\
+trace_6: & \bar{a}bc\ abc \ \bar{a}\bar{b}c\\
+trace_7: & \bar{a}bc\ \bar{a}bc \ a\bar{b}c\\
+trace_8: & \bar{a}bc\ \bar{a}bc \ \bar{a}\bar{b}c\\
+\end{array}
+\]
+During trace abstraction, only in $trace_1$ and $trace_2$,
+the first two signal events $abc$
+can be mapped to $\{e_1, e_2\}$.
+After that, the third signal event in $trace_2$ can not be mapped to any
+flow event, therefore only $trace_1$ is considered here, mapping $a\bar{b}c$ to
+flow event $\{e_3\}$.
+Therefore,
 this signal trace is abstracted to four flow traces, $\{e_1,
 e_2\} \times \{e_1, e_2\} \times \{e_3\}$.
-\section{Sequence of signal events}
+Hereafter, we will not repeat the process of mapping partial observed signal trace to set of 
+fully observed signal traces. 
+
+
+\section{Sequence of Signal Events}
 Next, we consider the case where a flow event is mapped from
 a sequence of signal events.  Now suppose that two other
 flow events are implemented by sequences of signal events as
@@ -783,7 +767,8 @@ Given an observed trace of the same observability shown below
 \[
 bc\ bc\ bc \ bc,
 \]
-it is abstracted to the following flow traces.
+Flow $e_4$ can be mapped to the first two $bc$s, the two $bc$s in the middle or in the end, or the whole trace can be mapped
+to just one $e_5$ flow instance. It is abstracted to the following flow traces.
 \[
 e_4e_4,\; \textvisiblespace e_4 \textvisiblespace,\;  e_4 \textvisiblespace \textvisiblespace,\;  \textvisiblespace \textvisiblespace e_4, \; e_5
 \] 
@@ -793,7 +778,118 @@ mapped to any flow events.  Note that the above abstraction
 leads to three distinct flow traces as the middle three
 correspond to the same flow trace.
 
-\section{Difficulties and solutions}
+
+\section{Sequence of Gapped Signal Events}
+Most of the time, the speed of data generation is much faster
+than speed of pins outputting data. Therefore, when there are big amount of 
+data generated, there is a possibility of data loss, leaving a gap between the signal traces.
+
+Here we will use flow event $e_4$ and $e_5$ from previous section as an example. We assume 
+the same observability.
+Given an observed trace of the same observability shown below
+\[
+\begin{array}{cl}
+bc\ \textvisiblespace\  \textvisiblespace\ bc\ bc\
+\end{array}
+\]
+The $\textvisiblespace$s in the signal traces indicate the gap with maximum two signal events. 
+For this situation we will go through each $\textvisiblespace$, considering all possibility for that signal
+event and try to map it to flow event. The process will stop when the newly mapped flow event can be 
+mapped to an existing scenario or start a new scenario. If the mapped flow event is in consistent even
+after considering the last $\textvisiblespace$, then we conclude there is an error.
+
+For this example, we consider the first $\textvisiblespace$. There are four possibilities: $bc\ b\bar{c}\ \bar{b}c\ \bar{b}\bar{c}$.
+Only $bc$ can be accepted since flow event $e_4\ and\ e_5$ only accept $bc$.
+So the new signal trace are
+\[
+\begin{array}{cl}
+bc\ bc\ bc\ bc\
+\end{array}
+\]
+This can be abstracted to the following flow traces.
+\[
+e_4e_4,\; \textvisiblespace e_4 \textvisiblespace,\;  e_4 \textvisiblespace \textvisiblespace,\;  \textvisiblespace \textvisiblespace e_4, \; e_5
+\] 
+If this any of the above flow event can be accepted by current scenario or start a new flow instance, we will stop here. 
+However, if all the flow event above is inconsistent, or it is consistent but later some following flow event leads to inconsistent status,
+ we will come back to this point and consider the second $\textvisiblespace$.
+ In this case we get a new signal trace: 
+ \[
+\begin{array}{cl}
+bc\ bc\ bc\ bc\ bc\
+\end{array}
+\]
+Flow $e_4$ can be mapped to the first two $bc$s, the two $bc$s in the middle left, middle right or in the end; or $e_5$
+can be mapped to the first four $bc$s or the last four $bc$s.It is abstracted to the following flow traces.
+\[
+e_4e_4\textvisiblespace,\; e_4 \textvisiblespace e_4,\; \textvisiblespace e_4e_4,\; e_5\textvisiblespace,\;  \textvisiblespace e_5
+\] 
+Here we will try to map above flow event to current scenarios.
+
+
+
+\section{Generalized Trace Analysis Algorithm}%
+In this section we will include the trace abstraction process into our algorithm and 
+use it together with the trace analysis algorithm. Here we assume one signal event can 
+be mapped to a flow event. Sequence of flow events are too complicated for now, and we will
+extend our work in this direction in future work.
+In this algorithm, we add following new definations:
+\begin{itemize}
+\item instance $sig\_e$ as signal event. 
+\item $E$ as set of all flow events.
+\item $Event$ as set of flow events mapped form current signal event .
+\item $map(e_i, sig\_e)$ as a mapping function from signal event $sig\_e$ to flow event $e_i$. 
+The function will return $\emptyset$ if mapping in unsuccessful.
+\end{itemize}
+
+\begin{algorithm}[h]
+\setstretch{0.5}
+\DontPrintSemicolon
+Create an empty scenario $scen$\;
+$\mathit{Scen} = \{scen\}$\;
+\ForEach {$h, \; 1 \leq h \leq n $} {
+	$\mathit{found} \gets {\tt true}$ \;
+	$Scen' = \emptyset$\;
+	$Event = \emptyset$\; 
+	\If {noe gapped}{
+	\ForEach {$e \in E $}{
+	 	\If {$map(e, sig\_e_h) \neq \emptyset$}{
+			$Event=Event \cup e$\;
+		}
+	}
+	\ForEach {$e_h \in Event$}{
+	\ForEach {$scen \in Scen$} {
+  		\ForEach {$(F_{i,j}, s_{i,j}) \in \mathit{scen}$} {
+    		\If {$((F_{i,j}, s'_{i,j}) \gets (\mathit{accept}(F_{i,j}, s_{i,j}, e_h) )) \cap (s'_{i,j}\neq \emptyset )$} {
+				Let $scen'$ be a copy of $scen$\;
+      		$\mathit{scen'} \gets \mathit{scen'} - (F_{i,j}, s_{i,j})) \cup (F_{i,j}, s'_{i,j}$\;
+      		$\mathit{Scen'} \gets \mathit{scen'} \cup \mathit{Scen'}$\;
+      		$\mathit{found} \gets {\tt false}$ \;
+    		}
+  		}
+  		\ForEach {$F_i \in \vec{F}$} {
+      	create a new instance $F_{i, j+1}$ \;
+      	\If {$((F_{i,j+1}, s'_{i,j+1})\gets\mathit{accept}(F_{i,j+1},\mathit{init}_{i,j+1}, e_h)) \cap(s'_{i,j+1}\neq \emptyset ) $} {
+    			Let $scen'$ be a copy of $scen$\;
+				$\mathit{scen'} \gets \mathit{scen'} \cup (F_{i,j+1}, s'_{i,j+1})$ \;
+				$\mathit{Scen'} \gets \mathit{scen'} \cup \mathit{Scen'}$\;
+        		$\mathit{found} \gets {\tt false}$ \;
+      	}
+    	}
+	}
+	}
+  \If {$\mathit{found} == {\tt true}$} {
+    \Return ${\tt Inconsistent}$\;
+  }
+  $Scen = Scen'$\;
+  }
+}
+\Return $\mathit{Scen}$ \;
+\caption{$\textsc{Generalized-Check-Compliance}(\vec{F}, \, \rho)$  part one}
+\label{algo:compliance}
+\end{algorithm}
+
+\section{Difficulties and Solutions}
 It is clear from above that a partial trace is viewed as a
 set of flow traces, and Algorithm~\ref{algo:compliance} can
 be suitably extended to work with flow traces to obtain the
@@ -825,13 +921,13 @@ numbers of final scenario.  However, as our system become more complex,
  a more automated tool is needed for better and faster signal selection process.
  
 Most of the current signal selection algorithm are done in low-level and using 
-SSR(State Restoration Ratio)  as 
+SSR (State Restoration Ratio)  as 
 their metric. 
 SRR is used by measures the number of design states reconstructed
  from the signals observed. 
-However, agreeing with 
+However, as explained in 
  ~\cite{forestMa}, because SSR treats all signal equally and thus always favor big arrays,
- it is not very helpful to restore useful states for our case. We need a tool that can 
+ it may not be very helpful to restore useful states for our case. We need a tool that can 
  restore the maximum states in system level and thus lead to less scenarios.
  
  ~\cite{forestMa} proposed an interesting algorithm based on Google's PaperRank system. 
@@ -896,11 +992,11 @@ results deemed meaningful are produced.
  can be adjusted in order for a different part or different
  behavior of the SUD to be observed.  This idea, closely
  related to trace signal selection, is critical for
- post-silicon validation, and a detailed discussion can only
- be presented in a separate paper.
+ post-silicon validation, and a detailed discussion can be 
+ done in future works.
 
 
-\chapter{Implementations and Results}
+\chapter{Case Studies}
 
 \section{Simulation simple TLM SoC with GEM5}
 \begin{figure} 
@@ -913,6 +1009,8 @@ results deemed meaningful are produced.
 To determine the efficiency of the trace analysis method for
 a realistic example, a transaction level model of a SoC is
 constructed within the GEM5 environment~\cite{Binkert2011}.
+The GEM5 simulator is a modular platform for computer-system architecture research, 
+encompassing system-level architecture as well as processor micro-architecture.
 This SoC model, as shown in Fig.~\ref{SoC}, consists of two
 ARM Cortex-A9 cores, each of which contains two separate
 16KB data and instruction caches.  The caches are connected
@@ -1085,8 +1183,8 @@ As shown above, the ambiguous interpretation of events can lead to large numbers
 \end{figure}
 
 
-\section{Simulation simple RTL SoC with VHDL}
-Another register transaction level SoC model is constructed. This model is more specific compared to the last model as the register value will be updated every cycle, thus will be much slower than the model on GEM5. Because the lack of similar research, we couldn't find any existing model, so this model is built from scratch just by me. The desired protocols are implemented inside all the components. Because this is a simplified model, the CPU can't run software programs. A test generator is implemented inside CPU to allow simple functions.
+\section{Simulation Simple RTL SoC with VHDL}
+A register transfer level SoC model is constructed. This model is more specific compared to the last model as the register value will be updated every cycle, thus will be much slower than the model on GEM5. Because the lack of similar research, we couldn't find any existing model, so this model is built from scratch just by me. The desired protocols are implemented inside all the components. Because this is a simplified model, the CPU can't run software programs. A test generator is implemented inside CPU to allow simple functions.
 
  As showed in Fig.~\ref{rtlstruc}, this model consists of two CPU models, each with its own 1KB cache. The caches are connected to a 4MG memory through a memory bus model. At each rising clock cycle, our model will record selected signal value into a vcd(value change dump) format file.
 
@@ -1139,7 +1237,13 @@ Error two: command changed after interconnect bus receive snoop request from Cac
 Our trace analysis algorithm find message from cache to memory can't map to any existing scenarios in 
 multiple runs, and all the stacked messages are snoop response. By debugging the cache component,
 we discovered the wrong implemented cache coherent protocol and fixed the error.
-
+\item
+Error three: when running Peterson's Algorithm to ensure mutual exclusion between two processors, our analysis algorithm 
+shows no cache coherence protocol was activated. Based on programers experience, there has to be at least one cache 
+coherence flow exist because of the shared locks and variable between two CPUs. 
+The unmatched number of cache coherence flows shows an big error in our system implementation
+of cache coherence protocol.
+ 
 \end{itemize}
 \chapter{Conclusion and Future Works}
 This thesis presents a method for post-silicon validation by
@@ -1173,9 +1277,9 @@ will also be pursued in the future.
 
 
 \begin{appendix}
-\appendix
+
 \chapter{Flow specifications and protocols provided by GEM5}
-\section{Flow Specifications}
+\section{Protocol Specifications in Message Sequence Chart}
 \begin{figure}[h]
 \centering
  \includegraphics[width=4.5In]{figures/write3.png}
@@ -1208,7 +1312,7 @@ will also be pursued in the future.
  \label{read2}
  \end{figure}
 \newpage
-\section{Protocols}%
+\section{Protocol Specification in LPNs}%
 \begin{figure}[h]
 \centerline{
  \includegraphics[width=3.1In]{figures/Fig5.png}}%
@@ -1331,8 +1435,8 @@ will also be pursued in the future.
 
 
 
-\chapter{RTL model in VHDL}%
-\section{Flow Specification}
+\chapter{Flow Specifications for RTL model}%
+\section{Protocol Specification in Message Sequence Charts}
 \begin{figure}[h!] 
 \centering
  \includegraphics[width=2In]{y1.png}
@@ -1367,10 +1471,11 @@ will also be pursued in the future.
  \label{y6}
 
 \end{figure}
+ The read and write protocols in RTL model are very similar to what we used in
+ GEM5 simulator. However, the command name used here is different.
 
 
-
-\section{Protocol}
+\section{Protocol Specification in LPNs}
 
  \begin{figure}[h]
  \centerline{
@@ -1378,13 +1483,13 @@ will also be pursued in the future.
  {\footnotesize
  \[
  \begin{array}{llll}
- msg1: (&\mbox{ Cache1},&\mbox{ wt },&\mbox{Bus })\\     
- msg2: (&\mbox{ Bus},&\mbox{ wt},&\mbox{ Memory     })\\ 
- msg3: (&\mbox{ Memory},&\mbox{wt},&\mbox{Bus     })\\
+ msg1: (&\mbox{ Cache1},&\mbox{ wb },&\mbox{Bus })\\     
+ msg2: (&\mbox{ Bus},&\mbox{ wb},&\mbox{ Memory     })\\ 
+ msg3: (&\mbox{ Memory},&\mbox{wb},&\mbox{Bus     })\\
  \end{array}
  \]}
 
-  \caption{\footnotesize Flow specification of a cache coherent read operation initiated from CPU1 to Cache. \footnotesize This flow is symmetric for CPU2. }
+  \caption{\footnotesize Flow specification of a cache write back operation initiated from Cache1. \footnotesize This flow is symmetric for CPU2. }
  \label{wbprotocol}
  \end{figure}
 

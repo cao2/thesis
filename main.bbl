@@ -86,7 +86,7 @@ Nathan Binkert, Bradford Beckmann, Gabriel Black, Steven~K. Reinhardt, Ali
 \newblock The gem5 simulator.
 \newblock {\em SIGARCH Comput. Archit. News}, 39(2):1--7, August 2011.
 
-\bibitem{LSCTOCPN}
+\bibitem{lsctocpn}
 Binsan Khadka.
 \newblock Transformation of live sequence charts to colored petri nets
   (lsctocpn).

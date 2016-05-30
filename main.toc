@@ -8,29 +8,31 @@
 \contentsline {section}{\numberline {1.3}Related Work}{2}
 \contentsline {section}{\numberline {1.4}Motivation}{4}
 \contentsline {chapter}{\numberline {\uppercase {CHAPTER 2}}\uppercase {Background}}{6}
-\contentsline {section}{\numberline {2.1}SoC Protocols and Representation of Protocols}{6}
+\contentsline {section}{\numberline {2.1}Representations of SoC Protocols }{6}
 \contentsline {section}{\numberline {2.2}Sequence Diagram}{7}
-\contentsline {section}{\numberline {2.3}Labeled Petri-Nets}{9}
-\contentsline {section}{\numberline {2.4}SoC Protocols and Post-silicon Trace Analysis}{12}
-\contentsline {chapter}{\numberline {\uppercase {CHAPTER 3}}\uppercase {Flow Guided Trace Interpretation}}{15}
-\contentsline {section}{\numberline {3.1}Notations and formalization}{15}
-\contentsline {section}{\numberline {3.2}Flow Guided Trace Interpretation}{16}
-\contentsline {chapter}{\numberline {\uppercase {CHAPTER 4}}\uppercase {Trace Analysis Under Partial Observability}}{22}
-\contentsline {section}{\numberline {4.1}Single signal event}{22}
-\contentsline {section}{\numberline {4.2}Sequence of signal events}{23}
-\contentsline {section}{\numberline {4.3}Difficulties and solutions}{24}
-\contentsline {section}{\numberline {4.4}Trace Signal Selection}{24}
-\contentsline {section}{\numberline {4.5}Interactive Trace Interpretation}{25}
-\contentsline {chapter}{\numberline {\uppercase {CHAPTER 5}}\uppercase {Implementations and Results}}{27}
-\contentsline {section}{\numberline {5.1}Simulation simple TLM SoC with GEM5}{27}
-\contentsline {section}{\numberline {5.2}Simulation simple RTL SoC with VHDL}{32}
-\contentsline {chapter}{\numberline {\uppercase {CHAPTER 6}}\uppercase {Conclusion and Future Works}}{36}
-\contentsline {chapter}{\numberline {\uppercase {APPENDICES}}}{37}
-\contentsline {chapter}{\numberline {\uppercase {APPENDICES}}}{38}
-\contentsline {appendix}{\numberline {Appendix A}\ignorespaces {Flow specifications and protocols provided by GEM5}}{39}
-\contentsline {section}{\numberline {A.1}Flow Specifications}{39}
-\contentsline {section}{\numberline {A.2}Protocols}{40}
-\contentsline {appendix}{\numberline {Appendix B}\ignorespaces {RTL model in VHDL}}{44}
-\contentsline {section}{\numberline {B.1}Flow Specification}{44}
-\contentsline {section}{\numberline {B.2}Protocol}{45}
-\contentsline {chapter}{\numberline {\uppercase {\vspace {-.12in}LIST OF REFERENCES }}}{49}
+\contentsline {section}{\numberline {2.3}Labeled Petri-Nets}{8}
+\contentsline {chapter}{\numberline {\uppercase {CHAPTER 3}}\uppercase {Flow Guided Trace Interpretation}}{11}
+\contentsline {section}{\numberline {3.1}Post-silicon Trace Analysis}{11}
+\contentsline {section}{\numberline {3.2}Flow Execution Scenarios}{12}
+\contentsline {section}{\numberline {3.3}Flow Guided Trace Interpretation Algorithm}{13}
+\contentsline {section}{\numberline {3.4}Illustration}{15}
+\contentsline {chapter}{\numberline {\uppercase {CHAPTER 4}}\uppercase {Trace Analysis Under Partial Observability}}{17}
+\contentsline {section}{\numberline {4.1}Mapping Individual Signal Event to Flow Event}{18}
+\contentsline {section}{\numberline {4.2}Sequence of Signal Events}{19}
+\contentsline {section}{\numberline {4.3}Sequence of Gapped Signal Events}{20}
+\contentsline {section}{\numberline {4.4}Generalized Trace Analysis Algorithm}{21}
+\contentsline {section}{\numberline {4.5}Difficulties and Solutions}{23}
+\contentsline {section}{\numberline {4.6}Trace Signal Selection}{23}
+\contentsline {section}{\numberline {4.7}Interactive Trace Interpretation}{24}
+\contentsline {chapter}{\numberline {\uppercase {CHAPTER 5}}\uppercase {Case Studies}}{26}
+\contentsline {section}{\numberline {5.1}Simulation simple TLM SoC with GEM5}{26}
+\contentsline {section}{\numberline {5.2}Simulation Simple RTL SoC with VHDL}{32}
+\contentsline {chapter}{\numberline {\uppercase {CHAPTER 6}}\uppercase {Conclusion and Future Works}}{35}
+\contentsline {chapter}{\numberline {\uppercase {APPENDICES}}}{36}
+\contentsline {appendix}{\numberline {Appendix A}\ignorespaces {Flow specifications and protocols provided by GEM5}}{37}
+\contentsline {section}{\numberline {A.1}Protocol Specifications in Message Sequence Chart}{37}
+\contentsline {section}{\numberline {A.2}Protocol Specification in LPNs}{38}
+\contentsline {appendix}{\numberline {Appendix B}\ignorespaces {Flow Specifications for RTL model}}{42}
+\contentsline {section}{\numberline {B.1}Protocol Specification in Message Sequence Charts}{42}
+\contentsline {section}{\numberline {B.2}Protocol Specification in LPNs}{43}
+\contentsline {chapter}{\numberline {\uppercase {\vspace {-.12in}LIST OF REFERENCES }}}{47}
