@@ -530,7 +530,7 @@ $\mathit{Scen} = \{scen\}$\;
   		\ForEach {$(F_{i,j}, s_{i,j}) \in \mathit{scen}$} {
     		\If {$((F_{i,j}, s'_{i,j}) \gets (\mathit{accept}(F_{i,j}, s_{i,j}, e_h) )) \cap (s'_{i,j}\neq \emptyset )$} {
 				Let $scen'$ be a copy of $scen$\;
-      		$\mathit{scen'} \gets \mathit{scen'} - (F_{i,j}, s_{i,j})) \cup (F_{i,j}, s'_{i,j}$\;
+      		$\mathit{scen'} \gets \mathit{scen'} - (F_{i,j}, s_{i,j})) \cup (F_{i,j}, s'_{i,j})$\;
       		$\mathit{Scen'} \gets \mathit{scen'} \cup \mathit{Scen'}$\;
       		$\mathit{found} \gets {\tt false}$ \;
     		}
@@ -833,36 +833,29 @@ In this section we will include the trace abstraction process into our algorithm
 use it together with the trace analysis algorithm. Here we assume one signal event can 
 be mapped to a flow event. Sequence of flow events are too complicated for now, and we will
 extend our work in this direction in future work.
-In this algorithm, we add following new definations:
+In this algorithm, we add following new definitions:
 \begin{itemize}
 \item instance $sig\_e$ as signal event. 
 \item $E$ as set of all flow events.
+\item $Max$ as the maximum gap steps
+\item $Ct$ as the current step 
+\item $h_{gap}$ as the time when gap happened.
+\item $Scen_{gap}$ as the scenario set saved after handling the gapped traces.
 \item $Event$ as set of flow events mapped form current signal event .
 \item $map(e_i, sig\_e)$ as a mapping function from signal event $sig\_e$ to flow event $e_i$. 
 The function will return $\emptyset$ if mapping in unsuccessful.
 \end{itemize}
 
+Note here we will replace the below section of Algorithm.~\ref{algo:compliance} with $Flow Analysis$ for simplicity purpose.
 \begin{algorithm}[h]
-\setstretch{0.5}
+\setstretch{1.2}
 \DontPrintSemicolon
-Create an empty scenario $scen$\;
-$\mathit{Scen} = \{scen\}$\;
-\ForEach {$h, \; 1 \leq h \leq n $} {
-	$\mathit{found} \gets {\tt true}$ \;
-	$Scen' = \emptyset$\;
-	$Event = \emptyset$\; 
-	\If {noe gapped}{
-	\ForEach {$e \in E $}{
-	 	\If {$map(e, sig\_e_h) \neq \emptyset$}{
-			$Event=Event \cup e$\;
-		}
-	}
-	\ForEach {$e_h \in Event$}{
+\ForEach {$e_h \in Event$}{
 	\ForEach {$scen \in Scen$} {
   		\ForEach {$(F_{i,j}, s_{i,j}) \in \mathit{scen}$} {
     		\If {$((F_{i,j}, s'_{i,j}) \gets (\mathit{accept}(F_{i,j}, s_{i,j}, e_h) )) \cap (s'_{i,j}\neq \emptyset )$} {
 				Let $scen'$ be a copy of $scen$\;
-      		$\mathit{scen'} \gets \mathit{scen'} - (F_{i,j}, s_{i,j})) \cup (F_{i,j}, s'_{i,j}$\;
+      		$\mathit{scen'} \gets \mathit{scen'} - (F_{i,j}, s_{i,j})) \cup (F_{i,j}, s'_{i,j})$\;
       		$\mathit{Scen'} \gets \mathit{scen'} \cup \mathit{Scen'}$\;
       		$\mathit{found} \gets {\tt false}$ \;
     		}
@@ -878,17 +871,52 @@ $\mathit{Scen} = \{scen\}$\;
     	}
 	}
 	}
+\end{algorithm}
+
+
+\begin{algorithm}[h]
+\setstretch{1}
+\DontPrintSemicolon
+Create an empty scenario $scen$\;
+$\mathit{Scen} = \{scen\}$\;
+\ForEach {$h, \; 1 \leq h \leq n $} {
+	$\mathit{found} \gets {\tt true}$ \;
+	$Scen' = \emptyset$\;
+	$Event = \emptyset$\; 
+	$Max = 0$\;
+	$Ct = 0$\;
+\eIf {not gapped}{
+	\ForEach {$e \in E $}{
+	 	\If {$map(e, sig\_e_h) \neq \emptyset$}{
+			$Event=Event \cup e$\;
+		}
+	}
+	$Flow Analysis$\;
   \If {$\mathit{found} == {\tt true}$} {
-    \Return ${\tt Inconsistent}$\;
+  \eIf {$Ct == Max$}{
+   	 \Return ${\tt Inconsistent}$\;
+	 }{
+	 $h=h_{gap}$\;
+	 $Scen = Scen_{gap}$\;
+	 }
   }
   $Scen = Scen'$\;
   }
+  {
+  	$Max= get\_max $\;
+	$Ct =0$\;
+	\While {$Ct < Max \cap found == {\tt true}$}{
+		$Event = E$\;
+		$Flow Analysis$\;
+	}
+	$h_{gap} = h$\;
+	$Scen_{gap} = Scen'$
+  }  
 }
 \Return $\mathit{Scen}$ \;
-\caption{$\textsc{Generalized-Check-Compliance}(\vec{F}, \, \rho)$  part one}
-\label{algo:compliance}
+\caption{$\textsc{Generalized-Check-Compliance}(\vec{F}, \, \rho)$ }
 \end{algorithm}
-
+\clearpage
 \section{Difficulties and Solutions}
 It is clear from above that a partial trace is viewed as a
 set of flow traces, and Algorithm~\ref{algo:compliance} can
@@ -1184,7 +1212,13 @@ As shown above, the ambiguous interpretation of events can lead to large numbers
 
 
 \section{Simulation Simple RTL SoC with VHDL}
-A register transfer level SoC model is constructed. This model is more specific compared to the last model as the register value will be updated every cycle, thus will be much slower than the model on GEM5. Because the lack of similar research, we couldn't find any existing model, so this model is built from scratch just by me. The desired protocols are implemented inside all the components. Because this is a simplified model, the CPU can't run software programs. A test generator is implemented inside CPU to allow simple functions.
+Previous section is done in very high abstraction level and trace abstraction method we introduced in Chapter 4
+is not fully used. In this section, we will construct a more detailed Register Transfer Level SoC. For this model 
+the trace information is less abstracted (represented in signal bits value), thus requires an extra translation process.
+This model simulate behaviors that is very similar to the actual chip, in a much slower speed. This model will 
+be the base of future research as we wrote it in cycle accurate model thus can be implemented on the FPGA board to enable more features.
+
+ Because the lack of similar research, we couldn't find any existing model, so this model is built from scratch just by me. The desired protocols are implemented inside all the components. Because this is a simplified model, the CPU can't run software programs. A test generator is implemented inside CPU to allow simple functions.
 
  As showed in Fig.~\ref{rtlstruc}, this model consists of two CPU models, each with its own 1KB cache. The caches are connected to a 4MG memory through a memory bus model. At each rising clock cycle, our model will record selected signal value into a vcd(value change dump) format file.
 

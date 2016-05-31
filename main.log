@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  29 MAY 2016 20:28
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  30 MAY 2016 22:18
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -323,9 +323,6 @@ LaTeX Font Info:    Try loading font information for U+psy on input line 64.
 File: upsy.fd 2001/06/04 font definitions for U/psy.
 )) (./main.aux
 
-LaTeX Warning: Label `algo:compliance' multiply defined.
-
-
 LaTeX Warning: Label `y4' multiply defined.
 
 )
@@ -643,177 +640,183 @@ LaTeX Warning: Command \textvisiblespace invalid in math mode on input line 825
 LaTeX Warning: Command \textvisiblespace invalid in math mode on input line 825
 .
 
-[21.30] [22.31] [23.32] [24.33] [25.34]
+[21.30]
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[22.31] [23.32] [24.33
+
+] [25.34] [26.35]
 CHAPTER 5. Case Studies
-<figures/Fig4.png, id=371, 823.075pt x 735.74875pt>
+<figures/Fig4.png, id=374, 823.075pt x 735.74875pt>
 File: figures/Fig4.png Graphic file (type png)
  <use figures/Fig4.png>
-Package pdftex.def Info: figures/Fig4.png used on input line 1004.
+Package pdftex.def Info: figures/Fig4.png used on input line 1032.
 (pdftex.def)             Requested size: 216.81pt x 193.80492pt.
 
-[26.35
+[27.36
 
-] [27.36 <./figures/Fig4.png>] [28.37] [29.38] [30.39]
-<struc.pdf, id=389, 958.58125pt x 542.025pt>
+] [28.37 <./figures/Fig4.png>] [29.38] [30.39] [31.40]
+<struc.pdf, id=392, 958.58125pt x 542.025pt>
 File: struc.pdf Graphic file (type pdf)
  <use struc.pdf>
-Package pdftex.def Info: struc.pdf used on input line 1180.
+Package pdftex.def Info: struc.pdf used on input line 1208.
 (pdftex.def)             Requested size: 505.89pt x 286.05609pt.
- [31.40] [32.41 <./struc.pdf>] [33.42] [34.43]
+ [32.41] [33.42 <./struc.pdf>] [34.43] [35.44]
 CHAPTER 6. Conclusion and Future Works
-[35.44
+[36.45
 
-] [36.45] <figures/write3.png, id=410, 847.165pt x 214.8025pt>
+] [37.46] <figures/write3.png, id=413, 847.165pt x 214.8025pt>
 File: figures/write3.png Graphic file (type png)
 
 <use figures/write3.png>
-Package pdftex.def Info: figures/write3.png used on input line 1285.
+Package pdftex.def Info: figures/write3.png used on input line 1319.
 (pdftex.def)             Requested size: 325.215pt x 82.4583pt.
- <figures/write1.png, id=411, 293.095pt x 147.55125pt>
+ <figures/write1.png, id=414, 293.095pt x 147.55125pt>
 File: figures/write1.png Graphic file (type png)
 
 <use figures/write1.png>
-Package pdftex.def Info: figures/write1.png used on input line 1290.
+Package pdftex.def Info: figures/write1.png used on input line 1324.
 (pdftex.def)             Requested size: 144.54pt x 72.76453pt.
- <figures/write2.png, id=412, 857.2025pt x 218.8175pt>
+ <figures/write2.png, id=415, 857.2025pt x 218.8175pt>
 File: figures/write2.png Graphic file (type png)
 
 <use figures/write2.png>
-Package pdftex.def Info: figures/write2.png used on input line 1294.
+Package pdftex.def Info: figures/write2.png used on input line 1328.
 (pdftex.def)             Requested size: 332.44243pt x 84.86101pt.
- <figures/read1.png, id=413, 434.62375pt x 168.63pt>
+ <figures/read1.png, id=416, 434.62375pt x 168.63pt>
 File: figures/read1.png Graphic file (type png)
 
 <use figures/read1.png>
-Package pdftex.def Info: figures/read1.png used on input line 1300.
+Package pdftex.def Info: figures/read1.png used on input line 1334.
 (pdftex.def)             Requested size: 144.54pt x 56.08034pt.
- <figures/read3.png, id=414, 849.1725pt x 211.79124pt>
+ <figures/read3.png, id=417, 849.1725pt x 211.79124pt>
 File: figures/read3.png Graphic file (type png)
 
 <use figures/read3.png>
-Package pdftex.def Info: figures/read3.png used on input line 1305.
+Package pdftex.def Info: figures/read3.png used on input line 1339.
 (pdftex.def)             Requested size: 296.30743pt x 73.90182pt.
- <figures/read2.png, id=415, 857.2025pt x 210.7875pt>
+ <figures/read2.png, id=418, 857.2025pt x 210.7875pt>
 File: figures/read2.png Graphic file (type png)
 
 <use figures/read2.png>
-Package pdftex.def Info: figures/read2.png used on input line 1310.
+Package pdftex.def Info: figures/read2.png used on input line 1344.
 (pdftex.def)             Requested size: 281.85255pt x 69.306pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[37.46
+[38.47
 
  <./figures/write3.png> <./figures/write1.png> <./figures/write2.png>]
-<figures/Fig5.png, id=422, 592.2125pt x 771.88374pt>
+<figures/Fig5.png, id=425, 592.2125pt x 771.88374pt>
 File: figures/Fig5.png Graphic file (type png)
  <use figures/Fig5.png>
-Package pdftex.def Info: figures/Fig5.png used on input line 1318.
+Package pdftex.def Info: figures/Fig5.png used on input line 1352.
 (pdftex.def)             Requested size: 224.03743pt x 292.0115pt.
 
-Overfull \hbox (2.61107pt too wide) in paragraph at lines 1319--1355
+Overfull \hbox (2.61107pt too wide) in paragraph at lines 1353--1389
 []$[]$ $[]$ 
  []
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<figures/Fih6.png, id=423, 614.295pt x 830.10126pt>
+<figures/Fih6.png, id=426, 614.295pt x 830.10126pt>
 File: figures/Fih6.png Graphic file (type png)
  <use figures/Fih6.png>
-Package pdftex.def Info: figures/Fih6.png used on input line 1360.
+Package pdftex.def Info: figures/Fih6.png used on input line 1394.
 (pdftex.def)             Requested size: 238.49121pt x 322.2689pt.
 
-Overfull \hbox (0.77437pt too wide) detected at line 1388
+Overfull \hbox (0.77437pt too wide) detected at line 1422
 []
  []
 
-<figures/readDcache.png, id=424, 561.09625pt x 782.925pt>
+<figures/readDcache.png, id=427, 561.09625pt x 782.925pt>
 File: figures/readDcache.png Graphic file (type png)
 
 <use figures/readDcache.png>
-Package pdftex.def Info: figures/readDcache.png used on input line 1396.
+Package pdftex.def Info: figures/readDcache.png used on input line 1430.
 (pdftex.def)             Requested size: 238.49121pt x 332.76859pt.
 
-Overfull \hbox (1.80208pt too wide) detected at line 1411
+Overfull \hbox (1.80208pt too wide) detected at line 1445
 []
  []
 
 
-Overfull \hbox (7.1355pt too wide) detected at line 1426
+Overfull \hbox (7.1355pt too wide) detected at line 1460
 []
  []
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[38.47 <./figures/read1.png> <./figures/read3.png> <./figures/read2.png>]
-[39.48 <./figures/Fig5.png>] [40.49 <./figures/Fih6.png>] [41.50 <./figures/rea
-dDcache.png>] <y1.png, id=446, 373.395pt x 185.69376pt>
+[39.48 <./figures/read1.png> <./figures/read3.png> <./figures/read2.png>]
+[40.49 <./figures/Fig5.png>] [41.50 <./figures/Fih6.png>] [42.51 <./figures/rea
+dDcache.png>] <y1.png, id=449, 373.395pt x 185.69376pt>
 File: y1.png Graphic file (type png)
  <use y1.png>
-Package pdftex.def Info: y1.png used on input line 1442.
+Package pdftex.def Info: y1.png used on input line 1476.
 (pdftex.def)             Requested size: 144.54pt x 71.88191pt.
 
-<y2.png, id=447, 743.77875pt x 273.02pt>
+<y2.png, id=450, 743.77875pt x 273.02pt>
 File: y2.png Graphic file (type png)
  <use y2.png>
-Package pdftex.def Info: y2.png used on input line 1446.
+Package pdftex.def Info: y2.png used on input line 1480.
 (pdftex.def)             Requested size: 260.17244pt x 95.50427pt.
 
-<y3.png, id=448, 733.74126pt x 192.72pt>
+<y3.png, id=451, 733.74126pt x 192.72pt>
 File: y3.png Graphic file (type png)
  <use y3.png>
-Package pdftex.def Info: y3.png used on input line 1450.
+Package pdftex.def Info: y3.png used on input line 1484.
 (pdftex.def)             Requested size: 361.34999pt x 94.91pt.
 
-<y4.png, id=449, 514.92375pt x 246.9225pt>
+<y4.png, id=452, 514.92375pt x 246.9225pt>
 File: y4.png Graphic file (type png)
  <use y4.png>
-Package pdftex.def Info: y4.png used on input line 1454.
+Package pdftex.def Info: y4.png used on input line 1488.
 (pdftex.def)             Requested size: 202.35622pt x 97.03407pt.
 
-<y5.png, id=450, 737.75626pt x 210.7875pt>
+<y5.png, id=453, 737.75626pt x 210.7875pt>
 File: y5.png Graphic file (type png)
  <use y5.png>
-Package pdftex.def Info: y5.png used on input line 1461.
+Package pdftex.def Info: y5.png used on input line 1495.
 (pdftex.def)             Requested size: 361.34999pt x 103.24174pt.
 
-<y6.png, id=451, 750.805pt x 206.7725pt>
+<y6.png, id=454, 750.805pt x 206.7725pt>
 File: y6.png Graphic file (type png)
  <use y6.png>
-Package pdftex.def Info: y6.png used on input line 1465.
+Package pdftex.def Info: y6.png used on input line 1499.
 (pdftex.def)             Requested size: 361.34999pt x 99.51785pt.
 
-<y7.png, id=452, 737.75626pt x 242.9075pt>
+<y7.png, id=455, 737.75626pt x 242.9075pt>
 File: y7.png Graphic file (type png)
  <use y7.png>
-Package pdftex.def Info: y7.png used on input line 1469.
+Package pdftex.def Info: y7.png used on input line 1503.
 (pdftex.def)             Requested size: 361.34999pt x 118.97382pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<wbprotocol.png, id=453, 134.5025pt x 395.4775pt>
+<wbprotocol.png, id=456, 134.5025pt x 395.4775pt>
 File: wbprotocol.png Graphic file (type png)
  <use wbprotocol.png>
-Package pdftex.def Info: wbprotocol.png used on input line 1482.
+Package pdftex.def Info: wbprotocol.png used on input line 1516.
 (pdftex.def)             Requested size: 72.26999pt x 212.49863pt.
- [42.51
+ [43.52
 
 
  <./y1.png> <./y2.png> <./y3.png> <./y4.png>]
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<rw.pdf, id=461, 414.54875pt x 759.83875pt>
+<rw.pdf, id=464, 414.54875pt x 759.83875pt>
 File: rw.pdf Graphic file (type pdf)
  <use rw.pdf>
-Package pdftex.def Info: rw.pdf used on input line 1498.
+Package pdftex.def Info: rw.pdf used on input line 1532.
 (pdftex.def)             Requested size: 231.26378pt x 423.8836pt.
 
-Overfull \hbox (2.61107pt too wide) in paragraph at lines 1499--1524
+Overfull \hbox (2.61107pt too wide) in paragraph at lines 1533--1558
 []$[]$ $[]$ 
  []
 
@@ -822,18 +825,18 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 
 File: rw.pdf Graphic file (type pdf)
 <use rw.pdf>
-Package pdftex.def Info: rw.pdf used on input line 1529.
+Package pdftex.def Info: rw.pdf used on input line 1563.
 (pdftex.def)             Requested size: 231.26378pt x 423.8836pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-(./main.bbl [43.52 <./y5.png> <./y6.png> <./y7.png>] [44.53 <./wbprotocol.png>]
-[45.54 <./rw.pdf>] [46.55]
+(./main.bbl [44.53 <./y5.png> <./y6.png> <./y7.png>] [45.54 <./wbprotocol.png>]
+[46.55 <./rw.pdf>] [47.56]
 Missing character: There is no š in font cmr12!
- [47.56
+ [48.57
 
-] [48.57]) [49.58] (./main.aux)
+] [49.58]) [50.59] (./main.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
@@ -845,7 +848,7 @@ Here is how much of TeX's memory you used:
  9499 multiletter control sequences out of 15000+600000
  14985 words of font info for 58 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 47i,26n,37p,1504b,541s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 47i,21n,37p,1504b,478s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 ></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
 </usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb>
@@ -867,10 +870,10 @@ exmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2014/te
 xmf-dist/fonts/type1/public/amsfonts/cm/cmti7.pfb></usr/local/texlive/2014/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmti8.pfb></usr/local/texlive/2014/texmf-
 dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on main.pdf (58 pages, 1167470 bytes).
+Output written on main.pdf (59 pages, 1182435 bytes).
 PDF statistics:
- 539 PDF objects out of 1000 (max. 8388607)
- 324 compressed objects within 4 object streams
+ 542 PDF objects out of 1000 (max. 8388607)
+ 326 compressed objects within 4 object streams
  0 named destinations out of 1000 (max. 500000)
  116 words of extra memory for PDF output out of 10000 (max. 10000000)
 
