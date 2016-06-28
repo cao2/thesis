@@ -1905,10 +1905,10 @@ with width of 52 that is used by interface 6.
 \centerline{
 \includegraphics[width=4in]{signalline.png}
 }
-\caption{Format definition of messages}
+\caption{Format definition of messages
 \label{sigline}
 \end{figure}
-For {\tt std$\_$logic$\_$vector} with 51 bits, as shown in Figure~\ref{sigline},
+For {\tt std$\_$logic$\_$vector} with 51 bits, as shown in format 1 of Figure~\ref{sigline},
 the most significant bit indicates validity of messages.
 The next
 two bits 49-48 indicate the command. These two bits can represent four different commands.
@@ -1916,7 +1916,7 @@ Right now our
 system supports only two types of commands,
 we use 01 to represent read command and 10 to represent write command.
 Bits 47-32 represent 16 bits address, and the last 32 bits represent data.
-For {\tt std$\_$logic$\_$vector}s with 52 bits, as shown in Figure~\ref{sigline},
+For {\tt std$\_$logic$\_$vector}s with 52 bits, as shown in format 2 of Figure~\ref{sigline},
 the most significant bit represent source of the request. For example, if a request is from CPU1, that bit
 will be 1, otherwise it will be 0, the rest of the bits are the same as the first type of {\tt std$\_$logic$\_$vector}.
 
@@ -1938,7 +1938,7 @@ There are three signals included in this interface, each of which is explained i
 \begin{figure}[h]
 \centering
     \includegraphics[width=2in]{int1.png}
-    \caption{Structure of interface one}
+    \caption{Interface definition of link 1 in Figure}
     \label{int1}
  \end{figure}
 
@@ -1972,7 +1972,7 @@ explained in Table~\ref{int2t}.
 \begin{figure}[h]
 \centering
     \includegraphics[width=5in]{int2.png}
-    \caption{Structure of interface two, three and four}
+    \caption{Interface definition of link 1 in Figure}
     \label{int2}
  \end{figure}
 
@@ -2205,14 +2205,13 @@ In this case, when the inconsistent message happened, only two write flow instan
 are activated. The write flow specification is LPN format in shown below.
 \[
 \begin{array}{l}
-cpu0: cache0: wt\\
-cache0: bus: wt\\
-bus: cache1: snp\\
-cache1: bus: snp\\
-$(bus: cache1: snp)$\\
-mem: bus: wt\\
-bus: cache0: wt\\
-cache0: cpu0: wt\\
+(cpu0: cache0: wt)\\
+(cache0: bus: wt)\\
+(bus: cache1: snp)\\
+(cache1: bus: snp)\\
+(mem: bus: wt)\\
+(bus: cache0: wt)\\
+(cache0: cpu0: wt)\\
 \end{array}
 \]
 The first read instance is in state two (after accepting message $(cache0: bus: wt)$),
