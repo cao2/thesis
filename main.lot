@@ -1,0 +1,15 @@
+\select@language {english}
+\contentsline {table}{\numberline {Table 5.1\ }{\ignorespaces Runtime Results of Trace analysis. Time is in seconds and memory usage is in MB.}}{38}
+\vspace {10\p@ }
+\contentsline {table}{\numberline {Table 5.2\ }{\ignorespaces The number of flow instances derived by the trace analysis with the full observability.}}{39}
+\vspace {10\p@ }
+\contentsline {table}{\numberline {Table 5.3\ }{\ignorespaces The number of flow instances derived by the trace analysis with certain monitors disabled.}}{40}
+\vspace {10\p@ }
+\contentsline {table}{\numberline {Table 5.4\ }{\ignorespaces Signals explanations for interface one}}{45}
+\vspace {10\p@ }
+\contentsline {table}{\numberline {Table 5.5\ }{\ignorespaces Signals explanations for interface two, three and four}}{47}
+\vspace {10\p@ }
+\contentsline {table}{\numberline {Table 5.6\ }{\ignorespaces Signals explanations for interface five and six}}{48}
+\vspace {10\p@ }
+\contentsline {table}{\numberline {Table 5.7\ }{\ignorespaces The number of flow instances derived by the trace analysis with the full observability.}}{48}
+\vspace {10\p@ }

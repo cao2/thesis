@@ -2042,12 +2042,10 @@ After the SoC model finishes 2000 flows for each cpu, there
 are totally $122704$ messages collected in the trace file.
 The trace analysis takes 10 second to finish processing
 all these messages and the peak memory used is 18MB.
-
-
-
-Table~\ref{table-case-3} shows the number of flow instances contained in that
-scenario for the six 
-flows describing cache coherent operations initiated from both CPUs.
+This test case works correctly with no inconsistent message occurred 
+and
+Table~\ref{table-case-3} shows the number of each flow instances activated and
+finished from both CPUs.
 \begin{table}[h]
 \caption{The number of flow instances derived by the trace analysis with the full observability.}
 \begin{center}
@@ -2071,11 +2069,10 @@ CPU2 Write Back				&  $1211$\\
 \end{table}%
 
 
-
-This test case works correctly with no inconsistent message occurred. To better 
-test our system, we hard coded a simple software that performs Peterson's Algorithm
+To better 
+test our system, we hard coded another simple software that performs Peterson's Algorithm
 inside each CPU. Detailed algorithm is displayed in Figure~\ref{petersons}. 
-In this algorithm we have four shared variables: $flag0$, $flag1$, $turn$, and $shared$.
+This algorithm contains four shared variables: $flag0$, $flag1$, $turn$, and $shared$.
 \begin{figure}[h]
 \RestyleAlgo{boxruled}
 \begin{algorithm}[H]
@@ -2121,14 +2118,12 @@ flag[1]=false\;
 \label{petersons}
 \caption{Peterson's Algorithm on two CPU}
 \end{figure}
-
-Each CPU want to enter the critical section will wait until $flag$ or $turn$ has 
+Each CPU want to enter the critical section waits until $flag$ or $turn$ has 
 the desired value. When entering the critical section, the variable $shared$ will
 be incremented by one.
-Each CPU will have a loop inside that keeps running this process.
 By running this algorithm N times, the final value of $shared$ should
 be 2N, as there will be two CPUs increment $shared$ N times. This
-value can be used to check the correctness of the algorithm.
+value can be used to check the correctness of the system.
 \clearpage
 \subsection{Debugging Experience}
 During the building of the system, our proposed analysis algorithm
@@ -2140,45 +2135,97 @@ read request and one write request. When the trace is produced and analyzed usin
 the trace analysis algorithm. The analysis was halted and returned a set of partially
 executed scenarios and one inconsistent message. This error happens no matter
 how many time we simulate the system.
-Two different inconsistent messages occurred and is shown below
+Two different inconsistent messages occurred and are shown below.
 \[
-\begin{array}{|}
-(bus, mem, rd, _)\\
-(bus, mem, wr, _)\\
+ \begin{array}{l}
+(bus, mem, rd)\\
+(bus, mem, wt)\\
 \end{array}
 \] 
+This two inconsistent messages belongs to two different flow specifications,
+the only similarity is that they are both sent from the same source memory bus.
+To better locate the cause of this problem, we checked the system level flow event
+happened before the occurrence of the inconsistent message. 
+This translated flow event from signal event shows that the inconsistent
+message are always exactly the same as its previous message
+and is always sent from memory bus.
+
+By looking into the memory bus's structure, the root cause is discovered and 
+fixed by resetting the memory request once it is received by memory.
+
+\subsubsection{Error two: incorrect command}
+During the debugging process, the trace analysis algorithm was halted because
+inconsistent message.
+When running the system multiple time and apply analysis algorithm on it,
+the inconsistent message $(membus, mem, rd)$ keep happens.
+
+We took one specific case and try to find the possible reason.
+In this case, when the inconsistent message happened, only two write flow instances
+are activated. The write flow specification is LPN format in shown below.
+\[
+\begin{array}{l}
+cpu0: cache0: wt\\
+cache0: bus: wt\\
+bus: cache1: snp\\
+cache1: bus: snp\\
+$(bus: cache1: snp)$\\
+mem: bus: wt\\
+bus: cache0: wt\\
+cache0: cpu0: wt\\
+\end{array}
+\]
+The first read instance is in state two (after accepting message $(cache0: bus: wt)$),
+the second read instance is in state four (after accepting message $(cache1: bus: snp)$).
+Because the inconsistent message is sent from memory bus. Here we conduct a set
+the messages that can be accepted by the current scenarios: $(bus: cache1: snp)$ that can be accepted
+by read instance one and $(bus: cache1: snp)$ that can be accepted by
+read instance two. By comparing these two expected messages with
+the inconsistent message, we see that the inconsistent message
+$(membus, mem, rd)$ has the same source and destination with
+the expected message $(membus, mem, wt)$, here we make
+a guess that
+the command may be changed for read flow instance two. This change
+can be made by its source memory bus. By checking the internal structure
+of the memory bus, we could not find any possible causes, so we went one
+message ahead, and check the cache structure. Inside the cache,
+we found out that the command bits in the snoop response
+is always 01, thus read. After making change on the
+process that handles snoop request, the problem was solved.
 
 
-During the trace analysis, our algorithm shows that the trace will always stop when interconnect send
- request to Memory and the message cannot be mapped to any existing scenarios. The error message
- looks exactly the same as the previous message. We traced the bug to interconnect and find out the request
- wasn't reset correctly.
-
-\subsubsection{Error two: command changed after interconnect bus receive snoop request from Cache}
-
-Our trace analysis algorithm find message from cache to memory cannot map to any existing scenarios in 
-multiple runs, and all the stacked messages are snoop response. By debugging the cache component,
-we discovered the wrong implemented cache coherent protocol and fixed the error.
 \subsubsection{Error three: protocol failure}
 
 
-When running Peterson's Algorithm to ensure mutual exclusion between two processors, our analysis algorithm 
-shows no cache coherence protocol was activated. Based on programers experience, there has to be at least one cache 
-coherence flow exist because of the shared locks and variable between two CPUs. 
-The unmatched number of cache coherence flows shows an big error in our system implementation
-of cache coherence protocol. 
+When running Peterson's Algorithm and apply our analysis algorithm on
+the produce trace, no inconsistent message happened and only one scenario is produced
+by the algorithm.
+However, by checking the numbers of each finished flow specifications,
+we found that no cache coherence protocol was activated. Based on debuggers experience, in order for Peterson's Algorithm to work, each CPU
+need to constantly request data that is shared by the other CPU,
+therefore there has to be at least one cache 
+coherence flow activated.
 
-This problem can not be found without programmer's view because no error occurred during trace analysis process.
-What we found during the analysis is that no matter how long we run the simulation, the number of read flow keep increasing while
-others remain the same. This narrows the root cause to the while loop while the program keep checking values of flag to see
-if the CPU can enter the critical section. This means that the
+Moreover,
+no matter how long we run the simulation, the number of read flow keep increasing while
+others remain the same.
+This narrows the the root cause to
+the only while loop in the program where it
+keeps checking values of $flag$ to see
+if the CPU can enter the critical section. 
+This means that the
 shared variable $flag$ and $turn$ are not holding the correct value.
 
-By looking at each flow event, we found out the two CPU requiring the same address data will
-result in each CPU thinking they have the exclusive right of that data.
+As there are no existence of inconsistent messages,
+it is unlikely the protocol specifications is wrongly implemented,
+so we conclude the protocol itself may contain some
+loopholes.
+By looking at the flow events, we found out that
+when two CPUs require data from the same address,
+both CPU thinks they have the exclusive right of that data.
 This is because both CPU issue request the same time, they will not 
-find the required data anywhere but the Memory, therefore both of the snoop request
-will get a cache miss response. 
+find the required data anywhere but the Memory, therefore
+both gets the data from memory and believe they own
+the data exclusively.
 The problem is solved by adding another register inside the Memory Bus to check
 the same request address situation. For example,
 when CPU0 requests an address that CPU1
@@ -2186,8 +2233,10 @@ just requested but have not finished yet, CPU0 will wait until CPU1
 finished its flow and then precede with a snoop request to CPU1.
 
  
- After problem in Error three was fixed, we rerun the system and found fair amount of
- cache coherence protocol activated. However, when each CPU run Peterson's Algorithm
+After that, we rerun the system and found fair amount of
+ cache coherence protocol activated, and
+ the program ends after small amount of time. 
+ However, when each CPU run Peterson's Algorithm
  for three times, the final value of $shared$ was 5, comparing to the expected 6.
  
  By analyzing the flow traces, we could not find any error. Because this problem
