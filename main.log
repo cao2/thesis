@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  30 MAY 2016 22:18
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  28 JUN 2016 00:24
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -321,80 +321,55 @@ LaTeX Font Info:    Try loading font information for U+psy on input line 64.
 
 (/usr/local/texlive/2014/texmf-dist/tex/latex/psnfss/upsy.fd
 File: upsy.fd 2001/06/04 font definitions for U/psy.
-)) (./main.aux
-
-LaTeX Warning: Label `y4' multiply defined.
-
-)
+))
+No file main.aux.
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 63.
-LaTeX Font Info:    ... okay on input line 63.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 63.
-LaTeX Font Info:    ... okay on input line 63.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 63.
-LaTeX Font Info:    ... okay on input line 63.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 63.
-LaTeX Font Info:    ... okay on input line 63.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 63.
-LaTeX Font Info:    ... okay on input line 63.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 63.
-LaTeX Font Info:    ... okay on input line 63.
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 63.
- (/usr/local/texlive/2014/texmf-dist/tex/latex/base/omscmr.fd
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 68.
+LaTeX Font Info:    ... okay on input line 68.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 68.
+LaTeX Font Info:    ... okay on input line 68.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 68.
+LaTeX Font Info:    ... okay on input line 68.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 68.
+LaTeX Font Info:    ... okay on input line 68.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 68.
+LaTeX Font Info:    ... okay on input line 68.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 68.
+LaTeX Font Info:    ... okay on input line 68.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 68.
+(/usr/local/texlive/2014/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 63.
- [1.1{/usr/local/texlive/2014/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2
-.2
-
-] (./main.toc
-Overfull \hbox (12.87093pt too wide) detected at line 1
-[]\OT1/cmr/m/n/12 LIST OF TABLES 
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 68.
+ [1.1{/usr/local/texlive/2014/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+Overfull \hbox (0.69289pt too wide) in paragraph at lines 68--68
+\OT1/cmr/m/n/12 Jae-won Jang or pro-vid-ing me with un-fail-ing sup-port and co
+n-tin-u-ous en-cour-age-ment through-
  []
 
+[2.2
 
-Overfull \hbox (19.47504pt too wide) detected at line 2
-[]\OT1/cmr/m/n/12 LIST OF FIGURES 
- []
-
-LaTeX Font Info:    Try loading font information for U+msa on input line 6.
-(/usr/local/texlive/2014/texmf-dist/tex/latex/amsfonts/umsa.fd
-File: umsa.fd 2013/01/14 v3.01 AMS symbols A
-)
-LaTeX Font Info:    Try loading font information for U+msb on input line 6.
-
-(/usr/local/texlive/2014/texmf-dist/tex/latex/amsfonts/umsb.fd
-File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-) [1.3
-
-]
-Overfull \hbox (49.74289pt too wide) detected at line 38
-[]\OT1/cmr/m/n/12 LIST OF REFERENCES  
- []
-
-)
+] (./main.toc)
 \tf@toc=\write3
 \openout3 = `main.toc'.
 
- [2.4] (./main.lot)
+ [1.3
+
+] (./main.lot)
 \tf@lot=\write4
 \openout4 = `main.lot'.
 
- [3.5
+ [2.4
 
-] (./main.lof
-Underfull \vbox (badness 4634) has occurred while \output is active []
-
- [4.6
-
-]
-[5.7])
+] (./main.lof)
 \tf@lof=\write5
 \openout5 = `main.lof'.
 
- [6.8] [7.9
+ [3.5
+
+] [4.6
 
 ]
 *geometry* driver: auto-detecting
@@ -489,391 +464,511 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
 CHAPTER 1. Introduction
-[1.10
+
+LaTeX Warning: Citation `white2004process' on page 1 undefined on input line 11
+4.
 
 
-] [2.11] [3.12] [4.13] [5.14]
+LaTeX Warning: Reference `ICdesign' on page 1 undefined on input line 119.
+
+<integrated_circuit_design.png, id=24, 328.1058pt x 530.9436pt>
+File: integrated_circuit_design.png Graphic file (type png)
+
+<use integrated_circuit_design.png>
+Package pdftex.def Info: integrated_circuit_design.png used on input line 132.
+(pdftex.def)             Requested size: 234.8775pt x 380.09167pt.
+
+
+LaTeX Warning: Citation `white2004process' on page 1 undefined on input line 13
+3.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+LaTeX Font Info:    Try loading font information for U+msa on input line 141.
+(/usr/local/texlive/2014/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 141.
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+
+LaTeX Warning: Citation `foster2013design' on page 1 undefined on input line 14
+2.
+
+
+LaTeX Warning: Citation `validationWall' on page 1 undefined on input line 144.
+
+
+
+LaTeX Warning: Citation `liu2014trace' on page 1 undefined on input line 158.
+
+[1.7
+
+
+] [2.8 <./integrated_circuit_design.png (PNG copy)>]
+
+LaTeX Warning: Reference `debugt' on page 3 undefined on input line 187.
+
+
+LaTeX Warning: Citation `Abramovici:2006:RDI:1146909.1146916' on page 3 undefin
+ed on input line 191.
+
+<debugtime.png, id=32, 670.505pt x 355.3275pt>
+File: debugtime.png Graphic file (type png)
+ <use debugtime.png>
+Package pdftex.def Info: debugtime.png used on input line 194.
+(pdftex.def)             Requested size: 328.82707pt x 174.25838pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+LaTeX Warning: Citation `1003792' on page 3 undefined on input line 207.
+
+
+LaTeX Warning: Citation `leatherman2003processor' on page 3 undefined on input 
+line 210.
+
+[3.9]
+
+LaTeX Warning: Citation `nicolici2009design' on page 4 undefined on input line 
+233.
+
+<scanchains.png, id=38, 822.07124pt x 474.77374pt>
+File: scanchains.png Graphic file (type png)
+ <use scanchains.png>
+Package pdftex.def Info: scanchains.png used on input line 238.
+(pdftex.def)             Requested size: 422.77664pt x 244.1671pt.
+
+
+LaTeX Warning: Citation `nicolici2009design' on page 4 undefined on input line 
+239.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+LaTeX Warning: Reference `sss' on page 4 undefined on input line 243.
+
+[4.10 <./debugtime.png>]
+
+LaTeX Warning: Reference `tb' on page 5 undefined on input line 274.
+
+<tracebuffer.png, id=43, 923.45pt x 483.8075pt>
+File: tracebuffer.png Graphic file (type png)
+ <use tracebuffer.png>
+Package pdftex.def Info: tracebuffer.png used on input line 278.
+(pdftex.def)             Requested size: 422.77664pt x 221.49847pt.
+
+
+LaTeX Warning: Citation `nicolici2009design' on page 5 undefined on input line 
+279.
+
+[5.11 <./scanchains.png>]
+
+LaTeX Warning: Citation `abramovici2006reconfigurable' on page 6 undefined on i
+nput line 302.
+
+
+LaTeX Warning: Citation `anis2007interactive' on page 6 undefined on input line
+ 302.
+
+
+LaTeX Warning: Citation `Goossens2007NOCS' on page 6 undefined on input line 31
+0.
+
+
+LaTeX Warning: Citation `Vermeulen2009VLSI-DAT' on page 6 undefined on input li
+ne 318.
+
+
+LaTeX Warning: Citation `Goossens2009DATE' on page 6 undefined on input line 31
+8.
+
+[6.12 <./tracebuffer.png>]
+
+LaTeX Warning: Citation `Gharehbaghi2012ISQED' on page 7 undefined on input lin
+e 324.
+
+
+LaTeX Warning: Citation `Dehbash2014' on page 7 undefined on input line 339.
+
+
+LaTeX Warning: Citation `Gharehbaghi2009ICCD' on page 7 undefined on input line
+ 341.
+
+
+LaTeX Warning: Citation `Boule2007ISQED' on page 7 undefined on input line 347.
+
+
+
+LaTeX Warning: Citation `Singerman2011DAC' on page 7 undefined on input line 35
+0.
+
+
+LaTeX Warning: Citation `Abarbanel2014DAC' on page 7 undefined on input line 36
+7.
+
+[7.13] [8.14]
+
+LaTeX Warning: Citation `Goossens2007NOCS' on page 9 undefined on input line 42
+8.
+
+[9.15] [10.16]
 CHAPTER 2. Background
-<figures/bpmn-flow-ex.pdf, id=54, 204.8303pt x 210.48256pt>
+
+LaTeX Warning: Citation `lsctocpn' on page 11 undefined on input line 493.
+
+<figures/bpmn-flow-ex.pdf, id=66, 204.8303pt x 210.48256pt>
 File: figures/bpmn-flow-ex.pdf Graphic file (type pdf)
 
 <use figures/bpmn-flow-ex.pdf>
-Package pdftex.def Info: figures/bpmn-flow-ex.pdf used on input line 278.
+Package pdftex.def Info: figures/bpmn-flow-ex.pdf used on input line 505.
 (pdftex.def)             Requested size: 234.8775pt x 241.35931pt.
 
 
+LaTeX Warning: Citation `Krstic14HOST' on page 11 undefined on input line 506.
+
+
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[6.15
 
-] <livesc.png, id=58, 573.14125pt x 439.6425pt>
+LaTeX Warning: Reference `flowa' on page 11 undefined on input line 510.
+
+
+LaTeX Warning: Citation `white2004process' on page 11 undefined on input line 5
+15.
+
+[11.17
+
+]
+
+LaTeX Warning: Citation `lsctocpn' on page 12 undefined on input line 536.
+
+[12.18 <./figures/bpmn-flow-ex.pdf>]
+<livesc.png, id=315, 573.14125pt x 439.6425pt>
 File: livesc.png Graphic file (type png)
  <use livesc.png>
-Package pdftex.def Info: livesc.png used on input line 311.
+Package pdftex.def Info: livesc.png used on input line 540.
 (pdftex.def)             Requested size: 361.34999pt x 277.18419pt.
 
 
-LaTeX Warning: `h' float specifier changed to `ht'.
+LaTeX Warning: Reference `flowa' on page 13 undefined on input line 541.
 
-[7.16 <./figures/bpmn-flow-ex.pdf>] [8.17 <./livesc.png>]
-<try.pdf, id=310, 927.465pt x 665.48625pt>
+
+LaTeX Warning: Reference `livesequence' on page 13 undefined on input line 544.
+
+
+
+LaTeX Warning: Reference `flowa' on page 13 undefined on input line 544.
+
+
+LaTeX Warning: Reference `flowa' on page 13 undefined on input line 546.
+
+[13.19 <./livesc.png>]
+
+LaTeX Warning: Reference `flowa' on page 14 undefined on input line 591.
+
+
+LaTeX Warning: Reference `changedb' on page 14 undefined on input line 592.
+
+<try.pdf, id=321, 927.465pt x 665.48625pt>
 File: try.pdf Graphic file (type pdf)
  <use try.pdf>
-Package pdftex.def Info: try.pdf used on input line 362.
+Package pdftex.def Info: try.pdf used on input line 602.
 (pdftex.def)             Requested size: 328.82707pt x 235.9497pt.
- [9.18 <./try.pdf>]
-[10.19]
+
+
+LaTeX Warning: Reference `flowa' on page 14 undefined on input line 603.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+LaTeX Warning: Reference `changedb' on page 14 undefined on input line 616.
+
+[14.20] [15.21 <./try.pdf>] [16.22]
 CHAPTER 3. Flow Guided Trace Interpretation
-[11.20
+[17.23
 
-] [12.21]
+] [18.24] [19.25]
+
+LaTeX Warning: Reference `algo:compliance' on page 20 undefined on input line 8
+21.
+
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[13.22] [14.23] [15.24] [16.25]
+[20.26] [21.27]
+
+LaTeX Warning: Reference `changedb' on page 22 undefined on input line 920.
+
+[22.28
+
+] [23.29]
+
+LaTeX Warning: Reference `eq:1' on page 24 undefined on input line 1010.
+
+
+LaTeX Warning: Reference `eq:2' on page 24 undefined on input line 1015.
+
+[24.30] [25.31]
 CHAPTER 4. Trace Analysis Under Partial Observability
+[26.32
 
-LaTeX Warning: Command \textvisiblespace invalid in math mode on input line 691
-.
+]
 
-[17.26
+LaTeX Warning: Reference `eq:8' on page 27 undefined on input line 1146.
 
-] [18.27] [19.28]
+[27.33] [28.34]
 
-LaTeX Warning: Command \textvisiblespace invalid in math mode on input line 773
-.
+LaTeX Warning: Reference `algo:gene' on page 29 undefined on input line 1314.
 
-
-LaTeX Warning: Command \textvisiblespace invalid in math mode on input line 773
-.
-
-
-LaTeX Warning: Command \textvisiblespace invalid in math mode on input line 773
-.
-
-
-LaTeX Warning: Command \textvisiblespace invalid in math mode on input line 773
-.
-
-
-LaTeX Warning: Command \textvisiblespace invalid in math mode on input line 773
-.
-
-
-LaTeX Warning: Command \textvisiblespace invalid in math mode on input line 773
-.
-
-
-LaTeX Warning: Command \textvisiblespace invalid in math mode on input line 776
-.
-
-
-LaTeX Warning: Command \textvisiblespace invalid in math mode on input line 792
-.
-
-
-LaTeX Warning: Command \textvisiblespace invalid in math mode on input line 792
-.
-
-
-LaTeX Warning: Command \textvisiblespace invalid in math mode on input line 795
-.
-
-
-LaTeX Warning: Command \textvisiblespace invalid in math mode on input line 796
-.
-
-
-LaTeX Warning: Command \textvisiblespace invalid in math mode on input line 799
-.
-
-
-LaTeX Warning: Command \textvisiblespace invalid in math mode on input line 801
-.
-
-
-LaTeX Warning: Command \textvisiblespace invalid in math mode on input line 811
-.
-
-
-LaTeX Warning: Command \textvisiblespace invalid in math mode on input line 811
-.
-
-
-LaTeX Warning: Command \textvisiblespace invalid in math mode on input line 811
-.
-
-
-LaTeX Warning: Command \textvisiblespace invalid in math mode on input line 811
-.
-
-
-LaTeX Warning: Command \textvisiblespace invalid in math mode on input line 811
-.
-
-
-LaTeX Warning: Command \textvisiblespace invalid in math mode on input line 811
-.
-
-[20.29]
-
-LaTeX Warning: Command \textvisiblespace invalid in math mode on input line 815
-.
-
-
-LaTeX Warning: Command \textvisiblespace invalid in math mode on input line 825
-.
-
-
-LaTeX Warning: Command \textvisiblespace invalid in math mode on input line 825
-.
-
-
-LaTeX Warning: Command \textvisiblespace invalid in math mode on input line 825
-.
-
-
-LaTeX Warning: Command \textvisiblespace invalid in math mode on input line 825
-.
-
-
-LaTeX Warning: Command \textvisiblespace invalid in math mode on input line 825
-.
-
-[21.30]
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[22.31] [23.32] [24.33
 
-] [25.34] [26.35]
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+LaTeX Warning: Reference `map' on page 29 undefined on input line 1445.
+
+[29.35] [30.36]
+
+LaTeX Warning: Reference `func' on page 31 undefined on input line 1453.
+
+[31.37] [32.38]
+
+LaTeX Warning: Reference `algo:compliance' on page 33 undefined on input line 1
+474.
+
+
+LaTeX Warning: Citation `nicolici' on page 33 undefined on input line 1490.
+
+
+LaTeX Warning: Citation `basu' on page 33 undefined on input line 1490.
+
+
+LaTeX Warning: Citation `forestMa' on page 33 undefined on input line 1521.
+
+[33.39
+
+]
+
+LaTeX Warning: Citation `forestMa' on page 34 undefined on input line 1525.
+
+
+LaTeX Warning: Citation `signalselect' on page 34 undefined on input line 1529.
+
+
+[34.40] [35.41]
 CHAPTER 5. Case Studies
-<figures/Fig4.png, id=374, 823.075pt x 735.74875pt>
-File: figures/Fig4.png Graphic file (type png)
- <use figures/Fig4.png>
-Package pdftex.def Info: figures/Fig4.png used on input line 1032.
-(pdftex.def)             Requested size: 216.81pt x 193.80492pt.
+<Gem5.png, id=402, 1055.945pt x 752.8125pt>
+File: Gem5.png Graphic file (type png)
+ <use Gem5.png>
+Package pdftex.def Info: Gem5.png used on input line 1596.
+(pdftex.def)             Requested size: 361.34999pt x 257.60698pt.
 
-[27.36
 
-] [28.37 <./figures/Fig4.png>] [29.38] [30.39] [31.40]
-<struc.pdf, id=392, 958.58125pt x 542.025pt>
-File: struc.pdf Graphic file (type pdf)
- <use struc.pdf>
-Package pdftex.def Info: struc.pdf used on input line 1208.
-(pdftex.def)             Requested size: 505.89pt x 286.05609pt.
- [32.41] [33.42 <./struc.pdf>] [34.43] [35.44]
-CHAPTER 6. Conclusion and Future Works
-[36.45
+LaTeX Warning: Citation `Binkert2011' on page 36 undefined on input line 1603.
 
-] [37.46] <figures/write3.png, id=413, 847.165pt x 214.8025pt>
-File: figures/write3.png Graphic file (type png)
 
-<use figures/write3.png>
-Package pdftex.def Info: figures/write3.png used on input line 1319.
-(pdftex.def)             Requested size: 325.215pt x 82.4583pt.
- <figures/write1.png, id=414, 293.095pt x 147.55125pt>
-File: figures/write1.png Graphic file (type png)
+LaTeX Warning: Reference `SoC' on page 36 undefined on input line 1606.
 
-<use figures/write1.png>
-Package pdftex.def Info: figures/write1.png used on input line 1324.
-(pdftex.def)             Requested size: 144.54pt x 72.76453pt.
- <figures/write2.png, id=415, 857.2025pt x 218.8175pt>
-File: figures/write2.png Graphic file (type png)
 
-<use figures/write2.png>
-Package pdftex.def Info: figures/write2.png used on input line 1328.
-(pdftex.def)             Requested size: 332.44243pt x 84.86101pt.
- <figures/read1.png, id=416, 434.62375pt x 168.63pt>
-File: figures/read1.png Graphic file (type png)
+LaTeX Warning: Citation `gem5' on page 36 undefined on input line 1631.
 
-<use figures/read1.png>
-Package pdftex.def Info: figures/read1.png used on input line 1334.
-(pdftex.def)             Requested size: 144.54pt x 56.08034pt.
- <figures/read3.png, id=417, 849.1725pt x 211.79124pt>
-File: figures/read3.png Graphic file (type png)
 
-<use figures/read3.png>
-Package pdftex.def Info: figures/read3.png used on input line 1339.
-(pdftex.def)             Requested size: 296.30743pt x 73.90182pt.
- <figures/read2.png, id=418, 857.2025pt x 210.7875pt>
-File: figures/read2.png Graphic file (type png)
+LaTeX Warning: Citation `gem5' on page 36 undefined on input line 1635.
 
-<use figures/read2.png>
-Package pdftex.def Info: figures/read2.png used on input line 1344.
-(pdftex.def)             Requested size: 281.85255pt x 69.306pt.
+[36.42
+
+]
+
+LaTeX Warning: Reference `SoC' on page 37 undefined on input line 1647.
+
+
+LaTeX Warning: Citation `gem5' on page 37 undefined on input line 1648.
+
+[37.43 <./Gem5.png>]
+
+LaTeX Warning: Reference `table-results' on page 38 undefined on input line 166
+8.
+
+
+LaTeX Warning: Reference `table-case-2' on page 38 undefined on input line 1707
+.
+
+[38.44]
+
+LaTeX Warning: Reference `table-par-obs' on page 39 undefined on input line 173
+9.
+
+
+LaTeX Warning: Reference `table-case-2' on page 39 undefined on input line 1743
+.
+
+
+LaTeX Warning: Reference `table-par-obs' on page 39 undefined on input line 175
+0.
+
+
+LaTeX Warning: Reference `table-results' on page 39 undefined on input line 175
+3.
+
+[39.45]
+
+LaTeX Warning: Reference `table-results' on page 40 undefined on input line 178
+1.
+
+[40.46]
+
+LaTeX Warning: Reference `table-par-obs' on page 41 undefined on input line 178
+4.
+
+
+LaTeX Warning: Reference `table-results' on page 41 undefined on input line 178
+4.
+
+[41.47] <RTL.png, id=423, 995.72pt x 728.7225pt>
+File: RTL.png Graphic file (type png)
+ <use RTL.png>
+Package pdftex.def Info: RTL.png used on input line 1822.
+(pdftex.def)             Requested size: 361.34999pt x 264.4637pt.
+
+
+LaTeX Warning: Reference `rtlstruc' on page 42 undefined on input line 1831.
+
+[42.48 <./RTL.png>]
+
+LaTeX Warning: Reference `wave' on page 43 undefined on input line 1846.
+
+<wave.png, id=428, 739.76375pt x 552.0625pt>
+File: wave.png Graphic file (type png)
+ <use wave.png>
+Package pdftex.def Info: wave.png used on input line 1852.
+(pdftex.def)             Requested size: 361.34999pt x 269.66219pt.
+
+
+LaTeX Warning: Reference `rtlstruc' on page 43 undefined on input line 1859.
+
+<signalline.png, id=429, 739.76375pt x 319.1925pt>
+File: signalline.png Graphic file (type png)
+ <use signalline.png>
+Package pdftex.def Info: signalline.png used on input line 1867.
+(pdftex.def)             Requested size: 289.07999pt x 124.73296pt.
+
+
+LaTeX Warning: Reference `sigline' on page 43 undefined on input line 1871.
+
+[43.49 <./wave.png>]
+
+LaTeX Warning: Reference `rtlstruc' on page 44 undefined on input line 1894.
+
+
+LaTeX Warning: Reference `int1' on page 44 undefined on input line 1896.
+
+
+LaTeX Warning: Reference `int1t' on page 44 undefined on input line 1897.
+
+<int1.png, id=435, 753.81625pt x 371.3875pt>
+File: int1.png Graphic file (type png)
+ <use int1.png>
+Package pdftex.def Info: int1.png used on input line 1900.
+(pdftex.def)             Requested size: 289.07999pt x 142.42076pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[38.47
 
- <./figures/write3.png> <./figures/write1.png> <./figures/write2.png>]
-<figures/Fig5.png, id=425, 592.2125pt x 771.88374pt>
-File: figures/Fig5.png Graphic file (type png)
- <use figures/Fig5.png>
-Package pdftex.def Info: figures/Fig5.png used on input line 1352.
-(pdftex.def)             Requested size: 224.03743pt x 292.0115pt.
-
-Overfull \hbox (2.61107pt too wide) in paragraph at lines 1353--1389
-[]$[]$ $[]$ 
+Overfull \hbox (5.58537pt too wide) in paragraph at lines 1908--1921
+[][]
  []
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<figures/Fih6.png, id=426, 614.295pt x 830.10126pt>
-File: figures/Fih6.png Graphic file (type png)
- <use figures/Fih6.png>
-Package pdftex.def Info: figures/Fih6.png used on input line 1394.
-(pdftex.def)             Requested size: 238.49121pt x 322.2689pt.
 
-Overfull \hbox (0.77437pt too wide) detected at line 1422
-[]
- []
-
-<figures/readDcache.png, id=427, 561.09625pt x 782.925pt>
-File: figures/readDcache.png Graphic file (type png)
-
-<use figures/readDcache.png>
-Package pdftex.def Info: figures/readDcache.png used on input line 1430.
-(pdftex.def)             Requested size: 238.49121pt x 332.76859pt.
-
-Overfull \hbox (1.80208pt too wide) detected at line 1445
-[]
- []
+LaTeX Warning: Reference `int2' on page 44 undefined on input line 1924.
 
 
-Overfull \hbox (7.1355pt too wide) detected at line 1460
-[]
+LaTeX Warning: Reference `int2t' on page 44 undefined on input line 1930.
+
+<int2.png, id=436, 920.43875pt x 360.34625pt>
+File: int2.png Graphic file (type png)
+ <use int2.png>
+Package pdftex.def Info: int2.png used on input line 1933.
+(pdftex.def)             Requested size: 361.34999pt x 141.4692pt.
+ [44.50 <./signalline.png>]
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+Overfull \hbox (62.29604pt too wide) in paragraph at lines 1941--1976
+[][]
  []
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[39.48 <./figures/read1.png> <./figures/read3.png> <./figures/read2.png>]
-[40.49 <./figures/Fig5.png>] [41.50 <./figures/Fih6.png>] [42.51 <./figures/rea
-dDcache.png>] <y1.png, id=449, 373.395pt x 185.69376pt>
-File: y1.png Graphic file (type png)
- <use y1.png>
-Package pdftex.def Info: y1.png used on input line 1476.
-(pdftex.def)             Requested size: 144.54pt x 71.88191pt.
 
-<y2.png, id=450, 743.77875pt x 273.02pt>
-File: y2.png Graphic file (type png)
- <use y2.png>
-Package pdftex.def Info: y2.png used on input line 1480.
-(pdftex.def)             Requested size: 260.17244pt x 95.50427pt.
-
-<y3.png, id=451, 733.74126pt x 192.72pt>
-File: y3.png Graphic file (type png)
- <use y3.png>
-Package pdftex.def Info: y3.png used on input line 1484.
-(pdftex.def)             Requested size: 361.34999pt x 94.91pt.
-
-<y4.png, id=452, 514.92375pt x 246.9225pt>
-File: y4.png Graphic file (type png)
- <use y4.png>
-Package pdftex.def Info: y4.png used on input line 1488.
-(pdftex.def)             Requested size: 202.35622pt x 97.03407pt.
-
-<y5.png, id=453, 737.75626pt x 210.7875pt>
-File: y5.png Graphic file (type png)
- <use y5.png>
-Package pdftex.def Info: y5.png used on input line 1495.
-(pdftex.def)             Requested size: 361.34999pt x 103.24174pt.
-
-<y6.png, id=454, 750.805pt x 206.7725pt>
-File: y6.png Graphic file (type png)
- <use y6.png>
-Package pdftex.def Info: y6.png used on input line 1499.
-(pdftex.def)             Requested size: 361.34999pt x 99.51785pt.
-
-<y7.png, id=455, 737.75626pt x 242.9075pt>
-File: y7.png Graphic file (type png)
- <use y7.png>
-Package pdftex.def Info: y7.png used on input line 1503.
-(pdftex.def)             Requested size: 361.34999pt x 118.97382pt.
+LaTeX Warning: Reference `int3' on page 45 undefined on input line 1979.
 
 
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-<wbprotocol.png, id=456, 134.5025pt x 395.4775pt>
-File: wbprotocol.png Graphic file (type png)
- <use wbprotocol.png>
-Package pdftex.def Info: wbprotocol.png used on input line 1516.
-(pdftex.def)             Requested size: 72.26999pt x 212.49863pt.
- [43.52
+LaTeX Warning: Reference `int3' on page 45 undefined on input line 1981.
 
 
- <./y1.png> <./y2.png> <./y3.png> <./y4.png>]
+LaTeX Warning: Reference `int3t' on page 45 undefined on input line 1983.
 
-LaTeX Warning: `h' float specifier changed to `ht'.
+<int3.png, id=441, 523.9575pt x 314.17375pt>
+File: int3.png Graphic file (type png)
+ <use int3.png>
+Package pdftex.def Info: int3.png used on input line 1986.
+(pdftex.def)             Requested size: 252.94499pt x 151.66937pt.
 
-<rw.pdf, id=464, 414.54875pt x 759.83875pt>
-File: rw.pdf Graphic file (type pdf)
- <use rw.pdf>
-Package pdftex.def Info: rw.pdf used on input line 1532.
-(pdftex.def)             Requested size: 231.26378pt x 423.8836pt.
-
-Overfull \hbox (2.61107pt too wide) in paragraph at lines 1533--1558
-[]$[]$ $[]$ 
+Overfull \hbox (62.29604pt too wide) in paragraph at lines 1993--2014
+[][]
  []
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-File: rw.pdf Graphic file (type pdf)
-<use rw.pdf>
-Package pdftex.def Info: rw.pdf used on input line 1563.
-(pdftex.def)             Requested size: 231.26378pt x 423.8836pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[45.51 <./int1.png>] [46.52 <./int2.png> <./int3.png>]
+
+LaTeX Warning: Reference `table-case-3' on page 47 undefined on input line 2048
+.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-(./main.bbl [44.53 <./y5.png> <./y6.png> <./y7.png>] [45.54 <./wbprotocol.png>]
-[46.55 <./rw.pdf>] [47.56]
-Missing character: There is no š in font cmr12!
- [48.57
 
-] [49.58]) [50.59] (./main.aux)
+LaTeX Warning: Reference `petersons' on page 47 undefined on input line 2077.
 
-LaTeX Warning: There were multiply-defined labels.
 
- ) 
-Here is how much of TeX's memory you used:
- 6210 strings out of 493117
- 88283 string characters out of 6135433
- 216774 words of memory out of 5000000
- 9499 multiletter control sequences out of 15000+600000
- 14985 words of font info for 58 fonts, out of 8000000 for 9000
- 1141 hyphenation exceptions out of 8191
- 47i,21n,37p,1504b,478s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
-></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
-</usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb>
-</usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><
-/usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></
-usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></us
-r/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/
-local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/lo
-cal/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/loca
-l/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/
-texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/tex
-live/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texliv
-e/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive
-/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2
-014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/201
-4/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2014/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2014/t
-exmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2014/te
-xmf-dist/fonts/type1/public/amsfonts/cm/cmti7.pfb></usr/local/texlive/2014/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmti8.pfb></usr/local/texlive/2014/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on main.pdf (59 pages, 1182435 bytes).
-PDF statistics:
- 542 PDF objects out of 1000 (max. 8388607)
- 326 compressed objects within 4 object streams
- 0 named destinations out of 1000 (max. 500000)
- 116 words of extra memory for PDF output out of 10000 (max. 10000000)
+Overfull \hbox (0.79999pt too wide) detected at line 2087
+|[]|
+ []
 
+
+Overfull \hbox (0.79999pt too wide) detected at line 2102
+|[]|
+ []
+
+
+Overfull \hbox (0.79999pt too wide) detected at line 2117
+|[]|
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2089--2122
+[]$[]$$[]$
+ []
+
+
+LaTeX Warning: `

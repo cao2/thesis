@@ -1,5 +1,12 @@
 \begin{thebibliography}{10}
 
+\bibitem{nicolici2009design}
+Nicola Nicolici and Ho~Fai Ko.
+\newblock Design-for-debug for post-silicon validation: Can high-level
+  descriptions help?
+\newblock In {\em High Level Design Validation and Test Workshop, 2009. HLDVT
+  2009. IEEE International}, pages 172--175. IEEE, 2009.
+
 \bibitem{Krstic14HOST}
 S.~Krstic, Jin Yang, D.W. Palmer, R.B. Osborne, and E.~Talmor.
 \newblock Security of soc firmware load protocols.
@@ -10,6 +17,48 @@ S.~Krstic, Jin Yang, D.W. Palmer, R.B. Osborne, and E.~Talmor.
 P.~Patra.
 \newblock On the cusp of a validation wall.
 \newblock {\em IEEE Design Test of Computers}, 24(2):193--196, March 2007.
+
+\bibitem{foster2013design}
+Harry~D Foster.
+\newblock Why the design productivity gap never happened.
+\newblock In {\em Proceedings of the International Conference on Computer-Aided
+  Design}, pages 581--584. IEEE Press, 2013.
+
+\bibitem{liu2014trace}
+Xiao Liu and Qiang Xu.
+\newblock {\em Trace-Based Post-Silicon Validation for VLSI Circuits}.
+\newblock Springer, 2014.
+
+\bibitem{Abramovici:2006:RDI:1146909.1146916}
+Miron Abramovici, Paul Bradley, Kumar Dwarakanath, Peter Levin, Gerard Memmi,
+  and Dave Miller.
+\newblock A reconfigurable design-for-debug infrastructure for socs.
+\newblock In {\em Proceedings of the 43rd Annual Design Automation Conference},
+  DAC '06, pages 7--12, New York, NY, USA, 2006. ACM.
+
+\bibitem{1003792}
+B.~Vermeulen and S.~K. Goel.
+\newblock Design for debug: catching design errors in digital chips.
+\newblock {\em IEEE Design Test of Computers}, 19(3):35--43, May 2002.
+
+\bibitem{leatherman2003processor}
+Rick Leatherman, Bruce Ableidinger, and Neal Stollon.
+\newblock Processor and system bus on-chip instrumentation.
+\newblock In {\em Proc. Embedded Systems Conference}. Citeseer, 2003.
+
+\bibitem{abramovici2006reconfigurable}
+Miron Abramovici, Paul Bradley, Kumar Dwarakanath, Peter Levin, Gerard Memmi,
+  and Dave Miller.
+\newblock A reconfigurable design-for-debug infrastructure for socs.
+\newblock In {\em Proceedings of the 43rd annual Design Automation Conference},
+  pages 7--12. ACM, 2006.
+
+\bibitem{anis2007interactive}
+Ehab Anis and Nicola Nicolici.
+\newblock Interactive presentation: Low cost debug architecture using lossy
+  compression for silicon debug.
+\newblock In {\em Proceedings of the conference on Design, automation and test
+  in Europe}, pages 225--230. EDA Consortium, 2007.
 
 \bibitem{Goossens2007NOCS}
 Kees Goossens, Bart Vermeulen, Remco~van Steeden, and Martijn Bennebroek.
@@ -73,11 +122,6 @@ Yael Abarbanel, Eli Singerman, and Moshe~Y. Vardi.
   Conference on Design Automation Conference}, DAC '14, pages 2:1--2:4, New
   York, NY, USA, 2014. ACM.
 
-\bibitem{Patra2007}
-Priyadarsan Patra.
-\newblock On the cusp of a validation wall.
-\newblock {\em IEEE Des. Test}, 24(2):193--196, March 2007.
-
 \bibitem{Binkert2011}
 Nathan Binkert, Bradford Beckmann, Gabriel Black, Steven~K. Reinhardt, Ali
   Saidi, Arkaprava Basu, Joel Hestness, Derek~R. Hower, Tushar Krishna, Somayeh
@@ -92,12 +136,10 @@ Binsan Khadka.
   (lsctocpn).
 \newblock Master's thesis, University of Massachusetts Dartmouth, January 2007.
 
-\bibitem{Bunker2005}
-Annette Bunker, Ganesh Gopalakrishnan, and Konrad Slind.
-\newblock Live sequence charts applied to hardware requirements specification
-  and verification.
-\newblock {\em International Journal on Software Tools for Technology
-  Transfer}, 7(4):341--350, 2005.
+\bibitem{white2004process}
+Stephen~A White.
+\newblock Process modeling notations and workflow patterns.
+\newblock {\em Workflow handbook}, 2004:265--294, 2004.
 
 \bibitem{nicolici}
 Ho~Fai Ko and N.~Nicolici.

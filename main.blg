@@ -1,52 +1,46 @@
 This is BibTeX, Version 0.99d (TeX Live 2014)
 Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: main.aux
-Case mismatch error between cite keys LSCTOCPN and lsctocpn
----line 36 of file main.aux
- : \citation{LSCTOCPN
- :                   }
-I'm skipping whatever remains of this command
 The style file: unsrt.bst
 Database file #1: SoC.bib
-You've used 20 entries,
+You've used 27 entries,
             1791 wiz_defined-function locations,
-            589 strings with 7996 characters,
-and the built_in function-call counts, 6136 in all, are:
-= -- 606
-> -- 218
-< -- 12
-+ -- 81
-- -- 61
-* -- 391
-:= -- 870
-add.period$ -- 67
-call.type$ -- 20
-change.case$ -- 20
+            623 strings with 9171 characters,
+and the built_in function-call counts, 8275 in all, are:
+= -- 819
+> -- 294
+< -- 17
++ -- 109
+- -- 82
+* -- 499
+:= -- 1166
+add.period$ -- 94
+call.type$ -- 27
+change.case$ -- 26
 chr.to.int$ -- 0
-cite$ -- 20
-duplicate$ -- 308
-empty$ -- 589
-format.name$ -- 61
-if$ -- 1469
+cite$ -- 27
+duplicate$ -- 427
+empty$ -- 808
+format.name$ -- 82
+if$ -- 2002
 int.to.chr$ -- 0
-int.to.str$ -- 20
-missing$ -- 17
-newline$ -- 102
-num.names$ -- 19
-pop$ -- 61
+int.to.str$ -- 27
+missing$ -- 25
+newline$ -- 137
+num.names$ -- 26
+pop$ -- 102
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 206
+skip$ -- 272
 stack$ -- 0
-substring$ -- 456
-swap$ -- 124
-text.length$ -- 12
+substring$ -- 580
+swap$ -- 173
+text.length$ -- 17
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 0
-while$ -- 60
-width$ -- 22
-write$ -- 243
-(There was 1 error message)
+while$ -- 81
+width$ -- 29
+write$ -- 326
