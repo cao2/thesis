@@ -105,21 +105,25 @@ necessary.
 %\label{term}
 %\end{table}
 \section{Pre- and Post-silicon Validation}
+
 Integrated circuits (ICs) are designed from
-a system level specification with all the functionality
-the design need to ensure. 
+a system specification that can be used to ensure
+certain behaviors and functionalities of the system. 
 Then IC designers converts the specification
-into a register transfer level (RTL) description. 
+into a transaction level description, and with more
+details, eventually converts to an register transfer level (RTL) description. 
 The RTL describes the exact behavior of the digital circuits on the chip, 
 as well as the interconnections to inputs and outputs ~\cite{white2004process}.
-Once the RTL model is verified, it is fabricated on silicon.
-Detailed
-steps
-are
+Once the RTL model is verified, it is fabricated on silicon and eventually
+is released to the market.
+A more detailed
+steps of IC design flow
+is
 shown in Figure~\ref{ICdesign}. 
-Validation happens at end of each step of the design process
-to ensure the correctness of the design.
-As the design goes through each steps, the abstraction level
+To ensure
+the correctness of the design, 
+validation is conducted on the system at end of each step of the design process.
+As the design goes through each step, the abstraction level
 of the system decreases. Consequently,
 the system become more complicated, and thus
 harder to refine when bug occurs. This requires
@@ -134,9 +138,10 @@ possible to reduce the cost.
 \label{ICdesign}
 \end{figure}
 
-As Moore's law continues, ICs are becoming more complex.
-As a result, numbers of processor bug are 
-growing and bugs are becoming more diverse and complex.
+As Moore's law continues, IC designs are becoming more complex.
+As a result, the numbers of system bugs are 
+growing and the type of bugs are becoming more diverse
+and harder to root cause.
 Recent studies have shown that validation in modern IC
 develop process takes up to 70$\%$
 of design time and is increasing~\cite{foster2013design}.
@@ -146,28 +151,41 @@ compatible with related software and hardware and meets user expectations~\cite{
 Many effort have been focused on Pre-silicon validation,
 where it aims to verify the architecture design before 
 it's implemented on an actual chip. 
-It's mainly done at RTL level on simulators, A field-programmable gate array (FPGA), or emulators. 
-Even-driven simulator is very commonly used in pre-silicon validation.
-This technique simulates the circuit behavior with test vectors to
+Pre-silicon validation
+is a very important research top because
+the cost to debug and refine the system is relatively low compared 
+to changing the design after it is
+fabricated on the silicon chip.
+Pre-silicon validation techniques includes 
+simulating the system at RTL level on simulators, A field-programmable gate array (FPGA), or emulators. 
+Event-driven simulator is a very commonly used technique in pre-silicon validation,
+this technique simulates the circuit behavior with test vectors to
 check the correctness of design's functionalities. This requires
 all possible behaviors of the design to be considered to design
 the test vector. Consequently, as the circuit size increases, 
 the number of possible behaviors grows exponentially, making
-exhaustive simulation impractical. Therefore pre-silicon validation
-can only be used to test small portions of the design, achieving
-only acceptable coverage~\cite{liu2014trace}.
-Another drawback of pre-silicon validation is the speed limitation. Because
-the simulation is mainly done on software, it is multiple orders
+exhaustive simulation impractical. 
+As it is the same situation for the rest of the pre-silicon
+validation techniques,only small portions of the design
+can be tested during pr-silicon validation, achieving
+acceptable coverage~\cite{liu2014trace}.
+Another drawback of pre-silicon validation is the speed limitation. 
+The fact that
+simulation is mainly done on software, makes the simulation
+multiple orders
 of magnitude slower compared to the actual circuit speed.
 To shorten the time required for simulation, 
-debuggers can implement designs into FPGA and
-run the simulation, this can achieve up to 3 orders of magnitude faster, but still relatively slow compared to actual 
+debuggers can implement designs into FPGA,
+achieving up to 3 orders of magnitude faster,
+but this speed is still relatively slow compared to actual 
 chip speed. 
 Emulator can combine multiple FPGAs
-to work on a larger portion of the RTL design with cause of limited speed. 
-All these limitations makes
-impossible to guarantee the first silicon error-free, hence
-pushing part of testing to post-silicon validation 
+to work on a larger portion of the RTL design,
+but it does not help with the speed limitation.
+All these limitations makes it
+impossible to guarantee the first silicon error-free, 
+hence it is necessary to
+push part of testing to post-silicon validation.
 
 Post-silicon validation makes use of pre-production silicon
 IC to ensure that the fabricated system
@@ -204,9 +222,9 @@ observe is limited. Several chip-debugging techniques are proposed,
 like probe needles and eletron-beam probing.
 However, the decreasing silicon sizes and multiple metal layers
 in modern silicon structure makes 
-debugging techniques based on visual inspection or direct physical contact more difficult\cite{1003792}.
+debugging techniques based on visual inspection or direct physical contact very difficult~\cite{1003792}.
 Another commonly used tools are embedded software, mostly done by monitoring
-processor bus activity. This method provides only limited observability
+processor bus activity, this method provides only limited observability
 of the internal hardware domain\cite{leatherman2003processor}.
 
 
@@ -223,7 +241,7 @@ in next section.
 %Only a limited number of signals can be observed and traced. This limitation 
 %brings challenge in both root cause tracing and debugging process. 
 
-\section{Scan Based Techinique}
+\subsection{Scan Based Techniques and Challenges}
 The goal of scan based technique is to
 reuse the internal scan chains that is
 placed in the CUD.
@@ -264,7 +282,7 @@ without causing any effect on the
 system is impractical. For these reasons, scan chains are not
 practical for complicate systems.
 
-\section{Trace Based Technique}
+\subsection{Trace Based Techniques and Challenges}
 Trace buffers is an embedded memory structure that can 
 store certain amount of signal data. Once the trace buffer is full, 
 the data can be offloaded through low speed device pins for analysis
@@ -429,7 +447,9 @@ debug~\cite{Goossens2007NOCS}.
 
 \section{Contributions}
 In this thesis, we consider the problem of reconstructing
-protocol-level behavior from silicon traces in SoC designs.
+system-level behavior from silicon traces in SoC designs that
+is abstracted in state of
+protocol specifications.
 Given a collection of system-level communication protocols
 and a trace of (partially observed) hardware signals, our
 approach infers, with a certain measure of confidence, the
@@ -443,17 +463,21 @@ system-level transactions from traces with missing, noisy,
 and ambiguous signal values.
 
 The proposed approach can give silicon debugger
-an overview of the system behaviors.
-This information can be used to decide
+an overview of the system behaviors,
+which
+can be used to check
 if the system performs the desired behavior and thus
 decide the correctness of the design.
-Another advantage this approach can provide 
-is when traces can not be mapped to 
-specifications, indicating that
-the specifications are 
-not correctly implemented.
-When that happens, our proposed
+Moreover,
+this approach maps the
+signal trace into flow instances. By
+checking if a trace can be successfully
+mapped to flow instances, the debuggers
+can judge if the those specifications are correctly implemented
+in the silicon.
+When error occurs, our proposed
 method can provide interesting information
+in system level
 to help root cause the problem.
 
 
@@ -1582,18 +1606,18 @@ results deemed meaningful are produced.
 
 \chapter{Case Studies}
 This chapter demonstrates the uses of our proposed
-algorithm on two different model. In the
+algorithm on two different models. In the
 first section, the trace analysis algorithm is applied to
-a transaction leveled model of a simple SoC
+a transaction level model of a simple SoC
 built on the simulator GEM5. 
 In the next section, 
 a more detailed RTL model is conducted to
-further test the effeteness of our algorithm.
+further test the efficiency and effectness of our algorithm.
 
 \section{A Transaction-Level Model of a Simple SoC in GEM5}
 \begin{figure} 
 \centerline{
-\includegraphics[width=5in]{Gem5.png}}
+\includegraphics[width=4in]{Gem5.png}}
 \caption{Structure of the SoC TLM}
 \label{SoC}
 \end{figure}
@@ -1606,12 +1630,18 @@ encompassing system-level architecture as well as processor micro-architecture.
 This SoC model, as shown in Figure~\ref{SoC}, consists of two
 ARM Cortex-A9 cores, each of which contains two separate
 16KB data and instruction caches.  The caches are connected
-to a 1GB memory through a memory bus model.  Components
-communicate with each other by sending and receiving various
-request and response messages.  In order to observe and
+to a 1GB memory through a memory bus model. 
+The memory bus works as a system agent that is
+in charge of routing messages to maximize the system
+parallelization.
+Inside of the SoC,
+components communicate with each other by
+sending and receiving various
+request and response messages through links.  In order to observe and
 trace communications occurring inside this model during
 execution, monitors are attached to links connecting the
-components.  These monitors record the messages flowing
+components. 
+These monitors record the messages flowing
 through the links they are attached to, and store them into
 output trace files.
 
@@ -1619,11 +1649,13 @@ output trace files.
 In this SoC design, there are nine interfaces in total and each 
 interface is attached with a monitor.
  By combining the information from all of the nine communication monitors, 
- the traces of the communication activities between each component
- are obtained.
+ the trace of the communication activities inside the SoC
+ can be obtained.
 As a virtualized SoC platform, GEM5 has three types of accesses supported by
 its communication interface:
 timing, atomic and functional.
+The type of access decides the time
+to process a request.
 Timing accesses is the most detailed one,
 it reflects the simulator's best effort for realistic timing
 and includes the modeling of queuing delay and resource contention.
@@ -1650,17 +1682,18 @@ These protocols and their corresponding LPN descriptions can also be found
 in Appendix A.
 These flow specifications describe data/instruction read
 operations and data write operations initiated from CPUs.
-Three such flows describe the cache coherent protocols for
-each CPU.  Since there are two CPUs, there are six flows in
+Each CPU has three protocols implemented, one read and two write protocols.
+Since there are two CPUs, there are six flows in
 the model.
 
 
 
 We wrote one simple concurrent programs with two threads, one for each CPU
 to exercise the flows.
-The program assigned to CPU1 read one file three times and do some modifications to
+The program assigned to CPU1 reads one file three times and does some modifications to
 the content of the file. 
-CPU2's does the same read and write functionalities to the same file, the only difference is that CPU2 modifies the file first and then
+CPU2's does the same read and write functionalities to the same file,
+the only difference is that CPU2 modifies the file first and then
 perform the reading function. 
 
 After this model is executed with the simple concurrent program, 
@@ -1787,12 +1820,17 @@ As shown above, the ambiguous interpretation of messages can lead to large numbe
 
 One problem we countered during the experiment  was that
 how GEM5 supports shared memory
-multi-threaded program execution is unclear. 
+multi-threaded program execution is unclear and
+each CPU has its separate, non-interleaving address space. 
 Therefore,
-no data are shared in both caches in this test.
+no data are shared between caches in this test.
 Furthermore, GEM5 does not support true concurrency.  When
 there are two programs running on the CPUs, GEM5 alternates
-the executions between the two CPUs.  To simulate
+the instruction executions between the two CPUs. Therefore,
+no matter how many time the
+multithread program runs, 
+the observed behaviors are always deterministic.
+To simulate
 asynchronous concurrency with the interleaving semantics,
 those two simple programs are instrumented with
 pseudo-blocking commands, one placed before each statement.
@@ -1819,7 +1857,7 @@ This model is cycle accurate, and simulates the SoC behavior that is more accura
 
  \begin{figure} [h]
 \centerline{
-\includegraphics[width=5in]{RTL.png}}
+\includegraphics[width=4in]{RTL.png}}
 \caption{SoC platform structure.}
 \label{rtlstruc}
 \end{figure}
@@ -1837,9 +1875,10 @@ to the RTL model shown in Figure~\ref{rtlstruc}.
 
  To collect communication activities of the system,
  the test environment collects values of selected signals
- into an output trace file on each rising clock edge.
-GHDl itself also
-outputs a tracing file in format of vcd (value change dump) where
+ into an output trace file on each rising clock edge, output it
+ into a txt trace file.
+GHDL itself also
+outputs a trace file in format of vcd (value change dump) where
 any value changes on all signals are collected, this format
 can be opened by wave viewer softwares and provide a 
 graphical representation of changes in a recorded signal's amplitude,
@@ -1856,29 +1895,30 @@ perform trace abstraction function on.
 
 
 
-There are 6 types of interfaces shown in Figure~\ref{rtlstruc}, each contains multiple signals
-that ensures the communications between components.
-There are two types of signals, $std\_logic$ that stores only one bit of value and  $std\_logic\_vector$ that
-stores a list of bits. This model contains two types of $std\_logic\_vector$, one with width of 51 and another
-with width of 52.
+There are six types of interfaces shown in Figure~\ref{rtlstruc}, each contains multiple signals
+to ensure the correct communication behaviors of the SoC.
+There are two types of signals, {\tt std$\_$logic} that stores only one bit of value and  {\tt std$\_$logic$\_$vector} that
+stores a list of bits. This model contains two types of {\tt std$\_$logic$\_$vector}, one with width of 51 that
+is used by interface 1, 2, 3, 4 and 5,  another type of {\tt std$\_$logic$\_$vector}
+with width of 52 that is used by interface 6.
   \begin{figure}[h]
 \centerline{
 \includegraphics[width=4in]{signalline.png}
 }
-\caption{Signal bits explaination}
+\caption{Format definition of messages
 \label{sigline}
 \end{figure}
-For $std\_logic\_vector$ with 51 bits, as shown in Figure~\ref{sigline},
+For {\tt std$\_$logic$\_$vector} with 51 bits, as shown in format 1 of Figure~\ref{sigline},
 the most significant bit indicates validity of messages.
 The next
 two bits 49-48 indicate the command. These two bits can represent four different commands.
 Right now our
-system supports only two types of commands and
+system supports only two types of commands,
 we use 01 to represent read command and 10 to represent write command.
 Bits 47-32 represent 16 bits address, and the last 32 bits represent data.
-For $std\_logic\_vector$s with 52 bits,
+For {\tt std$\_$logic$\_$vector}s with 52 bits, as shown in format 2 of Figure~\ref{sigline},
 the most significant bit represent source of the request. For example, if a request is from CPU1, that bit
-will be 1, otherwise it will be 0, the rest of the bits are the same as the first type of $std\_logic\_vector$.
+will be 1, otherwise it will be 0, the rest of the bits are the same as the first type of {\tt std$\_$logic$\_$vector}.
 
 %\begin{figure}[h]
 %\centerline{
@@ -1893,12 +1933,12 @@ data lost. And to implement non-blocking communication, we use
 a first in first out (FIFO) buffer inside each component for each incoming signals.
 The model shown in Figure~\ref{rtlstruc} has 6 different interfaces, here we explain each interfaces
 with signal names and its functionality.
-The first interface, as shown in Figure~\ref{int1}, is responsible for communications between CPU and Cache.
+The first interface (1), as shown in Figure~\ref{int1}, is responsible for communications between CPU and Cache.
 There are three signals included in this interface, each of which is explained in Table~\ref{int1t}.
 \begin{figure}[h]
 \centering
-    \includegraphics[width=4in]{int1.png}
-    \caption{Structure of interface one}
+    \includegraphics[width=2in]{int1.png}
+    \caption{Interface definition of link 1 in Figure}
     \label{int1}
  \end{figure}
 
@@ -1922,16 +1962,17 @@ $full\_c$ 			&$1$				& full indicator of $cpu\_req$ FIFO inside Cache\\
 
 There are three interfaces between Cache and Memory Bus. Detailed
 structures of these three interfaces are shown in Figure~\ref{int2}.
-In this figure, interface two is used for
-communications about snoop function, and is composed of those signals with red font;
-interface three is used for write back function and is represented in green color;
-interface four is in charge of cache requests bus responses, and is
-presented in blue color. Signals included in these three interfaces are
+In this figure, interface (2) is used for
+communications about snoop function,
+interface (3) is used for write back function, and
+interface (4) is in charge of cache requests bus responses.
+The color of the signal name is the same as its interface color in Figure~\ref{rtlstruc}.
+ Signals included in these three interfaces are
 explained in Table~\ref{int2t}.
 \begin{figure}[h]
 \centering
     \includegraphics[width=5in]{int2.png}
-    \caption{Structure of interface two, three and four}
+    \caption{Interface definition of link 1 in Figure}
     \label{int2}
  \end{figure}
 
@@ -2164,14 +2205,13 @@ In this case, when the inconsistent message happened, only two write flow instan
 are activated. The write flow specification is LPN format in shown below.
 \[
 \begin{array}{l}
-cpu0: cache0: wt\\
-cache0: bus: wt\\
-bus: cache1: snp\\
-cache1: bus: snp\\
-$(bus: cache1: snp)$\\
-mem: bus: wt\\
-bus: cache0: wt\\
-cache0: cpu0: wt\\
+(cpu0: cache0: wt)\\
+(cache0: bus: wt)\\
+(bus: cache1: snp)\\
+(cache1: bus: snp)\\
+(mem: bus: wt)\\
+(bus: cache0: wt)\\
+(cache0: cpu0: wt)\\
 \end{array}
 \]
 The first read instance is in state two (after accepting message $(cache0: bus: wt)$),

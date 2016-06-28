@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  28 JUN 2016 04:15
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  28 JUN 2016 13:05
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -321,11 +321,8 @@ LaTeX Font Info:    Try loading font information for U+psy on input line 64.
 
 (/usr/local/texlive/2014/texmf-dist/tex/latex/psnfss/upsy.fd
 File: upsy.fd 2001/06/04 font definitions for U/psy.
-)) (./main.aux
-
-LaTeX Warning: Label `y4' multiply defined.
-
-)
+))
+No file main.aux.
 \openout1 = `main.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 68.
@@ -341,7 +338,7 @@ LaTeX Font Info:    ... okay on input line 68.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 68.
 LaTeX Font Info:    ... okay on input line 68.
 LaTeX Font Info:    Try loading font information for OMS+cmr on input line 68.
- (/usr/local/texlive/2014/texmf-dist/tex/latex/base/omscmr.fd
+(/usr/local/texlive/2014/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
@@ -354,48 +351,25 @@ n-tin-u-ous en-cour-age-ment through-
 
 [2.2
 
-] (./main.toc
-Overfull \hbox (12.87093pt too wide) detected at line 1
-[]\OT1/cmr/m/n/12 LIST OF TABLES 
- []
-
-
-Overfull \hbox (19.47504pt too wide) detected at line 2
-[]\OT1/cmr/m/n/12 LIST OF FIGURES 
- []
-
-LaTeX Font Info:    Try loading font information for U+msa on input line 6.
-(/usr/local/texlive/2014/texmf-dist/tex/latex/amsfonts/umsa.fd
-File: umsa.fd 2013/01/14 v3.01 AMS symbols A
-)
-LaTeX Font Info:    Try loading font information for U+msb on input line 6.
-
-(/usr/local/texlive/2014/texmf-dist/tex/latex/amsfonts/umsb.fd
-File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-) [1.3
-
-]
-Overfull \hbox (49.74289pt too wide) detected at line 44
-[]\OT1/cmr/m/n/12 LIST OF REFERENCES  
- []
-
-)
+] (./main.toc)
 \tf@toc=\write3
 \openout3 = `main.toc'.
 
- [2.4] (./main.lot)
+ [1.3
+
+] (./main.lot)
 \tf@lot=\write4
 \openout4 = `main.lot'.
 
- [3.5
+ [2.4
 
-] (./main.lof [4.6
-
-] [5.7])
+] (./main.lof)
 \tf@lof=\write5
 \openout5 = `main.lof'.
 
- [6.8] [7.9
+ [3.5
+
+] [4.6
 
 ]
 *geometry* driver: auto-detecting
@@ -490,420 +464,345 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
 CHAPTER 1. Introduction
-<integrated_circuit_design.png, id=35, 328.1058pt x 530.9436pt>
+
+LaTeX Warning: Citation `white2004process' on page 1 undefined on input line 11
+6.
+
+
+LaTeX Warning: Reference `ICdesign' on page 1 undefined on input line 122.
+
+<integrated_circuit_design.png, id=24, 328.1058pt x 530.9436pt>
 File: integrated_circuit_design.png Graphic file (type png)
 
 <use integrated_circuit_design.png>
-Package pdftex.def Info: integrated_circuit_design.png used on input line 132.
+Package pdftex.def Info: integrated_circuit_design.png used on input line 136.
 (pdftex.def)             Requested size: 234.8775pt x 380.09167pt.
 
 
+LaTeX Warning: Citation `white2004process' on page 1 undefined on input line 13
+7.
+
+
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[1.10
+LaTeX Font Info:    Try loading font information for U+msa on input line 146.
+(/usr/local/texlive/2014/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 146.
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+
+LaTeX Warning: Citation `foster2013design' on page 1 undefined on input line 14
+7.
 
 
-] [2.11 <./integrated_circuit_design.png (PNG copy)>]
-<debugtime.png, id=42, 670.505pt x 355.3275pt>
+LaTeX Warning: Citation `validationWall' on page 1 undefined on input line 149.
+
+
+[1.7
+
+
+]
+
+LaTeX Warning: Citation `liu2014trace' on page 2 undefined on input line 171.
+
+[2.8 <./integrated_circuit_design.png (PNG copy)>]
+
+LaTeX Warning: Reference `debugt' on page 3 undefined on input line 205.
+
+
+LaTeX Warning: Citation `Abramovici:2006:RDI:1146909.1146916' on page 3 undefin
+ed on input line 209.
+
+<debugtime.png, id=32, 670.505pt x 355.3275pt>
 File: debugtime.png Graphic file (type png)
  <use debugtime.png>
-Package pdftex.def Info: debugtime.png used on input line 194.
+Package pdftex.def Info: debugtime.png used on input line 212.
 (pdftex.def)             Requested size: 328.82707pt x 174.25838pt.
+ [3.9]
+
+LaTeX Warning: Citation `1003792' on page 4 undefined on input line 225.
 
 
-LaTeX Warning: `h' float specifier changed to `ht'.
+LaTeX Warning: Citation `leatherman2003processor' on page 4 undefined on input 
+line 228.
 
-[3.12] <scanchains.png, id=48, 822.07124pt x 474.77374pt>
+
+LaTeX Warning: Citation `nicolici2009design' on page 4 undefined on input line 
+251.
+
+[4.10 <./debugtime.png>] <scanchains.png, id=42, 822.07124pt x 474.77374pt>
 File: scanchains.png Graphic file (type png)
- <use scanchains.png>
-Package pdftex.def Info: scanchains.png used on input line 238.
+
+<use scanchains.png>
+Package pdftex.def Info: scanchains.png used on input line 256.
 (pdftex.def)             Requested size: 422.77664pt x 244.1671pt.
 
 
-LaTeX Warning: `h' float specifier changed to `ht'.
+LaTeX Warning: Citation `nicolici2009design' on page 5 undefined on input line 
+257.
 
-[4.13 <./debugtime.png>] <tracebuffer.png, id=54, 923.45pt x 483.8075pt>
+
+LaTeX Warning: Reference `sss' on page 5 undefined on input line 261.
+
+[5.11 <./scanchains.png>]
+
+LaTeX Warning: Reference `tb' on page 6 undefined on input line 292.
+
+<tracebuffer.png, id=47, 923.45pt x 483.8075pt>
 File: tracebuffer.png Graphic file (type png)
-
-<use tracebuffer.png>
-Package pdftex.def Info: tracebuffer.png used on input line 278.
+ <use tracebuffer.png>
+Package pdftex.def Info: tracebuffer.png used on input line 296.
 (pdftex.def)             Requested size: 422.77664pt x 221.49847pt.
- [5.14 <./scanchains.png>] [6.15 <./tracebuffer.png>]
-[7.16] [8.17] [9.18] [10.19]
+
+
+LaTeX Warning: Citation `nicolici2009design' on page 6 undefined on input line 
+297.
+
+[6.12 <./tracebuffer.png>]
+
+LaTeX Warning: Citation `abramovici2006reconfigurable' on page 7 undefined on i
+nput line 320.
+
+
+LaTeX Warning: Citation `anis2007interactive' on page 7 undefined on input line
+ 320.
+
+
+LaTeX Warning: Citation `Goossens2007NOCS' on page 7 undefined on input line 32
+8.
+
+
+LaTeX Warning: Citation `Vermeulen2009VLSI-DAT' on page 7 undefined on input li
+ne 336.
+
+
+LaTeX Warning: Citation `Goossens2009DATE' on page 7 undefined on input line 33
+6.
+
+
+LaTeX Warning: Citation `Gharehbaghi2012ISQED' on page 7 undefined on input lin
+e 342.
+
+
+LaTeX Warning: Citation `Dehbash2014' on page 7 undefined on input line 357.
+
+
+LaTeX Warning: Citation `Gharehbaghi2009ICCD' on page 7 undefined on input line
+ 359.
+
+
+LaTeX Warning: Citation `Boule2007ISQED' on page 7 undefined on input line 365.
+
+
+[7.13]
+
+LaTeX Warning: Citation `Singerman2011DAC' on page 8 undefined on input line 36
+8.
+
+
+LaTeX Warning: Citation `Abarbanel2014DAC' on page 8 undefined on input line 38
+5.
+
+[8.14]
+
+LaTeX Warning: Citation `Goossens2007NOCS' on page 9 undefined on input line 44
+6.
+
+[9.15] [10.16]
 CHAPTER 2. Background
-<figures/bpmn-flow-ex.pdf, id=77, 204.8303pt x 210.48256pt>
+
+LaTeX Warning: Citation `lsctocpn' on page 11 undefined on input line 517.
+
+<figures/bpmn-flow-ex.pdf, id=66, 204.8303pt x 210.48256pt>
 File: figures/bpmn-flow-ex.pdf Graphic file (type pdf)
 
 <use figures/bpmn-flow-ex.pdf>
-Package pdftex.def Info: figures/bpmn-flow-ex.pdf used on input line 505.
+Package pdftex.def Info: figures/bpmn-flow-ex.pdf used on input line 529.
 (pdftex.def)             Requested size: 234.8775pt x 241.35931pt.
 
 
+LaTeX Warning: Citation `Krstic14HOST' on page 11 undefined on input line 530.
+
+
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[11.20
 
-] [12.21 <./figures/bpmn-flow-ex.pdf>]
-<livesc.png, id=326, 573.14125pt x 439.6425pt>
+LaTeX Warning: Reference `flowa' on page 11 undefined on input line 534.
+
+
+LaTeX Warning: Citation `white2004process' on page 11 undefined on input line 5
+39.
+
+[11.17
+
+]
+
+LaTeX Warning: Citation `lsctocpn' on page 12 undefined on input line 560.
+
+[12.18 <./figures/bpmn-flow-ex.pdf>]
+<livesc.png, id=315, 573.14125pt x 439.6425pt>
 File: livesc.png Graphic file (type png)
  <use livesc.png>
-Package pdftex.def Info: livesc.png used on input line 540.
+Package pdftex.def Info: livesc.png used on input line 564.
 (pdftex.def)             Requested size: 361.34999pt x 277.18419pt.
- [13.22 <./livesc.png>] <try.pdf, id=331, 927.465pt x 665.48625pt>
+
+
+LaTeX Warning: Reference `flowa' on page 13 undefined on input line 565.
+
+
+LaTeX Warning: Reference `livesequence' on page 13 undefined on input line 568.
+
+
+
+LaTeX Warning: Reference `flowa' on page 13 undefined on input line 568.
+
+
+LaTeX Warning: Reference `flowa' on page 13 undefined on input line 570.
+
+[13.19 <./livesc.png>]
+
+LaTeX Warning: Reference `flowa' on page 14 undefined on input line 615.
+
+
+LaTeX Warning: Reference `changedb' on page 14 undefined on input line 616.
+
+<try.pdf, id=321, 927.465pt x 665.48625pt>
 File: try.pdf Graphic file (type pdf)
  <use try.pdf>
-Package pdftex.def Info: try.pdf used on input line 602.
+Package pdftex.def Info: try.pdf used on input line 626.
 (pdftex.def)             Requested size: 328.82707pt x 235.9497pt.
 
 
+LaTeX Warning: Reference `flowa' on page 14 undefined on input line 627.
+
+
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[14.23] [15.24 <./try.pdf>] [16.25]
+
+LaTeX Warning: Reference `changedb' on page 14 undefined on input line 640.
+
+[14.20] [15.21 <./try.pdf>] [16.22]
 CHAPTER 3. Flow Guided Trace Interpretation
-[17.26
+[17.23
 
-] [18.27] [19.28]
+] [18.24] [19.25]
+
+LaTeX Warning: Reference `algo:compliance' on page 20 undefined on input line 8
+45.
+
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[20.29] [21.30] [22.31
+[20.26] [21.27]
 
-] [23.32] [24.33] [25.34]
+LaTeX Warning: Reference `changedb' on page 22 undefined on input line 944.
+
+[22.28
+
+] [23.29]
+
+LaTeX Warning: Reference `eq:1' on page 24 undefined on input line 1034.
+
+
+LaTeX Warning: Reference `eq:2' on page 24 undefined on input line 1039.
+
+[24.30] [25.31]
 CHAPTER 4. Trace Analysis Under Partial Observability
-[26.35
-
-] [27.36] [28.37]
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[29.38] [30.39] [31.40] [32.41] [33.42
-
-] [34.43] [35.44]
-CHAPTER 5. Case Studies
-<Gem5.png, id=413, 1055.945pt x 752.8125pt>
-File: Gem5.png Graphic file (type png)
- <use Gem5.png>
-Package pdftex.def Info: Gem5.png used on input line 1596.
-(pdftex.def)             Requested size: 361.34999pt x 257.60698pt.
- [36.45
-
-] [37.46 <./Gem5.png>] [38.47] [39.48] [40.49] [41.50]
-<RTL.png, id=434, 995.72pt x 728.7225pt>
-File: RTL.png Graphic file (type png)
- <use RTL.png>
-Package pdftex.def Info: RTL.png used on input line 1822.
-(pdftex.def)             Requested size: 361.34999pt x 264.4637pt.
- [42.51 <./RTL.png>]
-<wave.png, id=439, 739.76375pt x 552.0625pt>
-File: wave.png Graphic file (type png)
- <use wave.png>
-Package pdftex.def Info: wave.png used on input line 1852.
-(pdftex.def)             Requested size: 361.34999pt x 269.66219pt.
-
-<signalline.png, id=440, 739.76375pt x 319.1925pt>
-File: signalline.png Graphic file (type png)
- <use signalline.png>
-Package pdftex.def Info: signalline.png used on input line 1867.
-(pdftex.def)             Requested size: 289.07999pt x 124.73296pt.
-
-[43.52 <./wave.png>] <int1.png, id=445, 753.81625pt x 371.3875pt>
-File: int1.png Graphic file (type png)
-
-<use int1.png>
-Package pdftex.def Info: int1.png used on input line 1900.
-(pdftex.def)             Requested size: 289.07999pt x 142.42076pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-Overfull \hbox (5.58537pt too wide) in paragraph at lines 1908--1921
-[][]
- []
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<int2.png, id=446, 920.43875pt x 360.34625pt>
-File: int2.png Graphic file (type png)
- <use int2.png>
-Package pdftex.def Info: int2.png used on input line 1933.
-(pdftex.def)             Requested size: 361.34999pt x 141.4692pt.
- [44.53 <./signalline.png>]
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-Overfull \hbox (62.29604pt too wide) in paragraph at lines 1941--1976
-[][]
- []
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<int3.png, id=451, 523.9575pt x 314.17375pt>
-File: int3.png Graphic file (type png)
- <use int3.png>
-Package pdftex.def Info: int3.png used on input line 1986.
-(pdftex.def)             Requested size: 252.94499pt x 151.66937pt.
-
-Overfull \hbox (62.29604pt too wide) in paragraph at lines 1993--2014
-[][]
- []
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[45.54 <./int1.png>] [46.55 <./int2.png> <./int3.png>]
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-Overfull \hbox (0.79999pt too wide) detected at line 2084
-|[]|
- []
-
-
-Overfull \hbox (0.79999pt too wide) detected at line 2099
-|[]|
- []
-
-
-Overfull \hbox (0.79999pt too wide) detected at line 2114
-|[]|
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 2086--2119
-[]$[]$$[]$
- []
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[47.56] [48.57] [49.58] [50.59
-
-] [51.60] [52.61] [53.62]
-CHAPTER 6. Conclusion and Future Works
-[54.63
-
-] [55.64] <figures/write3.png, id=490, 847.165pt x 214.8025pt>
-File: figures/write3.png Graphic file (type png)
-
-<use figures/write3.png>
-Package pdftex.def Info: figures/write3.png used on input line 2289.
-(pdftex.def)             Requested size: 325.215pt x 82.4583pt.
- <figures/write1.png, id=491, 293.095pt x 147.55125pt>
-File: figures/write1.png Graphic file (type png)
-
-<use figures/write1.png>
-Package pdftex.def Info: figures/write1.png used on input line 2294.
-(pdftex.def)             Requested size: 144.54pt x 72.76453pt.
- <figures/write2.png, id=492, 857.2025pt x 218.8175pt>
-File: figures/write2.png Graphic file (type png)
-
-<use figures/write2.png>
-Package pdftex.def Info: figures/write2.png used on input line 2298.
-(pdftex.def)             Requested size: 332.44243pt x 84.86101pt.
- <figures/read1.png, id=493, 434.62375pt x 168.63pt>
-File: figures/read1.png Graphic file (type png)
-
-<use figures/read1.png>
-Package pdftex.def Info: figures/read1.png used on input line 2304.
-(pdftex.def)             Requested size: 144.54pt x 56.08034pt.
- <figures/read3.png, id=494, 849.1725pt x 211.79124pt>
-File: figures/read3.png Graphic file (type png)
-
-<use figures/read3.png>
-Package pdftex.def Info: figures/read3.png used on input line 2309.
-(pdftex.def)             Requested size: 296.30743pt x 73.90182pt.
- <figures/read2.png, id=495, 857.2025pt x 210.7875pt>
-File: figures/read2.png Graphic file (type png)
-
-<use figures/read2.png>
-Package pdftex.def Info: figures/read2.png used on input line 2314.
-(pdftex.def)             Requested size: 281.85255pt x 69.306pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[56.65
-
- <./figures/write3.png> <./figures/write1.png> <./figures/write2.png>]
-<figures/Fig5.png, id=502, 592.2125pt x 771.88374pt>
-File: figures/Fig5.png Graphic file (type png)
- <use figures/Fig5.png>
-Package pdftex.def Info: figures/Fig5.png used on input line 2322.
-(pdftex.def)             Requested size: 224.03743pt x 292.0115pt.
-
-Overfull \hbox (2.61107pt too wide) in paragraph at lines 2323--2359
-[]$[]$ $[]$ 
- []
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<figures/Fih6.png, id=503, 614.295pt x 830.10126pt>
-File: figures/Fih6.png Graphic file (type png)
- <use figures/Fih6.png>
-Package pdftex.def Info: figures/Fih6.png used on input line 2364.
-(pdftex.def)             Requested size: 238.49121pt x 322.2689pt.
-
-Overfull \hbox (0.77437pt too wide) detected at line 2392
-[]
- []
-
-<figures/readDcache.png, id=504, 561.09625pt x 782.925pt>
-File: figures/readDcache.png Graphic file (type png)
-
-<use figures/readDcache.png>
-Package pdftex.def Info: figures/readDcache.png used on input line 2400.
-(pdftex.def)             Requested size: 238.49121pt x 332.76859pt.
-
-Overfull \hbox (1.80208pt too wide) detected at line 2415
-[]
- []
-
-
-Overfull \hbox (7.1355pt too wide) detected at line 2430
-[]
- []
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[57.66 <./figures/read1.png> <./figures/read3.png> <./figures/read2.png>]
-[58.67 <./figures/Fig5.png>] [59.68 <./figures/Fih6.png>] [60.69 <./figures/rea
-dDcache.png>] <y1.png, id=526, 373.395pt x 185.69376pt>
-File: y1.png Graphic file (type png)
- <use y1.png>
-Package pdftex.def Info: y1.png used on input line 2446.
-(pdftex.def)             Requested size: 144.54pt x 71.88191pt.
-
-<y2.png, id=527, 743.77875pt x 273.02pt>
-File: y2.png Graphic file (type png)
- <use y2.png>
-Package pdftex.def Info: y2.png used on input line 2450.
-(pdftex.def)             Requested size: 260.17244pt x 95.50427pt.
-
-<y3.png, id=528, 733.74126pt x 192.72pt>
-File: y3.png Graphic file (type png)
- <use y3.png>
-Package pdftex.def Info: y3.png used on input line 2454.
-(pdftex.def)             Requested size: 361.34999pt x 94.91pt.
-
-<y4.png, id=529, 514.92375pt x 246.9225pt>
-File: y4.png Graphic file (type png)
- <use y4.png>
-Package pdftex.def Info: y4.png used on input line 2458.
-(pdftex.def)             Requested size: 202.35622pt x 97.03407pt.
-
-<y5.png, id=530, 737.75626pt x 210.7875pt>
-File: y5.png Graphic file (type png)
- <use y5.png>
-Package pdftex.def Info: y5.png used on input line 2465.
-(pdftex.def)             Requested size: 361.34999pt x 103.24174pt.
-
-<y6.png, id=531, 750.805pt x 206.7725pt>
-File: y6.png Graphic file (type png)
- <use y6.png>
-Package pdftex.def Info: y6.png used on input line 2469.
-(pdftex.def)             Requested size: 361.34999pt x 99.51785pt.
-
-<y7.png, id=532, 737.75626pt x 242.9075pt>
-File: y7.png Graphic file (type png)
- <use y7.png>
-Package pdftex.def Info: y7.png used on input line 2473.
-(pdftex.def)             Requested size: 361.34999pt x 118.97382pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-<wbprotocol.png, id=533, 134.5025pt x 395.4775pt>
-File: wbprotocol.png Graphic file (type png)
- <use wbprotocol.png>
-Package pdftex.def Info: wbprotocol.png used on input line 2486.
-(pdftex.def)             Requested size: 72.26999pt x 212.49863pt.
- [61.70
-
-
- <./y1.png> <./y2.png> <./y3.png> <./y4.png>]
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<rw.pdf, id=541, 414.54875pt x 759.83875pt>
-File: rw.pdf Graphic file (type pdf)
- <use rw.pdf>
-Package pdftex.def Info: rw.pdf used on input line 2502.
-(pdftex.def)             Requested size: 231.26378pt x 423.8836pt.
-
-Overfull \hbox (2.61107pt too wide) in paragraph at lines 2503--2528
-[]$[]$ $[]$ 
- []
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-File: rw.pdf Graphic file (type pdf)
-<use rw.pdf>
-Package pdftex.def Info: rw.pdf used on input line 2533.
-(pdftex.def)             Requested size: 231.26378pt x 423.8836pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-(./main.bbl [62.71 <./y5.png> <./y6.png> <./y7.png>] [63.72 <./wbprotocol.png>]
-[64.73 <./rw.pdf>] [65.74] [66.75
+[26.32
 
 ]
-Missing character: There is no š in font cmr12!
- [67.76] [68.77]) [69.78] (./main.aux)
 
-LaTeX Warning: There were multiply-defined labels.
+LaTeX Warning: Reference `eq:8' on page 27 undefined on input line 1170.
 
- ) 
-Here is how much of TeX's memory you used:
- 6286 strings out of 493117
- 89340 string characters out of 6135433
- 217645 words of memory out of 5000000
- 9565 multiletter control sequences out of 15000+600000
- 15294 words of font info for 59 fonts, out of 8000000 for 9000
- 1141 hyphenation exceptions out of 8191
- 47i,23n,37p,1514b,619s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
-></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
-</usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></
-usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></
-usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></u
-sr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></us
-r/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr
-/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/l
-ocal/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/loc
-al/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local
-/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/t
-exlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/tex
-live/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texliv
-e/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2
-014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/20
-14/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2014
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2014/t
-exmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2014/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2014/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2014/texmf
--dist/fonts/type1/public/amsfonts/cm/cmti7.pfb></usr/local/texlive/2014/texmf-d
-ist/fonts/type1/public/amsfonts/cm/cmti8.pfb></usr/local/texlive/2014/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/texlive/2014/texmf-dist
-/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (78 pages, 1569130 bytes).
-PDF statistics:
- 632 PDF objects out of 1000 (max. 8388607)
- 377 compressed objects within 4 object streams
- 0 named destinations out of 1000 (max. 500000)
- 161 words of extra memory for PDF output out of 10000 (max. 10000000)
+[27.33] [28.34]
 
+LaTeX Warning: Reference `algo:gene' on page 29 undefined on input line 1338.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+LaTeX Warning: Reference `map' on page 29 undefined on input line 1469.
+
+[29.35] [30.36]
+
+LaTeX Warning: Reference `func' on page 31 undefined on input line 1477.
+
+[31.37] [32.38]
+
+LaTeX Warning: Reference `algo:compliance' on page 33 undefined on input line 1
+498.
+
+
+LaTeX Warning: Citation `nicolici' on page 33 undefined on input line 1514.
+
+
+LaTeX Warning: Citation `basu' on page 33 undefined on input line 1514.
+
+
+LaTeX Warning: Citation `forestMa' on page 33 undefined on input line 1545.
+
+[33.39
+
+]
+
+LaTeX Warning: Citation `forestMa' on page 34 undefined on input line 1549.
+
+
+LaTeX Warning: Citation `signalselect' on page 34 undefined on input line 1553.
+
+
+[34.40] [35.41]
+CHAPTER 5. Case Studies
+<Gem5.png, id=402, 599.23875pt x 588.1975pt>
+File: Gem5.png Graphic file (type png)
+ <use Gem5.png>
+Package pdftex.def Info: Gem5.png used on input line 1620.
+(pdftex.def)             Requested size: 289.07999pt x 283.75864pt.
+
+
+LaTeX Warning: Citation `Binkert2011' on page 36 undefined on input line 1627.
+
+
+LaTeX Warning: Reference `SoC' on page 36 undefined on input line 1630.
+
+
+LaTeX Warning: Citation `gem5' on page 36 undefined on input line 1663.
+
+
+LaTeX Warning: Citation `gem5' on page 36 undefined on input line 1667.
+
+[36.42
+
+] [37.43 <./Gem5.png>]
+
+LaTeX Warning: Reference `SoC' on page 38 undefined on input line 1679.
+
+
+LaTeX Warning: Citation `gem5' on page 38 undefined on input line 1680.
+
+
+LaTeX Warning: Reference `table-results' on page 38 undefined on input line 170
+1.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+LaTeX Warning: Reference `table-case-2' on page 38 undefined on input line 1740
+.
+
+[38.44]
+
+LaTeX Warning: Reference `table-par-obs' on page 39 undefined on input line 177
+2.
+
+
+LaT
