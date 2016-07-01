@@ -1183,7 +1183,7 @@ $e$ is a flow event mapped from possible sequence of signal events
 starting from signal event at index $i$ and $i'$ is
 the index of next signal event to be considered.
 Starting from the current signal event with index $i$, consider all prefixes of
-increasing length up to Max, map each $pref(\rho,k)$ to
+increasing length up to $Max$, map each $pref(\rho,k)$ to
 a flow event.
 If successful, return $(e,i')$ such that $i'=i+k$.
 Here $Max$ is the length of the longest sequence of signal events that implement a flow event.
@@ -1905,7 +1905,7 @@ with width of 52 that is used by interface 6.
 \centerline{
 \includegraphics[width=4in]{signalline.png}
 }
-\caption{Format definition of messages
+\caption{Format definition of messages}
 \label{sigline}
 \end{figure}
 For {\tt std$\_$logic$\_$vector} with 51 bits, as shown in format 1 of Figure~\ref{sigline},
@@ -1938,12 +1938,12 @@ There are three signals included in this interface, each of which is explained i
 \begin{figure}[h]
 \centering
     \includegraphics[width=2in]{int1.png}
-    \caption{Interface definition of link 1 in Figure}
+    \caption{Interface definition of link 1 in Figure~\ref{rtlstruc}}
     \label{int1}
  \end{figure}
 
 \begin{table}[h]
-\caption{Signals explanations for interface one}
+\caption{Signals explanations for interface 1}
 
 \begin{tabular}{|l|c | p{12cm} |}
 \hline
@@ -1972,14 +1972,14 @@ explained in Table~\ref{int2t}.
 \begin{figure}[h]
 \centering
     \includegraphics[width=5in]{int2.png}
-    \caption{Interface definition of link 1 in Figure}
+    \caption{Interface definition of link 2, 3 and 4 in Figure~\ref{rtlstruc}}
     \label{int2}
  \end{figure}
 
 \begin{table}[h]
-\caption{Signals explanations for interface two, three and four}
+\caption{Signals explanations for interface 2, 3 and 4}
 
-\begin{tabular}{|l|l|c | p{12cm} |}
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}} |l|l|c| p{9cm} |}
 \hline
 Interface & Signal Name & Width & Definition \\
 \hline
@@ -2012,26 +2012,26 @@ Interface & Signal Name & Width & Definition \\
 4 & $full\_brs$ 			&$1$				& full indicator of $bus\_res$ FIFO inside Cache\\
 \hline
 
-\end{tabular}
+\end{tabular*}
 \label{int2t}
 \end{table}
 Two interfaces are constructed between memory bus and memory.
 Interface five is designed for handling data request functions, and is
-composed of signals in color blue in Figure~\ref{int3}.
+composed of signals in color red in Figure~\ref{int3}.
 Interface six is exclusively for write back functions, and is represented in
-color red in Figure~\ref{int3}.
+color purple in Figure~\ref{int3}.
 Detailed explanations of each signal are explained in
 Table~\ref{int3t}.
 \begin{figure}[h]
 \centering
     \includegraphics[width=3.5in]{int3.png}
-    \caption{Structure of interface five and six}
+    \caption{Interface definition of link 5 and 6 in Figure~\ref{rtlstruc}}
     \label{int3}
  \end{figure}
 \begin{table}[h]
-\caption{Signals explanations for interface five and six}
+\caption{Signals explanations for interface 5 and 6}
 
-\begin{tabular}{|l|l|c | p{12cm} |}
+\begin{tabular}{|l|l|c | p{9cm} |}
 \hline
 Interface & Signal Name & Width & Definition \\
 \hline
@@ -2072,7 +2072,8 @@ Interface & Signal Name & Width & Definition \\
 %as an comparator.
 
 
-This model has 6 protocols implemented. It's based on the protocols provided by GEM5 with some modification. 3 types of protocols: read, write and write back is implemented for both CPU. Write back protocol is new and will be invoked when Cache need to flush back dirty cache lines.
+This model has 6 protocols implemented. It's based on the protocols provided by GEM5 with some modification. 3 types of protocols: read, write and write back are implemented in both CPU. Write back protocol is a new protocol
+and can be invoked when Cache need to flush back dirty cache lines.
 
 To test the correctness of the cache coherence protocol, we hard coded a test generator inside
 of each CPU. 
@@ -2133,10 +2134,13 @@ int shared\;
 flag[0]=true\;
 turn =1 \;
 \While{flag[1] $\wedge$ turn ==1 }{
-	busy wait\;
+	//busy wait\;
 }
+//enters critical section\;
 shared++\;
 flag[0]=false\;
+//leaves critical section\;
+
 \end{algorithm}
 \end{minipage}%
 {\LinesNumberedHidden
@@ -2148,10 +2152,13 @@ flag[0]=false\;
 flag[1]=true\;
 turn =0 \;
 \While{flag[0] $\wedge$ turn ==0 }{
-	busy wait\;
+	//busy wait\;
 }
+//enters critical section\;
 shared++\;
 flag[1]=false\;
+//leaves critical section\;
+
 \end{algorithm}
 
 \end{minipage}
@@ -2170,7 +2177,9 @@ value can be used to check the correctness of the system.
 During the building of the system, our proposed analysis algorithm
 is used as a debugging method to locate implementation problems. Following types of errors
 are detected by the algorithm and fixed.
-\subsubsection{Bug one: duplicated messages}
+
+\noindent {\bf Bug one: duplicated messages}
+
 When the model was first built, each of the CPU was designed to only issue one
 read request and one write request. When the trace is produced and analyzed using
 the trace analysis algorithm. The analysis was halted and returned a set of partially
@@ -2194,7 +2203,8 @@ and is always sent from memory bus.
 By looking into the memory bus's structure, the root cause is discovered and 
 fixed by resetting the memory request once it is received by memory.
 
-\subsubsection{Error two: incorrect command}
+\noindent {\bf Error two: incorrect command}
+
 During the debugging process, the trace analysis algorithm was halted because
 inconsistent message.
 When running the system multiple time and apply analysis algorithm on it,
@@ -2233,7 +2243,7 @@ is always 01, thus read. After making change on the
 process that handles snoop request, the problem was solved.
 
 
-\subsubsection{Error three: protocol failure}
+\noindent {\bf Error three: protocol failure}
 
 
 When running Peterson's Algorithm and apply our analysis algorithm on
